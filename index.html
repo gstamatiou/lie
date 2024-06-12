@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Lie group notes</title>
+<!--Generated on Wed Jun 12 17:43:48 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dginev/ar5iv-css@0.7.9/css/ar5iv.min.css" type="text/css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dginev/ar5iv-css@0.7.9/css/ar5iv-fonts.min.css" type="text/css">
+</head>
+<body>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Lie group notes</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Giorgos
+</span></span>
+</div>
+
+<nav class="ltx_TOC ltx_list_toc ltx_toc_toc"><h6 class="ltx_title ltx_title_contents">Contents</h6>
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_chapter"><a href="#Ch1" title="In Lie group notes" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Lie groups: basic definitions</span></a></li>
+</ol></nav>
+<section id="Chx1" class="ltx_chapter">
+<h2 class="ltx_title ltx_title_chapter">Conventions</h2>
+
+<div id="Chx1.p1" class="ltx_para">
+<ul id="Chx1.S0.I1" class="ltx_itemize">
+<li id="Chx1.S0.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="Chx1.S0.I1.i1.p1" class="ltx_para">
+<p id="Chx1.S0.I1.i1.p1.1" class="ltx_p">By Lie group, we mean either real or complex.</p>
+</div>
+</li>
+<li id="Chx1.S0.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="Chx1.S0.I1.i2.p1" class="ltx_para">
+<p id="Chx1.S0.I1.i2.p1.1" class="ltx_p">A Lie subgroup of a Lie group is called a closed Lie subgroup (see <a href="#Thmtheorem3" title="Theorem 3 (Theorem 2.8, [Kir08]). ‣ Chapter 1 Lie groups: basic definitions ‣ Lie group notes" class="ltx_ref"><span class="ltx_text ltx_ref_tag">Theorem</span> <span class="ltx_text ltx_ref_tag">3</span></a>).</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="Ch1" class="ltx_chapter">
+<h2 class="ltx_title ltx_title_chapter">
+<span class="ltx_tag ltx_tag_chapter">Chapter 1 </span>Lie groups: basic definitions</h2>
+
+<div id="Ch1.p1" class="ltx_para">
+<p id="Ch1.p1.1" class="ltx_p">The following theorem allows us to reduce the study of Lie groups to the study of finite groups and connected Lie groups, since for a general Lie group <math id="Ch1.p1.1.m1.1" class="ltx_Math" alttext="G" display="inline"><semantics id="Ch1.p1.1.m1.1a"><mi id="Ch1.p1.1.m1.1.1" xref="Ch1.p1.1.m1.1.1.cmml">G</mi><annotation-xml encoding="MathML-Content" id="Ch1.p1.1.m1.1b"><ci id="Ch1.p1.1.m1.1.1.cmml" xref="Ch1.p1.1.m1.1.1">𝐺</ci></annotation-xml><annotation encoding="application/x-tex" id="Ch1.p1.1.m1.1c">G</annotation></semantics></math> we have</p>
+<table id="Ch1.Ex1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="Ch1.Ex1.m1.1" class="ltx_Math" alttext="G=G^{0}\times G/G^{0}," display="block"><semantics id="Ch1.Ex1.m1.1a"><mrow id="Ch1.Ex1.m1.1.1.1" xref="Ch1.Ex1.m1.1.1.1.1.cmml"><mrow id="Ch1.Ex1.m1.1.1.1.1" xref="Ch1.Ex1.m1.1.1.1.1.cmml"><mi id="Ch1.Ex1.m1.1.1.1.1.2" xref="Ch1.Ex1.m1.1.1.1.1.2.cmml">G</mi><mo id="Ch1.Ex1.m1.1.1.1.1.1" xref="Ch1.Ex1.m1.1.1.1.1.1.cmml">=</mo><mrow id="Ch1.Ex1.m1.1.1.1.1.3" xref="Ch1.Ex1.m1.1.1.1.1.3.cmml"><mrow id="Ch1.Ex1.m1.1.1.1.1.3.2" xref="Ch1.Ex1.m1.1.1.1.1.3.2.cmml"><msup id="Ch1.Ex1.m1.1.1.1.1.3.2.2" xref="Ch1.Ex1.m1.1.1.1.1.3.2.2.cmml"><mi id="Ch1.Ex1.m1.1.1.1.1.3.2.2.2" xref="Ch1.Ex1.m1.1.1.1.1.3.2.2.2.cmml">G</mi><mn id="Ch1.Ex1.m1.1.1.1.1.3.2.2.3" xref="Ch1.Ex1.m1.1.1.1.1.3.2.2.3.cmml">0</mn></msup><mo lspace="0.222em" rspace="0.222em" id="Ch1.Ex1.m1.1.1.1.1.3.2.1" xref="Ch1.Ex1.m1.1.1.1.1.3.2.1.cmml">×</mo><mi id="Ch1.Ex1.m1.1.1.1.1.3.2.3" xref="Ch1.Ex1.m1.1.1.1.1.3.2.3.cmml">G</mi></mrow><mo id="Ch1.Ex1.m1.1.1.1.1.3.1" xref="Ch1.Ex1.m1.1.1.1.1.3.1.cmml">/</mo><msup id="Ch1.Ex1.m1.1.1.1.1.3.3" xref="Ch1.Ex1.m1.1.1.1.1.3.3.cmml"><mi id="Ch1.Ex1.m1.1.1.1.1.3.3.2" xref="Ch1.Ex1.m1.1.1.1.1.3.3.2.cmml">G</mi><mn id="Ch1.Ex1.m1.1.1.1.1.3.3.3" xref="Ch1.Ex1.m1.1.1.1.1.3.3.3.cmml">0</mn></msup></mrow></mrow><mo id="Ch1.Ex1.m1.1.1.1.2" xref="Ch1.Ex1.m1.1.1.1.1.cmml">,</mo></mrow><annotation-xml encoding="MathML-Content" id="Ch1.Ex1.m1.1b"><apply id="Ch1.Ex1.m1.1.1.1.1.cmml" xref="Ch1.Ex1.m1.1.1.1"><eq id="Ch1.Ex1.m1.1.1.1.1.1.cmml" xref="Ch1.Ex1.m1.1.1.1.1.1"></eq><ci id="Ch1.Ex1.m1.1.1.1.1.2.cmml" xref="Ch1.Ex1.m1.1.1.1.1.2">𝐺</ci><apply id="Ch1.Ex1.m1.1.1.1.1.3.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3"><divide id="Ch1.Ex1.m1.1.1.1.1.3.1.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3.1"></divide><apply id="Ch1.Ex1.m1.1.1.1.1.3.2.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3.2"><times id="Ch1.Ex1.m1.1.1.1.1.3.2.1.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3.2.1"></times><apply id="Ch1.Ex1.m1.1.1.1.1.3.2.2.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3.2.2"><csymbol cd="ambiguous" id="Ch1.Ex1.m1.1.1.1.1.3.2.2.1.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3.2.2">superscript</csymbol><ci id="Ch1.Ex1.m1.1.1.1.1.3.2.2.2.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3.2.2.2">𝐺</ci><cn type="integer" id="Ch1.Ex1.m1.1.1.1.1.3.2.2.3.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3.2.2.3">0</cn></apply><ci id="Ch1.Ex1.m1.1.1.1.1.3.2.3.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3.2.3">𝐺</ci></apply><apply id="Ch1.Ex1.m1.1.1.1.1.3.3.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3.3"><csymbol cd="ambiguous" id="Ch1.Ex1.m1.1.1.1.1.3.3.1.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3.3">superscript</csymbol><ci id="Ch1.Ex1.m1.1.1.1.1.3.3.2.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3.3.2">𝐺</ci><cn type="integer" id="Ch1.Ex1.m1.1.1.1.1.3.3.3.cmml" xref="Ch1.Ex1.m1.1.1.1.1.3.3.3">0</cn></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="Ch1.Ex1.m1.1c">G=G^{0}\times G/G^{0},</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p id="Ch1.p1.3" class="ltx_p">where <math id="Ch1.p1.2.m1.1" class="ltx_Math" alttext="G^{0}" display="inline"><semantics id="Ch1.p1.2.m1.1a"><msup id="Ch1.p1.2.m1.1.1" xref="Ch1.p1.2.m1.1.1.cmml"><mi id="Ch1.p1.2.m1.1.1.2" xref="Ch1.p1.2.m1.1.1.2.cmml">G</mi><mn id="Ch1.p1.2.m1.1.1.3" xref="Ch1.p1.2.m1.1.1.3.cmml">0</mn></msup><annotation-xml encoding="MathML-Content" id="Ch1.p1.2.m1.1b"><apply id="Ch1.p1.2.m1.1.1.cmml" xref="Ch1.p1.2.m1.1.1"><csymbol cd="ambiguous" id="Ch1.p1.2.m1.1.1.1.cmml" xref="Ch1.p1.2.m1.1.1">superscript</csymbol><ci id="Ch1.p1.2.m1.1.1.2.cmml" xref="Ch1.p1.2.m1.1.1.2">𝐺</ci><cn type="integer" id="Ch1.p1.2.m1.1.1.3.cmml" xref="Ch1.p1.2.m1.1.1.3">0</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="Ch1.p1.2.m1.1c">G^{0}</annotation></semantics></math> is the identity component of <math id="Ch1.p1.3.m2.1" class="ltx_Math" alttext="G" display="inline"><semantics id="Ch1.p1.3.m2.1a"><mi id="Ch1.p1.3.m2.1.1" xref="Ch1.p1.3.m2.1.1.cmml">G</mi><annotation-xml encoding="MathML-Content" id="Ch1.p1.3.m2.1b"><ci id="Ch1.p1.3.m2.1.1.cmml" xref="Ch1.p1.3.m2.1.1">𝐺</ci></annotation-xml><annotation encoding="application/x-tex" id="Ch1.p1.3.m2.1c">G</annotation></semantics></math>.</p>
+</div>
+<div id="Thmtheorem1" class="ltx_theorem ltx_theorem_theorem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span id="Thmtheorem1.1.1.1" class="ltx_text ltx_font_bold">Theorem 1</span></span><span id="Thmtheorem1.2.2" class="ltx_text ltx_font_bold"> </span>(Theorem 2.6, <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx1" title="" class="ltx_ref">Kir08</a>]</cite> )<span id="Thmtheorem1.3.3" class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem1.p1" class="ltx_para">
+<p id="Thmtheorem1.p1.5" class="ltx_p"><span id="Thmtheorem1.p1.5.5" class="ltx_text ltx_font_italic">Let <math id="Thmtheorem1.p1.1.1.m1.1" class="ltx_Math" alttext="G" display="inline"><semantics id="Thmtheorem1.p1.1.1.m1.1a"><mi id="Thmtheorem1.p1.1.1.m1.1.1" xref="Thmtheorem1.p1.1.1.m1.1.1.cmml">G</mi><annotation-xml encoding="MathML-Content" id="Thmtheorem1.p1.1.1.m1.1b"><ci id="Thmtheorem1.p1.1.1.m1.1.1.cmml" xref="Thmtheorem1.p1.1.1.m1.1.1">𝐺</ci></annotation-xml><annotation encoding="application/x-tex" id="Thmtheorem1.p1.1.1.m1.1c">G</annotation></semantics></math> be a real or complex Lie group and <math id="Thmtheorem1.p1.2.2.m2.1" class="ltx_Math" alttext="G^{0}" display="inline"><semantics id="Thmtheorem1.p1.2.2.m2.1a"><msup id="Thmtheorem1.p1.2.2.m2.1.1" xref="Thmtheorem1.p1.2.2.m2.1.1.cmml"><mi id="Thmtheorem1.p1.2.2.m2.1.1.2" xref="Thmtheorem1.p1.2.2.m2.1.1.2.cmml">G</mi><mn id="Thmtheorem1.p1.2.2.m2.1.1.3" xref="Thmtheorem1.p1.2.2.m2.1.1.3.cmml">0</mn></msup><annotation-xml encoding="MathML-Content" id="Thmtheorem1.p1.2.2.m2.1b"><apply id="Thmtheorem1.p1.2.2.m2.1.1.cmml" xref="Thmtheorem1.p1.2.2.m2.1.1"><csymbol cd="ambiguous" id="Thmtheorem1.p1.2.2.m2.1.1.1.cmml" xref="Thmtheorem1.p1.2.2.m2.1.1">superscript</csymbol><ci id="Thmtheorem1.p1.2.2.m2.1.1.2.cmml" xref="Thmtheorem1.p1.2.2.m2.1.1.2">𝐺</ci><cn type="integer" id="Thmtheorem1.p1.2.2.m2.1.1.3.cmml" xref="Thmtheorem1.p1.2.2.m2.1.1.3">0</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="Thmtheorem1.p1.2.2.m2.1c">G^{0}</annotation></semantics></math> its identity component.
+Then <math id="Thmtheorem1.p1.3.3.m3.1" class="ltx_Math" alttext="G^{0}" display="inline"><semantics id="Thmtheorem1.p1.3.3.m3.1a"><msup id="Thmtheorem1.p1.3.3.m3.1.1" xref="Thmtheorem1.p1.3.3.m3.1.1.cmml"><mi id="Thmtheorem1.p1.3.3.m3.1.1.2" xref="Thmtheorem1.p1.3.3.m3.1.1.2.cmml">G</mi><mn id="Thmtheorem1.p1.3.3.m3.1.1.3" xref="Thmtheorem1.p1.3.3.m3.1.1.3.cmml">0</mn></msup><annotation-xml encoding="MathML-Content" id="Thmtheorem1.p1.3.3.m3.1b"><apply id="Thmtheorem1.p1.3.3.m3.1.1.cmml" xref="Thmtheorem1.p1.3.3.m3.1.1"><csymbol cd="ambiguous" id="Thmtheorem1.p1.3.3.m3.1.1.1.cmml" xref="Thmtheorem1.p1.3.3.m3.1.1">superscript</csymbol><ci id="Thmtheorem1.p1.3.3.m3.1.1.2.cmml" xref="Thmtheorem1.p1.3.3.m3.1.1.2">𝐺</ci><cn type="integer" id="Thmtheorem1.p1.3.3.m3.1.1.3.cmml" xref="Thmtheorem1.p1.3.3.m3.1.1.3">0</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="Thmtheorem1.p1.3.3.m3.1c">G^{0}</annotation></semantics></math> is a normal subgroup of <math id="Thmtheorem1.p1.4.4.m4.1" class="ltx_Math" alttext="G" display="inline"><semantics id="Thmtheorem1.p1.4.4.m4.1a"><mi id="Thmtheorem1.p1.4.4.m4.1.1" xref="Thmtheorem1.p1.4.4.m4.1.1.cmml">G</mi><annotation-xml encoding="MathML-Content" id="Thmtheorem1.p1.4.4.m4.1b"><ci id="Thmtheorem1.p1.4.4.m4.1.1.cmml" xref="Thmtheorem1.p1.4.4.m4.1.1">𝐺</ci></annotation-xml><annotation encoding="application/x-tex" id="Thmtheorem1.p1.4.4.m4.1c">G</annotation></semantics></math> and <math id="Thmtheorem1.p1.5.5.m5.1" class="ltx_Math" alttext="G/G^{0}" display="inline"><semantics id="Thmtheorem1.p1.5.5.m5.1a"><mrow id="Thmtheorem1.p1.5.5.m5.1.1" xref="Thmtheorem1.p1.5.5.m5.1.1.cmml"><mi id="Thmtheorem1.p1.5.5.m5.1.1.2" xref="Thmtheorem1.p1.5.5.m5.1.1.2.cmml">G</mi><mo id="Thmtheorem1.p1.5.5.m5.1.1.1" xref="Thmtheorem1.p1.5.5.m5.1.1.1.cmml">/</mo><msup id="Thmtheorem1.p1.5.5.m5.1.1.3" xref="Thmtheorem1.p1.5.5.m5.1.1.3.cmml"><mi id="Thmtheorem1.p1.5.5.m5.1.1.3.2" xref="Thmtheorem1.p1.5.5.m5.1.1.3.2.cmml">G</mi><mn id="Thmtheorem1.p1.5.5.m5.1.1.3.3" xref="Thmtheorem1.p1.5.5.m5.1.1.3.3.cmml">0</mn></msup></mrow><annotation-xml encoding="MathML-Content" id="Thmtheorem1.p1.5.5.m5.1b"><apply id="Thmtheorem1.p1.5.5.m5.1.1.cmml" xref="Thmtheorem1.p1.5.5.m5.1.1"><divide id="Thmtheorem1.p1.5.5.m5.1.1.1.cmml" xref="Thmtheorem1.p1.5.5.m5.1.1.1"></divide><ci id="Thmtheorem1.p1.5.5.m5.1.1.2.cmml" xref="Thmtheorem1.p1.5.5.m5.1.1.2">𝐺</ci><apply id="Thmtheorem1.p1.5.5.m5.1.1.3.cmml" xref="Thmtheorem1.p1.5.5.m5.1.1.3"><csymbol cd="ambiguous" id="Thmtheorem1.p1.5.5.m5.1.1.3.1.cmml" xref="Thmtheorem1.p1.5.5.m5.1.1.3">superscript</csymbol><ci id="Thmtheorem1.p1.5.5.m5.1.1.3.2.cmml" xref="Thmtheorem1.p1.5.5.m5.1.1.3.2">𝐺</ci><cn type="integer" id="Thmtheorem1.p1.5.5.m5.1.1.3.3.cmml" xref="Thmtheorem1.p1.5.5.m5.1.1.3.3">0</cn></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="Thmtheorem1.p1.5.5.m5.1c">G/G^{0}</annotation></semantics></math> is a discrete group.</span></p>
+</div>
+</div>
+<div id="Ch1.p2" class="ltx_para">
+<p id="Ch1.p2.1" class="ltx_p">In fact, we can reduce the case of connected Lie groups to simply connected Lie groups:</p>
+</div>
+<div id="Thmtheorem2" class="ltx_theorem ltx_theorem_theorem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span id="Thmtheorem2.1.1.1" class="ltx_text ltx_font_bold">Theorem 2</span></span><span id="Thmtheorem2.2.2" class="ltx_text ltx_font_bold"> </span>(Theorem 2.7, <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx1" title="" class="ltx_ref">Kir08</a>]</cite>)<span id="Thmtheorem2.3.3" class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem2.p1" class="ltx_para">
+<p id="Thmtheorem2.p1.6" class="ltx_p"><span id="Thmtheorem2.p1.6.6" class="ltx_text ltx_font_italic">Let <math id="Thmtheorem2.p1.1.1.m1.1" class="ltx_Math" alttext="G" display="inline"><semantics id="Thmtheorem2.p1.1.1.m1.1a"><mi id="Thmtheorem2.p1.1.1.m1.1.1" xref="Thmtheorem2.p1.1.1.m1.1.1.cmml">G</mi><annotation-xml encoding="MathML-Content" id="Thmtheorem2.p1.1.1.m1.1b"><ci id="Thmtheorem2.p1.1.1.m1.1.1.cmml" xref="Thmtheorem2.p1.1.1.m1.1.1">𝐺</ci></annotation-xml><annotation encoding="application/x-tex" id="Thmtheorem2.p1.1.1.m1.1c">G</annotation></semantics></math> be a connected Lie group. Then its universal cover <math id="Thmtheorem2.p1.2.2.m2.1" class="ltx_Math" alttext="\tilde{G}" display="inline"><semantics id="Thmtheorem2.p1.2.2.m2.1a"><mover accent="true" id="Thmtheorem2.p1.2.2.m2.1.1" xref="Thmtheorem2.p1.2.2.m2.1.1.cmml"><mi id="Thmtheorem2.p1.2.2.m2.1.1.2" xref="Thmtheorem2.p1.2.2.m2.1.1.2.cmml">G</mi><mo id="Thmtheorem2.p1.2.2.m2.1.1.1" xref="Thmtheorem2.p1.2.2.m2.1.1.1.cmml">~</mo></mover><annotation-xml encoding="MathML-Content" id="Thmtheorem2.p1.2.2.m2.1b"><apply id="Thmtheorem2.p1.2.2.m2.1.1.cmml" xref="Thmtheorem2.p1.2.2.m2.1.1"><ci id="Thmtheorem2.p1.2.2.m2.1.1.1.cmml" xref="Thmtheorem2.p1.2.2.m2.1.1.1">~</ci><ci id="Thmtheorem2.p1.2.2.m2.1.1.2.cmml" xref="Thmtheorem2.p1.2.2.m2.1.1.2">𝐺</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="Thmtheorem2.p1.2.2.m2.1c">\tilde{G}</annotation></semantics></math> has a canonical structure of a Lie group such that the covering map <math id="Thmtheorem2.p1.3.3.m3.1" class="ltx_Math" alttext="p:\tilde{G}\to G" display="inline"><semantics id="Thmtheorem2.p1.3.3.m3.1a"><mrow id="Thmtheorem2.p1.3.3.m3.1.1" xref="Thmtheorem2.p1.3.3.m3.1.1.cmml"><mi id="Thmtheorem2.p1.3.3.m3.1.1.2" xref="Thmtheorem2.p1.3.3.m3.1.1.2.cmml">p</mi><mo lspace="0.278em" rspace="0.278em" id="Thmtheorem2.p1.3.3.m3.1.1.1" xref="Thmtheorem2.p1.3.3.m3.1.1.1.cmml">:</mo><mrow id="Thmtheorem2.p1.3.3.m3.1.1.3" xref="Thmtheorem2.p1.3.3.m3.1.1.3.cmml"><mover accent="true" id="Thmtheorem2.p1.3.3.m3.1.1.3.2" xref="Thmtheorem2.p1.3.3.m3.1.1.3.2.cmml"><mi id="Thmtheorem2.p1.3.3.m3.1.1.3.2.2" xref="Thmtheorem2.p1.3.3.m3.1.1.3.2.2.cmml">G</mi><mo id="Thmtheorem2.p1.3.3.m3.1.1.3.2.1" xref="Thmtheorem2.p1.3.3.m3.1.1.3.2.1.cmml">~</mo></mover><mo stretchy="false" id="Thmtheorem2.p1.3.3.m3.1.1.3.1" xref="Thmtheorem2.p1.3.3.m3.1.1.3.1.cmml">→</mo><mi id="Thmtheorem2.p1.3.3.m3.1.1.3.3" xref="Thmtheorem2.p1.3.3.m3.1.1.3.3.cmml">G</mi></mrow></mrow><annotation-xml encoding="MathML-Content" id="Thmtheorem2.p1.3.3.m3.1b"><apply id="Thmtheorem2.p1.3.3.m3.1.1.cmml" xref="Thmtheorem2.p1.3.3.m3.1.1"><ci id="Thmtheorem2.p1.3.3.m3.1.1.1.cmml" xref="Thmtheorem2.p1.3.3.m3.1.1.1">:</ci><ci id="Thmtheorem2.p1.3.3.m3.1.1.2.cmml" xref="Thmtheorem2.p1.3.3.m3.1.1.2">𝑝</ci><apply id="Thmtheorem2.p1.3.3.m3.1.1.3.cmml" xref="Thmtheorem2.p1.3.3.m3.1.1.3"><ci id="Thmtheorem2.p1.3.3.m3.1.1.3.1.cmml" xref="Thmtheorem2.p1.3.3.m3.1.1.3.1">→</ci><apply id="Thmtheorem2.p1.3.3.m3.1.1.3.2.cmml" xref="Thmtheorem2.p1.3.3.m3.1.1.3.2"><ci id="Thmtheorem2.p1.3.3.m3.1.1.3.2.1.cmml" xref="Thmtheorem2.p1.3.3.m3.1.1.3.2.1">~</ci><ci id="Thmtheorem2.p1.3.3.m3.1.1.3.2.2.cmml" xref="Thmtheorem2.p1.3.3.m3.1.1.3.2.2">𝐺</ci></apply><ci id="Thmtheorem2.p1.3.3.m3.1.1.3.3.cmml" xref="Thmtheorem2.p1.3.3.m3.1.1.3.3">𝐺</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="Thmtheorem2.p1.3.3.m3.1c">p:\tilde{G}\to G</annotation></semantics></math> is a homomorphism of Lie groups whose kernel is isomorphic to the fundamental group of <math id="Thmtheorem2.p1.4.4.m4.1" class="ltx_Math" alttext="G" display="inline"><semantics id="Thmtheorem2.p1.4.4.m4.1a"><mi id="Thmtheorem2.p1.4.4.m4.1.1" xref="Thmtheorem2.p1.4.4.m4.1.1.cmml">G</mi><annotation-xml encoding="MathML-Content" id="Thmtheorem2.p1.4.4.m4.1b"><ci id="Thmtheorem2.p1.4.4.m4.1.1.cmml" xref="Thmtheorem2.p1.4.4.m4.1.1">𝐺</ci></annotation-xml><annotation encoding="application/x-tex" id="Thmtheorem2.p1.4.4.m4.1c">G</annotation></semantics></math>.
+Moreover, in this case, <math id="Thmtheorem2.p1.5.5.m5.1" class="ltx_Math" alttext="\ker p" display="inline"><semantics id="Thmtheorem2.p1.5.5.m5.1a"><mrow id="Thmtheorem2.p1.5.5.m5.1.1" xref="Thmtheorem2.p1.5.5.m5.1.1.cmml"><mi id="Thmtheorem2.p1.5.5.m5.1.1.1" xref="Thmtheorem2.p1.5.5.m5.1.1.1.cmml">ker</mi><mo lspace="0.167em" id="Thmtheorem2.p1.5.5.m5.1.1a" xref="Thmtheorem2.p1.5.5.m5.1.1.cmml">⁡</mo><mi id="Thmtheorem2.p1.5.5.m5.1.1.2" xref="Thmtheorem2.p1.5.5.m5.1.1.2.cmml">p</mi></mrow><annotation-xml encoding="MathML-Content" id="Thmtheorem2.p1.5.5.m5.1b"><apply id="Thmtheorem2.p1.5.5.m5.1.1.cmml" xref="Thmtheorem2.p1.5.5.m5.1.1"><csymbol cd="latexml" id="Thmtheorem2.p1.5.5.m5.1.1.1.cmml" xref="Thmtheorem2.p1.5.5.m5.1.1.1">kernel</csymbol><ci id="Thmtheorem2.p1.5.5.m5.1.1.2.cmml" xref="Thmtheorem2.p1.5.5.m5.1.1.2">𝑝</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="Thmtheorem2.p1.5.5.m5.1c">\ker p</annotation></semantics></math> is a discrete central subgroup in <math id="Thmtheorem2.p1.6.6.m6.1" class="ltx_Math" alttext="\tilde{G}" display="inline"><semantics id="Thmtheorem2.p1.6.6.m6.1a"><mover accent="true" id="Thmtheorem2.p1.6.6.m6.1.1" xref="Thmtheorem2.p1.6.6.m6.1.1.cmml"><mi id="Thmtheorem2.p1.6.6.m6.1.1.2" xref="Thmtheorem2.p1.6.6.m6.1.1.2.cmml">G</mi><mo id="Thmtheorem2.p1.6.6.m6.1.1.1" xref="Thmtheorem2.p1.6.6.m6.1.1.1.cmml">~</mo></mover><annotation-xml encoding="MathML-Content" id="Thmtheorem2.p1.6.6.m6.1b"><apply id="Thmtheorem2.p1.6.6.m6.1.1.cmml" xref="Thmtheorem2.p1.6.6.m6.1.1"><ci id="Thmtheorem2.p1.6.6.m6.1.1.1.cmml" xref="Thmtheorem2.p1.6.6.m6.1.1.1">~</ci><ci id="Thmtheorem2.p1.6.6.m6.1.1.2.cmml" xref="Thmtheorem2.p1.6.6.m6.1.1.2">𝐺</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="Thmtheorem2.p1.6.6.m6.1c">\tilde{G}</annotation></semantics></math>.</span></p>
+</div>
+</div>
+<div id="Ch1.p3" class="ltx_para">
+<p id="Ch1.p3.1" class="ltx_p">We have the following connection between subgroups and Lie subgroups (i.e. subgroups that are also submanifolds):</p>
+</div>
+<div id="Thmtheorem3" class="ltx_theorem ltx_theorem_theorem">
+<h6 class="ltx_title ltx_runin ltx_title_theorem">
+<span class="ltx_tag ltx_tag_theorem"><span id="Thmtheorem3.1.1.1" class="ltx_text ltx_font_bold">Theorem 3</span></span><span id="Thmtheorem3.2.2" class="ltx_text ltx_font_bold"> </span>(Theorem 2.8, <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bibx1" title="" class="ltx_ref">Kir08</a>]</cite>)<span id="Thmtheorem3.3.3" class="ltx_text ltx_font_bold">.</span>
+</h6>
+<div id="Thmtheorem3.p1" class="ltx_para">
+<ul id="Ch1.S0.I1" class="ltx_itemize">
+<li id="Ch1.S0.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="Ch1.S0.I1.i1.p1" class="ltx_para">
+<p id="Ch1.S0.I1.i1.p1.1" class="ltx_p"><span id="Ch1.S0.I1.i1.p1.1.1" class="ltx_text ltx_font_italic">Any Lie subgroup of a Lie group is closed in the topology of the ambient group.</span></p>
+</div>
+</li>
+<li id="Ch1.S0.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="Ch1.S0.I1.i2.p1" class="ltx_para">
+<p id="Ch1.S0.I1.i2.p1.1" class="ltx_p"><span id="Ch1.S0.I1.i2.p1.1.1" class="ltx_text ltx_font_italic">Any closed subgroup of a Lie group is a real Lie subgroup.</span></p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">Bibliography</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bibx1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[Kir08]</span>
+<span class="ltx_bibblock">Alexander A Kirillov
+</span>
+<span class="ltx_bibblock">“An introduction to Lie groups and Lie algebras”
+</span>
+<span class="ltx_bibblock">Cambridge University Press, 2008
+</span>
+</li>
+</ul>
+</section>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Wed Jun 12 17:43:48 2024 by <a href="http://dlmf.nist.gov/LaTeXML/" class="ltx_LaTeXML_logo"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="Mascot Sammy"></a>
+</div></footer>
+</div>
+</body>
+</html>

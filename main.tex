@@ -1,0 +1,52 @@
+\documentclass{report}
+
+% Packages for math symbols and equations
+\input{packages}
+\input{commands}
+
+\usepackage{tikz-cd}
+
+
+% Title page information
+\title{Lie group notes}
+\author{Giorgos}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter*{Conventions}
+\begin{itemize}
+    \item By Lie group, we mean either real or complex.
+    \item A Lie subgroup of a Lie group is called a closed Lie subgroup (see \cref{thm:closed_subgroup}). 
+\end{itemize}
+
+\chapter{Lie groups: basic definitions}
+The following theorem allows us to reduce the study of Lie groups to the study of finite groups and connected Lie groups, since for a general Lie group $G$ we have
+\[
+    G = G^0 \times G/G^0,
+\]
+where $G^0$ is the identity component of $G$.
+\begin{theorem}[Theorem 2.6, \cite{kirillov2008introduction} ]
+    Let $G$ be a real or complex Lie group and $G^0$ its identity component.
+    Then $G^0$ is a normal subgroup of $G$ and $G/G^0$ is a discrete group.
+\end{theorem}
+
+In fact, we can reduce the case of connected Lie groups to simply connected Lie groups:
+\begin{theorem}[Theorem 2.7, \cite{kirillov2008introduction}]
+    Let $G$ be a connected Lie group. Then its universal cover $\tilde G$ has a canonical structure of a Lie group such that the covering map $p: \tilde G \to G$ is a homomorphism of Lie groups whose kernel is isomorphic to the fundamental group of $G$.
+    Moreover, in this case, $\ker p$ is a discrete central subgroup in $\tilde G$.
+\end{theorem}
+
+We have the following connection between subgroups and Lie subgroups (i.e.\ subgroups that are also submanifolds):
+\begin{theorem}[Theorem 2.8, \cite{kirillov2008introduction}]\label{thm:closed_subgroup}
+    \begin{itemize}
+        \item Any Lie subgroup of a Lie group is closed in the topology of the ambient group.
+        \item Any closed subgroup of a Lie group is a real Lie subgroup.
+    \end{itemize}
+\end{theorem}
+\printbibliography
+\end{document}
