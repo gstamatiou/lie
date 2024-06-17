@@ -21,7 +21,8 @@
 \chapter*{Conventions}
 \begin{itemize}
     \item By Lie group, we mean either real or complex.
-    \item A Lie subgroup of a Lie group is called a closed Lie subgroup (see \cref{thm:closed_subgroup}). 
+    \item A closed Lie subgroup of a Lie group is a submanifold that is also a subgroup (see \cref{thm:closed_subgroup}). 
+    \item A Lie subgroup is a subgroup that is also an immersed submanifold.
 \end{itemize}
 
 \chapter{Lie groups: basic definitions}
@@ -43,10 +44,183 @@ In fact, we can reduce the case of connected Lie groups to simply connected Lie 
 
 We have the following connection between subgroups and Lie subgroups (i.e.\ subgroups that are also submanifolds):
 \begin{theorem}[Theorem 2.8, \cite{kirillov2008introduction}]\label{thm:closed_subgroup}
-    \begin{itemize}
+    \begin{enumerate}[label=(\roman*)]
         \item Any Lie subgroup of a Lie group is closed in the topology of the ambient group.
         \item Any closed subgroup of a Lie group is a real Lie subgroup.
-    \end{itemize}
+    \end{enumerate}
 \end{theorem}
+
+\subsection{Homogeneous spaces}
+We begin by describing coset spaces of Lie groups.
+\begin{theorem}[Theorem 2.11, \cite{kirillov2008introduction}]
+    Let $G$ be a Lie group of dimension $n$, $H \leq G$ a closed Lie subgroup of dimension $k$.
+    \begin{enumerate}[label = (\roman*)]
+        \item The coset space $G/H$ has a natural structure of a manifold of dimension $n-k$ such that the canonical map $p: G \to G/H$ is a fiber bundle, with fiber diffeomorphic to $H$.
+        The tangent space at the identity is isomorphic to the quotient space $T_H G/H \simeq T_eG/T_eH$.
+        \item If H is a normal closed Lie subgroup then $G/H$ has a canonical Lie group structure.
+    \end{enumerate}
+\end{theorem}
+
+The following is the analog of the homomorphism theorem for Lie groups:
+\begin{theorem}[Theorem 2.5, \cite{kirillov2008introduction}]
+    Let $f:G_1 \to G_2$ be a Lie group morphism.
+    \begin{enumerate}[label = (\roman*)]
+        \item $H = \ker f$ is a normal closed Lie subgroup of $G_1$ and $f$ induces an injective homomorphism $G_1/H \to G_2$ that is an immersion
+        \item If moreover $\Im f$ is an embedded submanifold, then it is a closed Lie subgroup of $G_2$ and $f$ induces an isomorphism $G_1/H \to \Im f$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Theorem 2.20, \cite{kirillov2008introduction}]
+    Let $G$ be a Lie group acting on a manifold $M$, and $m \in M$.
+    \begin{enumerate}[label = (\roman*)]
+        \item The stabilizer is a closed Lie subgroup of $G$, and the orbit map $g \mapsto g \cdot m$ induces an injective immersion $G/G_m \hookrightarrow \mathcal O_m$ whose image coincides with $\mathcal O_m$.
+        \item The orbit $\mathcal O_m$ is an immersed submanifold with tangent space $T_m \mathcal O_m = T_1 G / T_1 G_m $.
+        \item If the orbit is a submanifold, then the orbit map is a diffeomorphism.
+    \end{enumerate}
+\end{theorem}
+
+The case of one orbit gives rise to $G$-homogeneous spaces:
+\begin{theorem}[Theorem 2.22 \cite{kirillov2008introduction}]
+    Let $M$ be a $G$-homogeneous space and $m \in M$.
+    Then the orbit map $G \to M$ is a fiber bundle over $M$ with fiber $G_m$.
+\end{theorem}
+
+\subsection{Classical Lie groups}
+
+\begin{definition}
+    We define
+    \[
+    Sp(n, \mathbb K) = 
+    \left\{
+        A \in GL(2n, \mathbb K) \mid \omega(Ax, Ay) = \omega(x, y)
+    \right\}.
+    \]
+    where $\omega$ is the standard symplectic form on $\mathbb K^{2n}$, which is given by
+    $\omega(x, y) = x^* J y = \sum_{i=1}^n x_i y_{i+n} - x_{i+n}y_i$, 
+    and 
+    \[
+    J = 
+    \begin{pmatrix}
+    0 & -I_n \\
+    I_n & 0
+    \end{pmatrix}.
+    \]
+    We also define the gorup of unitary quaternionic transformations by
+    \[
+    \Sp(n) = \Sp(n, \mathbb C) \cap \SU(2n).
+    \]
+\end{definition}
+
+The following theorem tells us that the logarithmic map behaves well when restricted to a neighborhood of the identity in each classical group.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c c c c c}
+        $G$ & $O(n, \mathbb{R})$ & $SO(n, \mathbb{R})$ & $U(n)$ & $SU(n)$ & $Sp(n)$ \\
+        \hline \hline
+        $\mathfrak{g}$ & $x + x' = 0$ & $x + x' = 0$ & $x + x^* = 0$ & $x + x^* = 0, \ \text{tr} \, x = 0$ & $x + J^{-1}x'J = 0 \ x + x^* = 0$ \\
+        $\dim G$ & $\frac{n(n-1)}{2}$ & $\frac{n(n-1)}{2}$ & $n^2$ & $n^2 - 1$ & $n(2n+1)$ \\
+        $\pi_0(G)$ & $\mathbb{Z}_2$ & $\{1\}$ & $\{1\}$ & $\{1\}$ & $\{1\}$ \\
+        $\pi_1(G)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}$ & $\{1\}$ & $\{1\}$ \\
+    \end{tabular}
+    \caption{Compact classical groups}
+    \label{table:classical_groups}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c c c}
+        $G$ & $GL(n, \mathbb{R})$ & $SL(n, \mathbb{R})$ & $Sp(n, \mathbb{R})$ \\
+        \hline \hline
+        $\mathfrak{g}$ & $\mathfrak{gl}(n, \mathbb{R})$ & $\text{tr} \, x = 0$ & $x + J^{-1}x'J = 0$ \\
+        $\dim G$ & $n^2$ & $n^2 - 1$ & $n(2n + 1)$ \\
+        $\pi_0(G)$ & $\mathbb{Z}_2$ & $\{1\}$ & $\{1\}$ \\
+        $\pi_1(G)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}$ \\
+    \end{tabular}
+    \caption{Noncompact real classical groups.}
+    \label{table:noncompact_real_classical_groups}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c c c c}
+        $G$ & $GL(n, \mathbb{C})$ & $SL(n, \mathbb{C})$ & $O(n, \mathbb{C})$ & $SO(n, \mathbb{C})$ \\
+        \hline \hline
+        $\pi_0(G)$ & $\{1\}$ & $\{1\}$ & $\mathbb{Z}_2$ & $\{1\}$ \\
+        $\pi_1(G)$ & $\mathbb{Z}$ & $\{1\}$ & $\mathbb{Z}_2$ & $\mathbb{Z}_2$ \\
+    \end{tabular}
+    \caption{Complex classical groups.}
+    \label{table:complex_classical_groups}
+\end{table}
+
+\chapter{Lie groups and Lie algebras}
+\section{Exponential map}
+\begin{definition}[Proposition 3.1, \cite{kirillov2008introduction}]
+    Let $G$ be a Lie group and $x \in \mathfrak g$.
+    The one-parameter subgroup $\gamma_x: \mathbb K \to G$ is the unique Lie group morphism such that $\gamma_x'(0) = x$.
+    We define the exponential map of $G$ as
+    \[
+    \exp(x) = \gamma_x(1)
+    \]
+\end{definition}
+\begin{remark}
+    By looking at the proof of the statements in the above definition, one can see that for $x\in \mathfrak g$, the curve
+    \[
+    \exp(tx) = \gamma_x(t) = \gamma_{tx}(1).
+    \]
+    integral curve of the left-invariant vector field $X \in \mathcal X(G)$ that satisfies
+    \[
+    X_e = x.
+    \]
+\end{remark}
+
+The following are some properties of the exponential map:
+\begin{theorem}[Theorems 3.7 and 3.36, \cite{kirillov2008introduction}]
+    Let $G$ be a Lie group.
+    \begin{enumerate}[label = (\roman*)]
+        \item $d_{e} \exp = \id_{\mathfrak g}$
+        \item The exponential map is a local diffeomorphism at $0$.
+        \item For any Lie group morphism $\phi:G_1 \to G_2$, we have $d_e \phi (exp(x)) = \exp d_e (\phi(x))$ for all $x\in \mathfrak g$.
+        \item For any $g \in G, x \in \mathfrak g$
+        \[
+        g \exp(x) g^{-1} = \exp(\Ad_g x).
+        \]
+        \item For $x, y \in \mathfrak g$, we have:
+        \[
+        \text{If } [x,y] = 0 \text{ then } e^x e^y = e^y e^x = e^{x+y}.
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{remark}
+    The exponential map is not surjective in general. It is however for compact Lie groups.
+\end{remark}
+
+\begin{example}
+    Let $G = SO(3, \mathbb R)$.
+    Then $\mathfrak{so}(3, \mathbb R)$ consists of skew-symmetric mattrices, with basis:
+    \begin{align*}
+        J_1 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & -1 \\ 0 & 1 & 0 \end{pmatrix}, \quad
+        J_2 = \begin{pmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ -1 & 0 & 0 \end{pmatrix}, \quad
+        J_3 = \begin{pmatrix} 0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}.
+    \end{align*}
+    The exponential matrix is given by
+    \[
+    e^{tJ_1} = 
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & \cos(t) & -\sin(t) \\
+        0 & \sin(t) & \cos(t)
+    \end{pmatrix},
+    \]
+    i.e.\ rotation around x-axis by angle t; similarly, $J_y, J_z$ generate rotations around
+    $y, z$ axes.
+    Elements of the form $exp(tJx), exp(tJ_y ), exp(tJ_z )$ generate
+    a neighborhood of identity in $\SO(3, \mathbb R)$.
+    Since $SO(3, \mathbb R)$ is connected, these elements generate the whole group. 
+    For this reason, it is common to refer to $J_x , J_y , J_z$ as “inﬁnitesimal generators” of $SO(3, \mathbb R)$. Thus,
+    in a certain sense $SO(3, \mathbb R)$ is generated by three elements.
+\end{example}
+
 \printbibliography
 \end{document}
