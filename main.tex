@@ -26,9 +26,22 @@
 \end{itemize}
 
 \chapter{Lie groups: basic definitions}
+We will have two notions of subgroups of Lie groups:
+\begin{definition}
+    Let $G$ be a complex or real Lie group and $H$ be a subgroup of $G$.
+    \begin{enumerate}[label = (\roman*)]
+        \item $H$ is a Lie subgroup if it is an immersed submanifold of $G$ with the multiplication and inverse maps being smooth (or analytic).
+        \item $H$ is a closed Lie subgroup if it is an embedded submanifold of $G$.
+    \end{enumerate}
+\end{definition}
+\begin{example}
+    Any of the classical Lie groups are closed Lie subgroups of $\GL(n, \mathbb K)$.
+    For a Lie subgroup that is not closed, consider the irrational winding on the torus, that is $G = \mathbb T^2 = \mathbb R^2/\mathbb Z^2$, and $H = f(\mathbb R)$ with $f(t,s) = (t \mod \mathbb Z, \alpha s \mod \mathbb Z)$, where $\alpha \in \mathbb R\backslash \mathbb Q$.
+\end{example}
+\section{Lie subgroups and quotients}
 The following theorem allows us to reduce the study of Lie groups to the study of finite groups and connected Lie groups, since $G_0$ is a normal subgroup of $G$ and $G/G_0$ is a discrete group.
 where $G^0$ is the identity component of $G$.
-\begin{theorem}[Theorem 2.6, \cite{kirillov2008introduction} ]
+\begin{theorem}[Theorem 2.6, \cite{kirillov2008introduction}]
     Let $G$ be a real or complex Lie group and $G^0$ its identity component.
     Then $G^0$ is a normal subgroup of $G$ and a Lie group itself, while $G/G^0$ is a discrete group.
 \end{theorem}
@@ -38,6 +51,17 @@ In fact, we can reduce the case of connected Lie groups to simply connected Lie 
     Let $G$ be a connected Lie group. Then its universal cover $\tilde G$ has a canonical structure of a Lie group such that the covering map $p: \tilde G \to G$ is a homomorphism of Lie groups whose kernel is isomorphic to the fundamental group of $G$.
     Moreover, in this case, $\ker p$ is a discrete central subgroup in $\tilde G$.
 \end{theorem}
+\begin{proof}
+    The lifting property of the universal cover implies that $\tilde G$ is a Lie group.
+    The kernel is discrete, being the fiber of a covering map.
+    The fact that it is central follows from the more general fact that every discrete normal subgroup of a connected Lie group is central.
+    To show the latter, one considers the map $G \to N, g \to g n g^{-1}$ where $N$ is the normal subgroup and $n \in N$ is some fixed element.
+    Then the inverse image of any element $n' \in N$ is closed an open in $G$, so it is all of $G$ in the case where $n' = n$ and empty otherwise.
+\end{proof}
+
+\begin{example}
+    In the case where $G = \mathbb T^2$ is the torus, the covering map $p: \mathbb R^2 \to \mathbb T^2$ is given by $p(t,s) = e^{2\pi i t, 2\pi i s }$, and $\ker p = \mathbb N^2 \simeq \pi_1(\mathbb T^2)$.
+\end{example}
 
 We have the following connection between subgroups and Lie subgroups (i.e.\ subgroups that are also submanifolds):
 \begin{theorem}[Theorem 2.8, \cite{kirillov2008introduction}]\label{thm:closed_subgroup}
@@ -46,8 +70,17 @@ We have the following connection between subgroups and Lie subgroups (i.e.\ subg
         \item Any closed subgroup of a Lie group is a real Lie subgroup.
     \end{enumerate}
 \end{theorem}
+\begin{proof}
+    For the first part of the theorem, we note that $\overline H$ is a subgroup of $G$ as well.
+    We claim that $H$ (and thus $Hx$ for every $x \in \overline H$ ) is open and dense in $\overline H$.
+    To see this, note that $e \in \overline H$ implies that for every neighborhood $U \subseteq G$ of $e$ in $G$, $U \cap H$ is nonempty.
+    In particular there exists some open set $U$ in $G$ containing $r$ such that $U \cap H \neq \emptyset$.
+    Then $U\cap H$ will be a neighborhood of $e$ in $\overline H$ and $H$ is open because it can be written as the union of all subsets of the form $h(U\cap H)$ for $h \in H$.
 
-\subsection{Homogeneous spaces}
+    To conclude, note that for $x, y \in \overline H$, $Hx \cap Hy$ is dense in $\overline H$, so it is nonempty.
+    This implies that $Hx = Hy = H$ and $H$ thus $H = \overline H$.
+\end{proof}
+\section{Homogeneous spaces}
 We begin by describing coset spaces of Lie groups.
 \begin{theorem}[Theorem 2.11, \cite{kirillov2008introduction}]
     Let $G$ be a Lie group of dimension $n$, $H \leq G$ a closed Lie subgroup of dimension $k$.
@@ -67,14 +100,23 @@ The following is the analog of the homomorphism theorem for Lie groups:
     \end{enumerate}
 \end{theorem}
 
+
 \begin{theorem}[Theorem 2.20, \cite{kirillov2008introduction}]
     Let $G$ be a Lie group acting on a manifold $M$, and $m \in M$.
     \begin{enumerate}[label = (\roman*)]
-        \item The stabilizer is a closed Lie subgroup of $G$, and the orbit map $g \mapsto g \cdot m$ induces an injective immersion $G/G_m \hookrightarrow \mathcal O_m$ whose image coincides with $\mathcal O_m$.
-        \item The orbit $\mathcal O_m$ is an immersed submanifold with tangent space $T_m \mathcal O_m = T_1 G / T_1 G_m $.
+        \item The stabilizer $G_m$ is a closed Lie subgroup of $G$, with Lie algebra
+        \[
+        \mathfrak h = \{ x \in \mathfrak g \mid \rho_*(x)(m) = 0 \}.
+        \]
+        where $\rho: G \to \mathrm{Diff}(M)$ is the action of $G$ on $M$.
+        \item The orbit map $g \mapsto g \cdot m$ induces an injective immersion $G/G_m \hookrightarrow \mathcal O_m$ whose image coincides with $\mathcal O_m$.
+        \item The orbit $\mathcal O_m$ is an immersed submanifold with tangent space $T_m \mathcal O_m = \mathfrak g / \mathfrak h $.
         \item If the orbit is a submanifold, then the orbit map is a diffeomorphism.
     \end{enumerate}
 \end{theorem}
+\begin{proof}
+See \cite[Theorem 2.20, Theorem 3.29]{kirillov2008introduction}.
+\end{proof}
 
 The case of one orbit gives rise to $G$-homogeneous spaces:
 \begin{theorem}[Theorem 2.22 \cite{kirillov2008introduction}]
@@ -82,7 +124,7 @@ The case of one orbit gives rise to $G$-homogeneous spaces:
     Then the orbit map $G \to M$ is a fiber bundle over $M$ with fiber $G_m$.
 \end{theorem}
 
-\subsection{Classical Lie groups}
+\section{Classical Lie groups}
 
 \begin{definition}
     We define
@@ -115,7 +157,7 @@ The following theorem tells us that the logarithmic map behaves well when restri
     \begin{tabular}{c c c c c c}
         $G$ & $O(n, \mathbb{R})$ & $SO(n, \mathbb{R})$ & $U(n)$ & $SU(n)$ & $Sp(n)$ \\
         \hline \hline
-        $\mathfrak{g}$ & $x + x' = 0$ & $x + x' = 0$ & $x + x^* = 0$ & $x + x^* = 0, \ \text{tr} \, x = 0$ & $x + J^{-1}x'J = 0 \ x + x^* = 0$ \\
+        $\mathfrak{g}$ & $x^t = -x$ & $x^t = -x$ & $x^* = -x$ & $x^* = -x, \ \text{tr}, x = 0$ & $J^{-1}x^*J = -x, x^* = -x$ \\
         $\dim G$ & $\frac{n(n-1)}{2}$ & $\frac{n(n-1)}{2}$ & $n^2$ & $n^2 - 1$ & $n(2n+1)$ \\
         $\pi_0(G)$ & $\mathbb{Z}_2$ & $\{1\}$ & $\{1\}$ & $\{1\}$ & $\{1\}$ \\
         $\pi_1(G)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}$ & $\{1\}$ & $\{1\}$ \\
@@ -193,6 +235,18 @@ The following are some properties of the exponential map:
     The exponential map is not surjective in general. It is however for compact Lie groups.
 \end{remark}
 
+\begin{lemma}
+    The exponential map of a connected Lie group $G$ sends generators of $\mathcal g$ to generators of $G$.
+    That is, if $\{ x_1, \ldots, x_n \}$ is a basis of $\mathfrak g$, then $\left\{ \exp(t x_i) : t \in \mathbb R, i \in \llbracket 1, n \rrbracket \right\}$ is a basis of $G$.
+\end{lemma}
+\begin{proof}
+    Consider the map $f: \mathbb R^n \to \mathbb G$ given by
+    \[
+    f(t_1, \ldots, t_n) = \exp(t_1 x_1) \cdots \exp(t_n x_n).
+    \]
+    Then $d_0 f = I_n$ in the basis with respect to the standard basis for $\mathbb R^n$ and $\{ x_1, \ldots, x_n \}$ for $\mathfrak g$.
+    In particular it is surjective and by the constant rank theorem, $f(\mathbb R^n)$ contatins a neighborhood of the identity of $G$. 
+\end{proof}
 \begin{example}
     Let $G = SO(3, \mathbb R)$.
     Then $\mathfrak{so}(3, \mathbb R)$ consists of skew-symmetric mattrices, with basis:
@@ -219,6 +273,235 @@ The following are some properties of the exponential map:
     in a certain sense $SO(3, \mathbb R)$ is generated by three elements.
 \end{example}
 
+\begin{remark}
+    To motivate the term ``inﬁnitesimal generators'', one can think of them as directions in which one can move from the identity (using the exponential map) in order to generate the whole group.
+\end{remark}
+
+\section{The commutator}
+In literature, one has at least three ways to define the commutator of some Lie group, Namely
+\begin{enumerate}[label = (\roman*)]
+    \item Using left-invariant vector fields (see \cite{lee2018introduction}).
+    \item As the lowest order term in the logarithm of the multiplication of exponentials (see \cref{lem:commutator_definition}).
+    \item As the differential of the adjoint representation.
+\end{enumerate}
+
+For completeness, we recall that in \cite{lee2018introduction}, the commutator of a Lie group is defined as
+\[
+[x,y] = [X,Y]_e \text{ for } x,y \in \mathfrak g
+\]
+where $X,Y$ are the left-invariant vector fields for which $X_e = x, Y_e = y$, and the bracket of two vector fields is defined as $[X,Y] = XY - YX$.
+
+In \cite{kirillov2008introduction}, the commutator is defined as the lowest order term in the logarithm of the multiplication of exponentials (see \cref{lem:commutator_definition}).
+We say that a map $Q:\mathfrak g \to \mathfrak g$ is of order $k$ if $Q(t x) = t^k Q(X)$ for $t \in \mathbb R, x \in \mathfrak g$.
+\begin{lemma}[Lemma 3.11, \cite{kirillov2008introduction}]\label{lem:commutator_definition}
+    Let $G$ be a Lie group.
+    Then there exists a neighborhood of $0 \in \mathfrak g$ and smooth (or analytic in the complex case) functions $[\cdot, \cdot], \mu: \mathfrak g \times \mathfrak g \to \mathfrak g$ such that in that neighborhood:
+    \begin{align*}
+        e^x e^y &= e^{\mu(x,y)}\\
+        \mu(x,y) &= x + y + \frac{1}{2}[x.y] + \cdots
+    \end{align*}
+    with $[\cdot, \cdot]$ being a bilinear skew-symmetric form and the dots denoting terms of order higher than $3$.
+\end{lemma}
+
+The commutator has the following properties:
+\begin{proposition}[Proposition 3.12, \cite{kirillov2008introduction}]
+    Let $G, H$ be Lie groups and $\phi: G \to H$ a Lie group morphism.
+    Then for $x,y \in \mathfrak g$ we have
+    \begin{enumerate}[label = (\roman*)]
+        \item $\phi_{*} [x,y] = [\phi_{*} x, \phi_{*} y]$.
+        \item $\Ad_g[x,y] = [\Ad_g x, \Ad_g y]$.
+        \item $e^x e^y e^{-x} e^{-y} = e^{[x,y]+\cdots}$, where dots stand for degrees higher than $2$.
+        \item $\ad_x y = [x,y]$, where $\ad = d_e \Ad: \mathfrak g \to \mathfrak{gl}(\mathfrak g)$.
+        \item $Ad_{e^x} = e^{\ad_x} \in \mathfrak{gl}(\mathfrak g)$
+    \end{enumerate}
+\end{proposition}
+For instance when $G$ is commutative, the commutator is zero (and the exponential map is a homomorphism).
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item For $\mathfrak g = \mathfrak{gl}(d, \mathbb K)$, the commutator is given by
+        \[
+        [x,y] = xy - yx.
+        \]
+        \item For a general associative algebra $A$, the commutator over $\mathcal K$, is given by the same formula.
+        \item Any vector space can be made into a commutative Lie algebra by defining the commutator to be zero.
+    \end{enumerate}
+\end{example}
+
+\begin{theorem}[Jacobi identity]
+    Let $G$ be a real or complex Lie group and $x,y,z \in \mathfrak g$.
+    Then
+    \[
+    [x,[y,z]] + [y,[z,x]] + [z,[x,y]] = 0.
+    \]
+\end{theorem}
+\begin{proof}
+    See \cite[Theorem 3.16]{kirillov2008introduction}.
+\end{proof}
+\begin{proposition}
+    Differentiation at the identity induces a map
+    \[
+    \hom(G_1, G_2) \to \hom(\mathfrak g_1, \mathfrak g_2)
+    \]
+    which is injective when $G_1$ is connected.
+\end{proposition}
+
+
+\section{Subalgebras, ideals and center}
+\begin{definition}
+    A subalgebra of a Lie algebra $\mathfrak g$ is a subspace $\mathfrak h \subseteq \mathfrak g$ that is closed under the Lie bracket: $[x,y] \in \mathfrak h$ for all $x,y \in \mathfrak h$.
+    An ideal is a subalgebra $\mathfrak h$ such that $[x,y] \in \mathfrak h$ for all $x \in \mathfrak h, y \in \mathfrak g$.
+\end{definition}
+It is easy to see that one can take quotients of Lie algebras by ideals and thus obtain Lie algebras.
+
+The next theorem tells us that Lie subgroups correspond to subalgebras, and normal closed Lie subgroups correspond to ideals.
+In the case of the latter, a converse statement gives us a way to check if a subgroup is normal by checking whether the corresponding subalgebra is an ideal.
+In this way we obtain a link between an algebraic condition (being a normal subgroup) and a linear one (being an ideal).
+\begin{theorem}[Theorem 3.22, \cite{kirillov2008introduction}]
+    Let $G$ be a real or complex Lie group with Lie algebra $\mathfrak g$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item If $H$ is a Lie subgroup (not necessarily closed) of $G$, then $\mathfrak h$ is a subalgebra of $\mathfrak g$.
+        \item If $H$ is a normal closed Lie subgroup of $G$, then $\mathfrak h$ is an ideal of $\mathfrak g$.
+        \item If $H$ is a closed Lie subgroup of $G$, both $G$ and  $H$ are connected, then $\mathfrak h$ is an ideal of $\mathfrak g$ if and only if $H$ is a normal subgroup of $G$.
+    \end{enumerate}
+\end{theorem}
+
+
+\section{Lie algebra of vector fields}
+For a manifold $M$, the space $\mathrm{Vect}(M)$ can be made into a Lie algebra by directly defining the bracket of two vector fields and showing that it is skew-symmetric and bilinear.
+However, one can think of $\mathrm{Diff}(M)$ as similar to a Lie group (but not quite, since it is infinite-dimensional), whose Lie algebra is $\mathrm{Vect}(M)$.
+\begin{definition}
+    Let $M$ be a smooth manifold and $G$ be a Lie group.
+    \begin{enumerate}[label = (\roman*)]
+        \item A smooth map $\rho: G \to \mathrm{Diff}(M)$ is a map that arises from a smooth action of $G$ on $M$.
+        \item The Lie algebra of $\mathrm{Diff}(M)$ is the space of vector fields $\mathrm{Vect}(M)$.
+        \item The exponential map of $\mathrm{Diff}(M)$ is the flow (whenever well-defined) of a vector field: $\left(e^X\right)_m = \Phi^1_X(m)$.
+        \item The differential of $\rho: G \to \mathrm{Diff}(M)$ is the map $\rho_*: \mathfrak g \to \mathrm{Vect}(M)$ given by
+        \[
+        \left(\rho_*(x)\right)_m = \left.\frac{\d}{\d t}\right|_{t=0} \rho\left(e^{tx}\right)(m).
+        \]
+        \item The commutator $[\xi, \eta]$ of two vector fields $\xi, \eta \in \mathrm{Vect}(M)$ is the unique vector field that satisfies
+        \[
+        \Phi^t_\xi \Phi^s_\eta \Phi^{-t}_\xi \Phi^{-s}_\eta = \Phi^{ts}_{[\xi, \eta]} + \cdots
+        \]
+        where the dots stand for terms of order 3 and higher in $s,t$.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    To motivate why $\mathrm{Vect}(M) = \mathfrak{diff}(M)$, we note that $\mathfrak{diff}(M)$ should be given by the derivatives of the one-parameter subgroups of $\mathrm{Diff}(M)$.
+    If $\phi^t \in \mathrm{Diff}(M)$ is a one-parameter subgroup of $M$, then its derivative defines a vector field $\partial_{t=0} \phi^t \in \mathrm{Vect}(M)$:
+    \[
+    \frac{\d}{\d t}\Big|_{t=0} \phi^t(m) \in T_m(M), \text{ for } m \in M.
+    \]
+    Similarly, to motivate the differential of $\rho: G \to \mathrm{Diff}(M)$, we note that $\rho$ maps one-parameter subgroups to one-parameter subgroups.
+\end{remark}
+
+\begin{proposition}[Proposition 3.23, \cite{kirillov2008introduction}]
+    Let $M$ be a smooth manifold and $G$ be a Lie group acting smoothly on $M$.
+    \begin{enumerate}[label = (\roman*)]
+        \item The commutator of vector fields makes $\mathrm{Vect}(M)$ into a Lie algebra.
+        \item The commutator can be also defined by the following formulas:
+        \begin{align*}
+            [\xi, \eta] &= \frac{\d}{\d t} (\Phi^t_\xi)_* \eta \\
+            \partial_{[\xi, \eta]}f &= \partial_\eta \partial_\xi f - \partial_\xi \partial_\eta f\\
+            \left[ f^i \partial_i, g^j \partial_j \right] &= \left( g^i \partial_i f^j - f^i \partial_i g^j \right) \partial_j
+        \end{align*}
+    \end{enumerate}
+\end{proposition}
+
+\begin{theorem}[Theorem 3.25, \cite{kirillov2008introduction}]
+    The transformation $\rho_*: \mathfrak g \to \mathrm{Vect}(M)$ is a Lie algebra morphism.
+\end{theorem}
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item Considering the action of $G$ on itself by left-multiplication $L: G \to \mathrm{Diff}(G)$, the Lie algebra isomorphism
+        \[
+        L_*: \mathfrak g \leftrightarrow \{\text{right invariant vector fields on } \} G
+        \]
+        associates to $x \in \mathfrak g$ the right-invariant vector field $X$ such that $X_e = x$.
+    \end{enumerate}
+\end{example}
+
+\section{Stabilizers and the center}
+\begin{corollary}
+    Let $f: G_1 \to G_2$ be a morphism of real or complex Lie groups.
+    Then 
+    \begin{enumerate}[label = (\roman*)]
+        \item $\ker f $ is a closed Lie subgroup with Lie algebra $\ker f_*$.
+        \item The map $G_1/\ker f \to \mathrm{Im} f$ is an immersion.
+        \item When $\mathrm{Im}f$ is a submanifold, the map is a $G_1/\ker f \to \mathrm{Im}f$ diffeomorphism.
+    \end{enumerate}
+\end{corollary}
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item 
+        Let $V$ be a vector space over $\mathbb K$ with a bilinear form $B$.
+        Then
+        \[
+        \mathrm{O}(V, B) = \left\{ g \in \GL(V) : B(gu, gv) = B(u,v) \text{ for all } u, v \in V \right\}
+        \]
+        is a closed Lie group with Lie algebra:
+        \[
+        \mathfrak{o}(V,B) = \left\{ g \in \mathfrak{gl}(V): B(xu, xv) = B(u,v) \text{ for all } u,v \in V\right\}.
+        \]
+    
+        Indeed, define an action of $\GL(V)$ on the space $\mathcal F$ of bilinear forms on $V$ by $gF(u,v) = F(g^{-1}u, g^{-1}v)$.
+        This defines a representation $\rho: \GL(V) \to \GL(\mathcal F)$ and $\mathrm{O}(V,B)$ is the stabilizer of $B$ under this action.
+        The space $\mathcal F$ is a vector space, so $\mathrm{Vect}(\mathcal F)$ can be identifies with the space smooth maps from $\mathcal F$ to itself.
+        Then for $x \in \mathfrak{gl}(V)$
+        \begin{align*}
+            \left(\rho_*(x)\right)_B(u,v) &= \left( \frac{\d}{\d t}\Big|_{t=0} \rho(e^{tx}) B\right)(u, v) = \left( \frac{\d}{\d t}\Big|_{t=0} B(e^{-tx}u, e^{-tx}v)\right)\\
+            &= -B(u, xv) - B(xu, v).
+        \end{align*}
+    
+        \item 
+        Let $A$ be a finite-dimensional associative algebra over $\mathbb{K}$. Then the group of all automorphisms of $A$
+        \[
+        \text{Aut}(A) = \{g \in \text{GL}(A) \mid (g a) \cdot (g b) = g(a \cdot b) \text{ for all } a,b \in A\}
+        \]
+        is a Lie group with Lie algebra
+        \[
+        \text{Der}(A) = \{x \in \mathfrak{gl}(A) \mid (x.a)b + a(x.b) = x(ab) \text{ for all } a, b \in A\}
+        \]
+        (this Lie algebra is called the \textit{algebra of derivations of} $A$).
+        
+        Indeed, if we consider the space $W$ of all linear maps $A \otimes A \to A$ and define the action of $G$ by $(g f)(a \otimes b) = g f(g^{-1}a \otimes g^{-1}b)$ then $\text{Aut} A = G_\mu$, where $\mu : A \otimes A \to A$ is the multiplication. So $\text{Aut}(A)$ is a Lie group with Lie algebra $\text{Der}(A)$.
+        \item 
+        The same argument also shows that for a finite-dimensional Lie algebra $\mathfrak{g}$, the group
+        \[
+        \text{Aut}(\mathfrak{g}) = \{ g \in \text{GL}(\mathfrak{g}) \mid [ga, gb] = g[a, b] \text{ for all } a, b \in \mathfrak{g} \}
+        \]
+        is a Lie group with Lie algebra
+        \[
+        \text{Der}(\mathfrak{g}) = \{ x \in \mathfrak{gl}(\mathfrak{g}) \mid [x.a, b] + [a, x.b] = x.[a, b] \text{ for all } a, b \in \mathfrak{g} \}
+        \]
+        called the Lie algebra of derivations of $\mathfrak{g}$.
+    \end{enumerate}
+\end{example}
+
+
+Finally, we can show that the center of $G$ is a closed Lie subgroup.
+
+
+\begin{theorem}
+Let $G$ be a connected Lie group. Then its center $Z(G)$ is a closed Lie subgroup with Lie algebra the ideal 
+\[
+\mathfrak{z}(\mathfrak{g}) = \{ x \in \mathfrak{g} \mid [x, y] = 0 \ \forall y \in \mathfrak{g} \}.
+\]
+\end{theorem}
+
+The quotient group $G / Z(G)$ is usually called the \textit{adjoint group} associated with $G$ and denoted $\text{Ad}\, G$:
+\[
+\text{Ad}\, G = G / Z(G) = \text{Im}(\text{Ad}: G \rightarrow \text{GL}(\mathfrak{g})) \quad \text{(for connected } G).
+\]
+The corresponding Lie algebra is
+\[
+\text{ad}\, \mathfrak{g} = \mathfrak{g} / \mathfrak{z}(\mathfrak{g}) = \text{Im}(\text{ad}: \mathfrak{g} \rightarrow \mathfrak{gl}(\mathfrak{g})).
+\]
+    
 \appendix
 
 \chapter{Covering theory reminder}
@@ -324,6 +607,12 @@ The following property is crucial into showing that the topology defined by the 
 U[\gamma] = U_[\gamma'] \text{ for all } [\gamma'] \in U_{[\gamma]}.
 \]
 The proofs that $p:U_[\gamma] \to U$ is a homeomorphism for all $U \in \mathcal U$ and $[\gamma] \in \tilde X$ and that $\tilde X$ is simply connected can be found in \cite{hatcher2002topology}.
+
+An elementary example is the torus:
+\begin{example}
+    For $X = \mathbb T^2$ being the torus, the universal covering $p: \mathbb R^2 \to \mathbb T^2$ and given by $p(t,s) = e^{2\pi i t, 2\pi i s }$.
+    Under the identification $\pi_1(\mathbb T^2) \simeq \mathbb N^2$, which acts on $\mathbb R^2$ by translations, we have $\mathbb T^2 \simeq \mathbb R^2 / \mathbb N^2$.
+\end{example}
 
 Having now constructed the universal cover, we now move on to discussing deck transformations.
 \begin{definition}
