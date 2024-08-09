@@ -124,6 +124,30 @@ The case of one orbit gives rise to $G$-homogeneous spaces:
     Then the orbit map $G \to M$ is a fiber bundle over $M$ with fiber $G_m$.
 \end{theorem}
 
+The following proposition gives us a way to check whether a Lie group morphism is a covering map:
+\begin{proposition}[Lie morphism covering map criterion]
+    Let $f:G_1 \to G_2$ be a Lie group morphism such that $f_*: \mathfrak g_1 \to \mathfrak g_2$ is an isomorphism.
+    Then $f$ is a covering map and $\ker f$ is a discrete central group.
+\end{proposition}
+\begin{proof}
+    The inverse mapping theorem tells us that there exist neighborhoods $U_1, U_2$ of the identities of $G_1$ and $G_2$ respectively such that $f:U_1 \to U_2$ is a diffeomorphism.
+    In particular, $f$ is surjective since its image contains $U_2$ which generates $G_2$, being a neighborhood of the identity.
+    Moreover, for every $g \in G_1$ and $z_1, z_2 \in \ker f$:
+    \[
+        gU_1 z_1 \cap gU_2 z_2 = \{e_1\} \text{ unless } z_1 = z_2.
+    \]
+    Indeed, if $g u z_1 = g v z_2$ for some $u, v \in U$, then $u = v z_2 z_1^{-1}$, so $f(u) = f(v)$.
+    But $f$ being injective on $U_1$, this implies $u = v$ and $z_1 = z_2$.
+
+    Thus $f(g)U_1$ is an evenly covered neighborhood for every $f(g) \in G_2$.
+    \[
+    f^{-1}(f(g)U_2) = g U_1 \ker f = \bigsqcup_{z \in \ker f} g U_1 z.
+    \]
+
+    To see that $\ker f$ is discrete, note that the injectivity of $f$ implies $U_1 \cap \ker f = \{ e_1 \}$.
+    Being a discrete normal subgroup, it must also be central.
+\end{proof}
+
 \section{Classical Lie groups}
 
 \begin{definition}
@@ -278,11 +302,12 @@ The following are some properties of the exponential map:
 \end{remark}
 
 \section{The commutator}
-In literature, one has at least three ways to define the commutator of some Lie group, Namely
+In literature, one has at least three (and four in the case of vector fields) ways to define the commutator of some Lie group, Namely
 \begin{enumerate}[label = (\roman*)]
     \item Using left-invariant vector fields (see \cite{lee2018introduction}).
     \item As the lowest order term in the logarithm of the multiplication of exponentials (see \cref{lem:commutator_definition}).
     \item As the differential of the adjoint representation.
+    \item In the case of vector fields, as the differentiation of the second vector field along the first.
 \end{enumerate}
 
 For completeness, we recall that in \cite{lee2018introduction}, the commutator of a Lie group is defined as
@@ -409,6 +434,11 @@ However, one can think of $\mathrm{Diff}(M)$ as similar to a Lie group (but not 
         \end{align*}
     \end{enumerate}
 \end{proposition}
+Note that the first expression from the second point of the above theorem should be read as
+\[
+[\xi, \eta]_p = \frac{\d}{\d t}\Big|_{t=0} d_{\Phi^{-t}_\xi(p)} \Phi^t_\xi (\eta_{\Phi^{-t}_\xi(p)})
+\]
+which allows us to interpret the Lie bracket of two vector fields as differentiation of the one along (the integral curves of) the other.
 
 \begin{theorem}[Theorem 3.25, \cite{kirillov2008introduction}]
     The transformation $\rho_*: \mathfrak g \to \mathrm{Vect}(M)$ is a Lie algebra morphism.
@@ -501,7 +531,104 @@ The corresponding Lie algebra is
 \[
 \text{ad}\, \mathfrak{g} = \mathfrak{g} / \mathfrak{z}(\mathfrak{g}) = \text{Im}(\text{ad}: \mathfrak{g} \rightarrow \mathfrak{gl}(\mathfrak{g})).
 \]
+
+
+\section{Campbell--Hausdorff formula}
+So far, we have shown that the multiplication in a Lie group $G$ deﬁnes the
+commutator in $g = T_1 G$. 
+However, the deﬁnition of commutator only used the lowest non-trivial term of the group law in logarithmic coordinates. Thus, it might be expected that higher terms give more operations on g. However, it turns out that it is not so: the whole group law is completely determined by the lowest term, i.e.\ by the commutator, as follows from the Campbell--Hausdorff formula:
+\begin{theorem}[Campbell--Hausdorff Formula]
+    For small enough $x, y \in \mathfrak{g}$ one has
+    \[
+    \exp(x) \exp(y) = \exp(\mu(x, y))
+    \]
+    for some $\mathfrak{g}$-valued function $\mu(x, y)$ which is given by the following series convergent in some neighborhood of $(0, 0)$:
+    \[
+    \mu(x, y) = x + y + \sum_{n \geq 2} \mu_n(x, y), 
+    \]
+    where $\mu_n(x, y)$ is a Lie polynomial in $x, y$ of degree $n$, i.e. an expression consisting of commutators of $x, y$, their commutators, etc., of total degree $n$ in $x, y$. This expression is universal: it does not depend on the Lie algebra $\mathfrak{g}$ or on the choice of $x, y$.
+    In particular, the group operation in a connected Lie group $G$ can be
+    recovered from the commutator in $\mathfrak g$.
+    \end{theorem}
     
+    It is possible to write the expression for $\mu$ explicitly. 
+    However, this is rarely useful, so we will only write the first few terms:
+    \[
+    \mu(x, y) = x + y + \frac{1}{2}[x, y] + \frac{1}{12} \left( [x, [x, y]] + [y, [y, x]] \right) + \cdots 
+    \]
+    
+
+Although it follows from the Campbell--Hausdorff formula, the commutation criterion of the exponential can be also proven directly:
+\begin{theorem}[Theorem 3.36, \cite{kirillov2008introduction}]
+    Let $x, y \in \mathfrak g$.
+    Then $e^x e^y = e^y e^x$ if and only if $[x,y]=0$.
+    In that case $e^x e^y = e^y e^x = e^{x+y}$.
+\end{theorem}
+\begin{proof}
+    The if direction follows from the definition of the commutator via Taylor series.
+    For the other direction we follow the method suggested in Exercise 3.11 of \cite{kirillov2008introduction}:
+    \[
+    \Ad(e^x)y = e^{\ad x} y = \sum_{n\geq 0} \frac{(\ad x)^n}{n!} y = y
+    \]
+    But $C_g e^z = e^{\Ad_g z}$, so the above implies that $e^x e^y e^{-x} = C_{e^x}e^y = e^{\Ad(e^x)y} = e^y$.
+\end{proof}
+
+\section{Fundamental theorems of Lie theory}
+Let us summarize the results we have so far about the relation between Lie
+groups and Lie algebras.
+
+\begin{enumerate}
+    \item Every real or complex Lie group $G$ defines a Lie algebra $\mathfrak{g} = T_1 G$ (respectively, real or complex), with commutator defined by (3.2); we will write $\mathfrak{g} = \text{Lie}(G)$. Every morphism of Lie groups $\varphi : G_1 \to G_2$ defines a morphism of Lie algebras $\varphi_* : \mathfrak{g}_1 \to \mathfrak{g}_2$. For connected $G_1$, the map
+    \[
+    \text{Hom}(G_1, G_2) \to \text{Hom}(\mathfrak{g}_1, \mathfrak{g}_2)
+    \]
+    \[
+    \varphi \mapsto \varphi_*
+    \]
+    is injective. (Here $\text{Hom}(\mathfrak{g}_1, \mathfrak{g}_2)$ is the set of Lie algebra morphisms.)
+    \item As a special case of the previous, every Lie subgroup $H \subset G$ defines a Lie subalgebra $\mathfrak{h} \subset \mathfrak{g}$.
+    \item The group law in a connected Lie group $G$ can be recovered from the commutator in $\mathfrak{g}$; however, we do not yet know whether we can also recover the topology of $G$ from $\mathfrak{g}$.
+\end{enumerate}
+
+However, this still leaves a number of questions.
+\begin{question}
+    Given a morphism of Lie algebras $\mathfrak{g}_1 \to \mathfrak{g}_2$, where $\mathfrak{g}_1 = \text{Lie}(G_1)$, $\mathfrak{g}_2 = \text{Lie}(G_2)$, can this morphism always be lifted to a morphism of the Lie groups?
+\end{question}
+\begin{question}
+    Given a Lie subalgebra $\mathfrak{h} \subset \mathfrak{g} = \text{Lie}(G)$, does there always exist a corresponding Lie subgroup $H \subset G$?
+\end{question}
+\begin{question}
+    Can every Lie algebra be obtained as a Lie algebra of a Lie group?
+\end{question}
+
+As the following example shows, in this form the answer to question 1 is negative.
+
+\begin{example}
+Let $G_1 = S^1 = \mathbb{R}/\mathbb{Z}, G_2 = \mathbb{R}$. Then the Lie algebras are $\mathfrak{g}_1 = \mathfrak{g}_2 = \mathbb{R}$ with zero commutator. Consider the identity map $\mathfrak{g}_1 \to \mathfrak{g}_2 : a \mapsto a$. Then the lift $\tilde f: \mathbb R \to \mathbb R$ of the corresponding morphism to the universal covering group (provided that the underlying morphism $f: \mathbb S^1 \to \mathbb R$ exists), should be given by $\tilde(\theta) = \theta + c$; on the other hand, it must also satisfy $\tilde f(\mathbb{Z}) = \{0\}$. Thus, this morphism of Lie algebras can not be lifted to a morphism of Lie groups.
+\end{example}
+
+In this example the difficulty arose because $G_1$ was not simply-connected. It turns out that this is the only difficulty: after taking care of this, the answers to all the questions posed above are positive. The following theorems give precise statements.
+
+\begin{theorem}[First fundemental theorem of Lie theory]
+For any real or complex Lie group $G$, there is a bijection between connected Lie subgroups $H \subset G$ and Lie subalgebras $\mathfrak{h} \subset \mathfrak{g}$, given by $H \mapsto \mathfrak{h} = \text{Lie}(H) = T_1 H$.
+\end{theorem}
+
+\begin{theorem}[Second fundemental theorem of Lie theory]
+If $G_1, G_2$ are Lie groups (real or complex) and $G_1$ is connected and simply connected, then $\text{Hom}(G_1, G_2) = \text{Hom}(\mathfrak{g}_1, \mathfrak{g}_2)$, where $\mathfrak{g}_1, \mathfrak{g}_2$ are Lie algebras of $G_1, G_2$ respectively.
+\end{theorem}
+
+\begin{theorem}[Lie's third theorem]
+Any finite-dimensional real or complex Lie algebra is isomorphic to a Lie algebra of a Lie group (respectively, real or complex).
+\end{theorem}
+
+These are the fundamental theorems of Lie theory and combining these with the previous results, we get the following important corollary.
+
+\begin{corollary}[Le group and algebra equivalence]
+    The categories of finite-dimensional Lie algebras and connected, simply-connected Lie groups are equivalent.
+    In other words, for any real or complex finite-dimensional Lie algebra $\mathfrak{g}$, there is a unique (up to isomorphism) connected simply-connected Lie group $G$ (respectively, real or complex) with $\text{Lie}(G) = \mathfrak{g}$. Any other connected Lie group $G'$ with Lie algebra $\mathfrak{g}$ must be of the form $G/Z$ for some discrete central subgroup $Z \subset G$.
+\end{corollary}
+
+
 \appendix
 
 \chapter{Covering theory reminder}
