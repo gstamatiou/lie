@@ -185,6 +185,7 @@ The following theorem tells us that the logarithmic map behaves well when restri
         $\dim G$ & $\frac{n(n-1)}{2}$ & $\frac{n(n-1)}{2}$ & $n^2$ & $n^2 - 1$ & $n(2n+1)$ \\
         $\pi_0(G)$ & $\mathbb{Z}_2$ & $\{1\}$ & $\{1\}$ & $\{1\}$ & $\{1\}$ \\
         $\pi_1(G)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}$ & $\{1\}$ & $\{1\}$ \\
+        $\mathfrak{g}_{\mathbb C}$ &  &  & $\mathfrak{gl}(n, \mathbb C)$ & $\mathfrak{sl}(n, \mathbb C)$ & 
     \end{tabular}
     \caption{Compact classical groups}
     \label{table:classical_groups}
@@ -199,6 +200,7 @@ The following theorem tells us that the logarithmic map behaves well when restri
         $\dim G$ & $n^2$ & $n^2 - 1$ & $n(2n + 1)$ \\
         $\pi_0(G)$ & $\mathbb{Z}_2$ & $\{1\}$ & $\{1\}$ \\
         $\pi_1(G)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}$ \\
+        $\mathfrak{g}_{\mathbb C}$ &  & $\mathfrak{sl(n, \mathbb C)}$ &  
     \end{tabular}
     \caption{Noncompact real classical groups.}
     \label{table:noncompact_real_classical_groups}
@@ -628,6 +630,52 @@ These are the fundamental theorems of Lie theory and combining these with the pr
     In other words, for any real or complex finite-dimensional Lie algebra $\mathfrak{g}$, there is a unique (up to isomorphism) connected simply-connected Lie group $G$ (respectively, real or complex) with $\text{Lie}(G) = \mathfrak{g}$. Any other connected Lie group $G'$ with Lie algebra $\mathfrak{g}$ must be of the form $G/Z$ for some discrete central subgroup $Z \subset G$.
 \end{corollary}
 
+\section{Complex and real forms}
+The operation of complexiﬁcation, which is trivial at the level of Lie algebras,
+is highly non-trivial at the level of Lie groups.
+Real forms and their complexifications can be topologically quite different: for example, $\SU(n)$ is compact while $\SL(n, C)$ is not. On the other hand, it is natural to expect that their algebras share many algebraic properties, such as semisimplicity.
+Thus we may use the properties of the complex Lie algebra to study the real Lie algebra, and vice versa, or use the properties of one real form to study another real form.
+Thus, we may use, for example, use the compact group $\SU(n)$ to prove some results
+about the non-compact group $\SL(n, C)$. Moreover, since $\mathfrak{sl}(n, \mathbb R)C = \mathfrak{sl}(n, \mathbb C)$,
+this will also give us results about the non-compact real group $\SL(n, \mathbb R)$. 
+We will give an application of this to the study of representations of Lie groups in
+the next chapter.
+
+\begin{definition}
+    \begin{enumerate}[label = (\roman*)]
+        \item 
+        The complexification $\mathfrak g_{\mathbb C}$ of a real Lie algebra $\mathfrak g$ is the complex Lie algebra
+    \[
+    \mathfrak g_{\mathbb C} \equaldef \mathfrak g \otimes_{\mathbb R} \mathbb C = \mathfrak g \oplus i \mathfrak g.
+    \]
+    We say that $\mathfrak g$ is a real form of $\mathfrak g_{\mathbb C}$.
+    \item
+    Let $G$ be a connected complex Lie group with Lie algebra $\mathfrak g$. 
+    A closed real Lie subgroup $K \leq G$ is a real form of $G$ if its Lie algebra $\mathfrak k$ is a real form of $\mathfrak g$.
+    \end{enumerate}
+\end{definition}
+
+In some cases, complexiﬁcation is obvious, as in $\mathfrak g = sl(n, R)$.
+Others however, are less obvious, as $\mathfrak g = \mathfrak u(n)$.
+Finding a real form for a complex group is can be often direct:
+\begin{proposition}
+    Let $G$ be a connected simply-connected complex Lie group with Lie algebra $\mathfrak g$.
+    Then every real form $\mathfrak k$ of $\mathfrak g$ is realised as the Lie algebra of a real form $K$ of $G$.
+\end{proposition}
+\begin{proof}
+    Considering $\mathfrak g = \mathfrak k \oplus i \mathfrak k$, we define the real Lie algebra automorphism
+    \[
+    \theta: \mathfrak g \to \mathfrak g, \quad x + iy \mapsto x - iy.
+    \]
+    Since $G$ is connected and simply connected, the second fundamental theorem of Lie groups tells us that $\theta$ can be lifted to a Lie group automorphism $\Theta: G \to G$.
+    Then $K = G^\Theta$ is a real form of $G$ with Lie algebra $\ker \theta = \mathfrak k$.
+\end{proof}
+Going in the opposite direction, from a real Lie group to a complex one, is
+more subtle: there are real Lie groups that can not be obtained as real forms
+of a complex Lie group (for example, it is known that the universal cover
+of $\SL(2, \mathbb R)$ is not a real form of any complex Lie group). It is still possible
+to deﬁne a complexiﬁcation for any real Lie group G; however, in general the former does not admit the latter as a subgroup.
+
 
 \appendix
 
@@ -767,5 +815,36 @@ Considering the quotient space $\tilde X / \pi_1(X, x_0)$, we have the following
     \end{tikzcd}
     \]
 \end{theorem}
+
+\chapter{Exercises}
+In this chapter, we have solutions for certain exercises of \cite{kirillov2008introduction}.
+\begin{exercise}[Exercise 3.12]
+        Let $x, y \in \mathfrak g$.
+        Then $e^x e^y = e^y e^x$ if and only if $[x,y]=0$.
+        In that case $e^x e^y = e^y e^x = e^{x+y}$.    
+\end{exercise}
+\begin{proof}[Solution]
+    The if direction follows from the definition of the commutator via Taylor series.
+    For the other direction we follow the method suggested in Exercise 3.11 of \cite{kirillov2008introduction}:
+    \[
+    \Ad(e^x)y = e^{\ad x} y = \sum_{n\geq 0} \frac{(\ad x)^n}{n!} y = y
+    \]
+    But $C_g e^z = e^{\Ad_g z}$, so the above implies that $e^x e^y e^{-x} = C_{e^x}e^y = e^{\Ad(e^x)y} = e^y$.
+\end{proof}
+
+\begin{exercise}[Exercise 3.15]
+    Let $G$ be a connected simply-connected complex Lie group with Lie algebra $\mathfrak g$.
+    Then every real form $\mathfrak k$ of $\mathfrak g$ is realised as the Lie algebra of a real form $K$ of $G$.
+\end{exercise}
+\begin{proof}[Solution]
+    Considering $\mathfrak g = \mathfrak k \oplus i \mathfrak k$, we define the real Lie algebra automorphism
+    \[
+    \theta: \mathfrak g \to \mathfrak g, \quad x + iy \mapsto x - iy.
+    \]
+    Since $G$ is connected and simply connected, the second fundamental theorem of Lie groups tells us that $\theta$ can be lifted to a Lie group automorphism $\Theta: G \to G$.
+    Then $K = G^\Theta$ is a real form of $G$ with Lie algebra $\ker \theta = \mathfrak k$.
+\end{proof}
+
+
 \printbibliography
 \end{document}
