@@ -638,8 +638,6 @@ Thus we may use the properties of the complex Lie algebra to study the real Lie 
 Thus, we may use, for example, use the compact group $\SU(n)$ to prove some results
 about the non-compact group $\SL(n, C)$. Moreover, since $\mathfrak{sl}(n, \mathbb R)C = \mathfrak{sl}(n, \mathbb C)$,
 this will also give us results about the non-compact real group $\SL(n, \mathbb R)$. 
-We will give an application of this to the study of representations of Lie groups in
-the next chapter.
 
 \begin{definition}
     \begin{enumerate}[label = (\roman*)]
@@ -676,6 +674,162 @@ of a complex Lie group (for example, it is known that the universal cover
 of $\SL(2, \mathbb R)$ is not a real form of any complex Lie group). It is still possible
 to deﬁne a complexiﬁcation for any real Lie group G; however, in general the former does not admit the latter as a subgroup.
 
+
+\chapter{Representations of Lie groups and Lie algebras}
+In this chapter, we will discuss the representation theory of Lie groups and Lie
+algebras. 
+Unless speciﬁed otherwise, all Lie groups, algebras,
+and representations are ﬁnite-dimensional, and all representations are complex.
+Lie groups and Lie algebras can be either real or complex; unless speciﬁed
+otherwise, all results are valid both for the real and complex case.
+
+\section{Basic definitions}
+
+\begin{definition}
+    A representation of a Lie group \( G \) is a vector space \( V \) together with a morphism \( \rho : G \to \mathrm{GL}(V) \).
+    
+    A representation of a Lie algebra \( \mathfrak{g} \) is a vector space \( V \) together with a morphism \( \rho : \mathfrak{g} \to \mathfrak{gl}(V) \).
+    
+    A morphism between two representations \( V, W \) of the same group \( G \) is a linear map \( f : V \to W \) which commutes with the action of \( G \): \( f \rho(g) = \rho(g)f \). In a similar way, one defines a morphism of representations of a Lie algebra. The space of all \( G \)-morphisms (respectively, \( \mathfrak{g} \)-morphisms) between \( V \) and \( W \) will be denoted by \( \mathrm{Hom}_G(V, W) \) (respectively, \( \mathrm{Hom}_{\mathfrak{g}}(V, W) \)).
+\end{definition}
+    
+\begin{remark}
+Morphisms between representations are also frequently called \textit{intertwining operators} because they ``intertwine'' action of \( G \) in \( V \) and \( W \).
+\end{remark}
+
+The notion of a representation is completely parallel to the notion of module over an associative ring or algebra; the difference of terminology is due to historical reasons. In fact, it is also usual to use the word ``module'' rather than ``representation'' for Lie algebras: a module over Lie algebra \( \mathfrak{g} \) is the same as a representation of \( \mathfrak{g} \). We will use both terms interchangeably.
+
+Note that in this definition we did not specify whether \( V \) and \( G \) are real or complex. Usually if \( G \) (respectively, \( \mathfrak{g} \)) is complex, then \( V \) should also be taken a complex vector space. However, it also makes sense to take complex \( V \) even if \( G \) is real: in this case we require that the morphism \( G \to \mathrm{GL}(V) \) be smooth, considering \( \mathrm{GL}(V) \) as \( 2n^2 \)-dimensional real manifold. Similarly, for real Lie algebras we can consider complex representations requiring that \( \rho : \mathfrak{g} \to \mathfrak{gl}(V) \) be \( \mathbb{R} \)-linear.
+    
+Of course, we could also restrict ourselves to consideration of real representations of real groups. However, it turns out that the introduction of complex representations significantly simplifies the theory even for real groups and algebras. Thus, from now on, all representations will be complex unless specified otherwise.
+    
+\begin{example}
+    For a Lie group $G$ or a Lie algebra $\mathfrak g$ we always have the following two representations:
+    \begin{enumerate}[label = (\roman*)]
+        \item Trivial representation: $V = \mathbb C, \rho(g) = \id$ for all $g \in G$ (respectively $\rho(x) = 0$ for all $x \in \mathfrak g$). 
+        \item Adjoint representation: $V = \mathfrak g, \rho(g) = \Ad_g$ for all $g \in G$ (respectively $\rho(x) = \ad_x$ for all $x \in \mathfrak g$). 
+        \item Coadjoint representation: $V = \mathfrak g^*, \rho(x) = \ad_x^* $ for all $x \in \mathfrak g$.
+    \end{enumerate}
+\end{example}
+
+The first important result about representations of Lie groups and Lie algebras is the following theorem.
+It tells us that from a representation (or a morphism of representations) of a Lie group we can obtain a representation (or a morphism of representations) of its Lie algebra, and that when $G$ is connected, simply connected, then representing $G$ and representing its Lie algebra is equivalent.
+\begin{theorem}
+Let \( G \) be a Lie group (real or complex) with Lie algebra \( \mathfrak{g} \).
+\begin{enumerate}
+    \item Every representation \( \rho : G \to \mathrm{GL}(V) \) defines a representation \( \rho_* : \mathfrak{g} \to \mathfrak{gl}(V) \), and every morphism of representations of \( G \) is automatically a morphism of representations of \( \mathfrak{g} \).
+    \item If \( G \) is connected, simply-connected, then \( \rho \mapsto \rho_* \) gives an equivalence of categories of representations of \( G \) and representations of \( \mathfrak{g} \). In particular, every representation of \( \mathfrak{g} \) can be uniquely lifted to a representation of \( G \), and \( \mathrm{Hom}_G(V, W) = \mathrm{Hom}_{\mathfrak{g}}(V, W) \).
+\end{enumerate}
+\end{theorem}
+This is an important result, as Lie algebras are, after all, finite dimensional vector spaces, so they are easier to deal with.
+\begin{example}
+    A representation of \( \mathrm{SU}(2) \) is the same as a representation of \( \mathfrak{su}(2) \), i.e. a vector space with three endomorphisms \( X, Y, Z \), satisfying commutation relations \( XY - YX = Z, YZ - ZY = X, ZX - XZ = Y \).
+\end{example}
+\begin{remark}
+    This theorem can also be used to describe representations of a group which is connected but not simply-connected, in the sense that representations of $G$ are the same as representations of its universal cover that are trivial over the fundamentla group of $G$.
+    More concretely, any such group $G$ can be written as \( G = \tilde{G}/Z \) for some simply-connected group \( \tilde{G} \) and a discrete central subgroup \( Z \subset G \). Thus, representations of \( G \) are the same as representations of \( \tilde{G} \) satisfying \( \rho(Z) = \mathrm{id} \). An important example of this is when \( G = \mathrm{SO}(3, \mathbb{R}) \), \( \tilde{G} = \mathrm{SU}(2) \).
+\end{remark}
+
+\begin{lemma}
+    Let $\mathfrak g $ be a real Lie algebra and $\mathfrak g_{\mathbb C}$ its complexification.
+    Then the categories of complex representations of $mathfrak g$ and $\mathfrak g_{\mathbb C}$ are equivalent.
+\end{lemma}
+The next example shows that we can reduce the problem of study of representations of a non-compact Lie group $\SL(2, \mathbb C)$ to 
+\begin{example}
+    The categories of ﬁnite-dimensional representations of $\SL(2, \mathbb C)$,
+$\SU(2)$, $\mathfrak{sl}(2, \mathbb C)$ and $\su(2)$ are all equivalent. Indeed,
+$\mathfrak{sl}(2, C) = (\su(2))_{\mathbb C}$ , so categories of their ﬁnite-dimensional representations are equivalent; since the groups $\SU(2), \SL(2, C)$ are simply-connected, they
+have the same representations as the corresponding Lie algebras.
+\end{example}
+
+\section{Operations on representations}
+\subsection{Subrepresentations and quotients}
+
+\begin{definition}
+    Let $V$ be a representation of $G$ (respectively $\mathfrak g$). 
+    A subrepresentation is a vector subspace $W \subseteq V$ stable under the action:
+    $\rho(g)W \subseteq W$ for all $g \in G$ (respectively, $\rho(x)W \subseteq W$ for all $x \in \mathfrak g$).
+\end{definition}
+
+When $W \subseteq V$ is a subrepresentation, then one can obtain the factor representation or quotient representation $V/W$ given by
+\[
+\rho_{V/W}(g) = \rho_V(g) + W.
+\]
+
+
+\subsection{Direct sum and tensor product}
+\begin{lemma}\label{lem:direct_sum_tensor_product}
+    Let $V , W$ be representations of $G$ (respectively, $\mathfrak g$). 
+    Then there is a canonical structure of a representation on $V^*, V \oplus W, V \otimes W$.
+\end{lemma}
+\begin{proof}
+    It is given by
+    \begin{align*}
+        \rho(g)(v + w) &= \rho(g)(v) + \rho(g)(w) \text{ on } V \oplus W \text{ for } G,\\
+        \rho(x)(v + w) &= \rho(x)(v) + \rho(x)(w) \text{ on } V \oplus W \text{ for } \mathfrak g,\\
+        \rho(g)(v \otimes w) &= \rho(g)(v) \otimes \rho(g)(w) \text{ on } V \otimes W \text{ for } G,\\
+        \rho(x)(v \otimes w) &= \rho(x)(v) \otimes w + v \otimes \rho(x)(w) \text{ on } V \otimes W \text{ for } \mathfrak g,\\
+        \rho_{V^*}(g) &= \rho(g^{-1})^t \text{ on } V^* \text{ for } G,\\
+        \rho_{V^*}(x) &= -\rho(x)^t \text{ on } V^* \text{ for } \mathfrak g,
+    \end{align*}
+    where we denote with $A^t$ the adjoint opearor $A^t:V^* \to V^*$ for $A: V \to V$.
+\end{proof}
+For example, the coadjoint representation is obtained by dualizing the adjoint representation of $\mathfrak g$.
+
+Before giving the next series of examples, recall that for any finite dimensional vector spaces $V, W$, we have the following cannonical isomorphism:
+\begin{align*}
+    V^* \otimes W &\simeq \hom(V, W)\\
+    f \otimes w &\mapsto \left( u \mapsto f(u)w \right)\\
+    e^i \otimes (Ae_i) &\mapsfrom A
+\end{align*}
+where $e_1, \ldots, e_n$ are any basis of $V$ and $e_1, \cdots, e^n$ are its dual basis for $V^*$.
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item Coadjoint representation on $\mathfrak g^*$: Dualizing the adjoint representation of $\mathfrak g$ we obtain the coadjoint representation given by $\rho(x) = ad_x^*$
+        \item $\hom(V,W)$: Given two representations $V, W$ of $G$, the space of linear maps $\hom(V,W)$ is a representation by:
+        \begin{align*}
+            \rho(g)_{\hom(V,W)}(A) &= \rho_V(g)A\rho_W(g^{-1}) \text{ for } g \in G,\\
+            \rho(x)_{\hom(V,W)}(A) &= \rho_V(x)A - A\rho_W(x) \text{ for } x \in \mathfrak g.
+        \end{align*}
+        This is obtained by dualizing and tensoring as in the lemma above, i.e.\ the diagram below is commutative\\
+        \begin{center}
+            \begin{tikzcd}
+                V \otimes W^* \arrow[r, "\simeq"] \arrow[d, "\rho(g)"] & \hom(V,W) \arrow[d, "\rho(g)"] \\
+                V \otimes W^* \arrow[r, "\simeq"] & \hom(V,W)
+            \end{tikzcd}    
+        \end{center}
+        \item Bilinear forms: Given a representation $V$, the space of bilinear forms on $V$ becomes a representation when we consider it as a subspace of $V^* \otimes V^*$. It is given by:
+        \begin{align*}
+            g B(u, v) &= B(g^{-1}u, g^{-1}v), \text{ for } g \in G\\
+            x B(u, v) &= -B(x u, v) - B(u, x v), \text{ for } x \in \mathfrak g.    
+        \end{align*}
+    \end{enumerate}
+\end{example}
+
+\subsection{Invariants}
+\begin{definition}
+    Let $V$ be a representation of a Lie group $G$. A vector $v \in V$ is
+    called invariant if $\rho(g)v = v$ for all $g \in G$. The subspace of invariant vectors
+    in $V$ is denoted by $V^G$ .
+    Similarly, let $V$ be a representation of a Lie algebra $\mathfrak g$. A vector $v \in V$ is
+    called invariant if $\rho(x)v = 0$ for all $x \in g$. The subspace of invariant vectors
+    in $V$ is denoted by $V^{\mathfrak g}$ .
+\end{definition}
+
+\begin{remark}
+    When $G$ is connected, and $V$ is a representation of $G$, then
+    \[
+    V^G = V^{\mathfrak g}
+    \]
+\end{remark}
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item $\hom(V, W)$: Considering $\hom(V,W)$ as the representation arising from two representations $V, W$, we have $\hom(V, W)^G = \hom_G(V, W)$.
+        \item Bilinear forms: We have $B \in V^G$ if and only if the linear map $V \to V^*$, given by $v \to B(v, -)$, is a representations morphism.
+    \end{enumerate}
+\end{example}
 
 \appendix
 
@@ -818,6 +972,77 @@ Considering the quotient space $\tilde X / \pi_1(X, x_0)$, we have the following
 
 \chapter{Exercises}
 In this chapter, we have solutions for certain exercises of \cite{kirillov2008introduction}.
+
+\begin{exercise}[Exercise 2.7]
+Deﬁne a bilinear form on $\mathfrak{su}(2)$ by $(a, b) = \tr(ab^*)/2$. 
+Show that this form is symmetric, positive deﬁnite, and invariant under the adjoint action of
+$\SU(2)$.
+\end{exercise}
+\begin{proof}[Solution]
+    It is symmetric since in $\su(2)$ we have $b^* = -b$, so $(a,b) = \tr(ab^*)/2 = -\tr(ab)/2 = 
+    -\tr(ba)/2 = (b,a)$.
+    It is positive definite since $(a,a) = \frac{1}{2} \sum_{i,j} |a_{ij}|^2$.
+    It is also invariant under the adjoint action of $\SU(2)$ since the trace is invariant under conjugation, and the adjoint representation is given by conjugation.
+\end{proof}
+
+\begin{exercise}[Exercise 2.8]
+    Consider the usual basis for $\mathfrak{su}(2)$:
+    \[
+    i \sigma_1 = \begin{pmatrix} 0 & i \\ i & 0 \end{pmatrix}, \quad 
+    i\sigma_2 = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}, \quad 
+    i \sigma_3 = \begin{pmatrix} i & 0 \\ 0 & -i \end{pmatrix}.
+    \]
+    Show that the adjoint representation
+    \begin{align*}
+        \Ad: \SU(2) &\to \GL(3, \mathbb R)\\
+        g &\mapsto \text{ matrix of } \Ad_g \text{ in the basis } i\sigma_1, i\sigma_2, i\sigma_3
+    \end{align*}
+    gives a morphism of Lie groups $\SU(2) \to \SO(3)$.
+\end{exercise}
+\begin{proof}[Solution]
+    Note that the above exercise gave us an isometry between $\mathfrak{su}(2)$ and $\mathbb R^3$, where the first is equipped with the inner product $(a,b) = \tr(ab^*)/2$ and the second with the standard euclidean inner product.
+    Denoting with $[\Ad_g]$ the matrix of $\Ad_g$ in the basis $i \sigma_1, i \sigma_2, i \sigma_3$, the above isometry tells us $\Ad_g$ preserves the given inner product if and only if the matrix $[\Ad_g]$ preserves the standard euclidean inner product, i.e.\ $[Ad_g] \in \SO(3, \mathbb R)$.
+    Indeed, denoting the isometry with $\Phi: \SU(2) \to \mathbb R^2$, it gives us an isomorphism 
+    
+    \begin{align*}
+        \GL(\Phi): \GL(\SU(2)) &\overset{\simeq}{\to} \GL(3, \mathbb R)\\
+        T &\mapsto \Phi T \Phi^{-1}
+    \end{align*}
+    and $T \in \U(2)$ if and only if $\GL(\Phi) \in \mathrm{O}(3)$.
+    But we saw in the above exercise that the inner product is preserved, so the adjoint representation lies in $\mathrm{O}(3)$.
+
+    To show that it lies actually in $\SO(3)$, note that the determinant of every matrix in $\mathrm{O}(3)$ is either $1$ or $-1$.
+    However, $\SU(2)$ is connected, so the same is true for $\phi(\SU(2))$.
+    Since it is connected and contains $I_3$, so the determinant of the adjoint representation must be $1$.
+\end{proof}
+
+\begin{exercise}[Exercise 2.9]
+    Let $\phi: \SU(2) \to \SO(3, \mathbb R)$ be the morphism of Lie groups defined in the previous exercise.
+    Compute explicitly the map map of the tangent spaces $\phi_*: \mathfrak{su}(2) \to \mathfrak{so}(3, \mathbb R)$ and show that it is an isomorphism.
+    Deduce from this that $\ker \phi$ is a discrete normal subgroup in $\SU(2)$ and that $\Im \phi$ is an open subgroup in $\SO(3, \mathbb R)$.
+\end{exercise}
+\begin{proof}[Solution]
+    Let $Phi: \SU(2) \to \mathbb R^3$ be the isometry that maps $i\sigma_1, i \sigma_2, i\sigma_3$ to the standard basis of $\mathbb R^3$ and the induced isomohpsism $\GL(\Phi): \GL(\SU(2)) \to \GL(3, \mathbb R), \GL(\Phi)(T) = \Phi T \Phi^{-1}$.
+    Then $Phi$ is given as the composition:
+    \[\begin{array}{ccccc}
+        \SU(2) &\to \quad \GL(\SU(2)) &\overset{\GL(\Phi)}{\to} &\GL(3, \mathbb R) \\
+        g &\mapsto \quad \Ad_g &\mapsto &\Phi \Ad_g \Phi^{-1}
+    \end{array}\]
+
+    Diferentiating the above, we see that $\phi_* = \mathfrak{gl}(\Phi) \circ \ad$ which is simply the matrix of $\ad$ in the base $i\sigma_1, i\sigma_2, i\sigma_3$.
+    Hence we calculate
+    \[
+    ad_{i\sigma_1} = - 2J_x, \quad
+    ad_{i\sigma_2} = - 2J_y, \quad
+    ad_{i\sigma_3} = - 2J_z.
+    \]
+    and thus the matrix of $\phi_* = -2 \diag(1,1,1)$ which is clearly an isomorphism.
+    Hence $\phi$ is a covering map and its kernel is a discrete central normal subgroup of $\SU(2)$, and its image is an open subgroup of $\SO(3, \mathbb R)$.
+\end{proof}
+
+\begin{exercise}
+    Prove that the map $\phi$ used in the two previous exercises establishes an isomorphism $\SU(2)/\mathbb Z^2 \to \SO(3, \mathbb R)$, and thus, since $\SU(2)\simeq \mathbb S^3$, we have $\mathbb{RP}^3 \simeq \SO(3, \mathbb R)$.
+\end{exercise}
 \begin{exercise}[Exercise 3.12]
         Let $x, y \in \mathfrak g$.
         Then $e^x e^y = e^y e^x$ if and only if $[x,y]=0$.
@@ -845,6 +1070,12 @@ In this chapter, we have solutions for certain exercises of \cite{kirillov2008in
     Then $K = G^\Theta$ is a real form of $G$ with Lie algebra $\ker \theta = \mathfrak k$.
 \end{proof}
 
+\chapter{Geomtric realisation}
+
+\begin{proposition}
+    $\SU(2)$ is homeomorphic to $\mathbb S^4$.
+    In particular, it is simply connected.
+\end{proposition}
 
 \printbibliography
 \end{document}
