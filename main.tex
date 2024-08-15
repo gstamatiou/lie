@@ -636,8 +636,8 @@ is highly non-trivial at the level of Lie groups.
 Real forms and their complexifications can be topologically quite different: for example, $\SU(n)$ is compact while $\SL(n, C)$ is not. On the other hand, it is natural to expect that their algebras share many algebraic properties, such as semisimplicity.
 Thus we may use the properties of the complex Lie algebra to study the real Lie algebra, and vice versa, or use the properties of one real form to study another real form.
 Thus, we may use, for example, use the compact group $\SU(n)$ to prove some results
-about the non-compact group $\SL(n, C)$. Moreover, since $\mathfrak{sl}(n, \mathbb R)C = \mathfrak{sl}(n, \mathbb C)$,
-this will also give us results about the non-compact real group $\SL(n, \mathbb R)$. 
+about the non-compact group $\SL(n, C)$. Moreover, since $\mathfrak{sl}(n, \mathbb R)_{\mathbb C} = \mathfrak{sl}(n, \mathbb C)$,
+this will also give us results about the non-compact real group $\SL(n, \mathbb R)$.
 
 \begin{definition}
     \begin{enumerate}[label = (\roman*)]
@@ -831,6 +831,141 @@ where $e_1, \ldots, e_n$ are any basis of $V$ and $e_1, \cdots, e^n$ are its dua
     \end{enumerate}
 \end{example}
 
+\section{Irreducible representations}
+One of the main problems of the representation theory is the problem of classi-
+ﬁcation of all representations of a Lie group or a Lie algebra. In this generality,
+it is an extremely difﬁcult problem and for a general Lie group, no satisfactory
+answer is known. We will later show that for some special classes of Lie groups
+(namely compact Lie groups and semisimple Lie groups, to be deﬁned later)
+this problem does have a good answer.
+The most natural approach to this problem is to start by studying the sim-
+plest possible representations, which would serve as building blocks for more
+complicated representations.
+
+\begin{definition}
+    \begin{enumerate}[label = (\roman*)]
+        \item A non-zero representation V of $G$ or $\mathfrak g$ is called irreducible
+        or simple if it has no subrepresentations other than $0$ and $V$ . 
+        Otherwise $V$ is called reducible.
+        \item $V$ is a completely completely reducible or semisimple representation if it is isomorphic to a direct sum of irreducible representations:
+        $V = \oplus_i V_i$, with $V_i$ irreducible.
+        \item If $V$ is completely reducible, one usually groups together isomorphic summands writing $V = \oplus_i n_i V_i$, where $V_i$ are pair-wise non-isomorphic irreducible
+        representations and the numbers $n_i$ are called multiplicities.
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    Sometimes, it will be useful to consider the isomorphic expressions:
+    \[
+    n V \simeq \oplus_1^n V \simeq \mathbb C^n \otimes V
+    \]
+    where the latter isomorphism is given by the map $(v_1, \cdots, v_n) \mapsto e_1 \otimes v_1 + \cdots  e_n \otimes v_n $ and in the other direction by the map $z \otimes v \mapsfrom (z_1v, \cdots, z_n v)$.
+\end{remark}
+
+Thus, more modest goals of the representation theory would be answering
+the following questions:
+\begin{enumerate}[label = (\roman*)]
+    \item For a given Lie group $G$, classify all irreducible representations of G.
+    \item For a given representation $V$ of a Lie group G, given that it is completely reducible, ﬁnd explicitly the decomposition of $V$ into direct sum of irreducibles.
+    \item For which Lie groups $G$ all representations are completely reducible?
+\end{enumerate}
+
+\begin{example}[Irreducible representations]
+    \begin{enumerate}[label = (\roman*)]
+        \item $\mathbb C^n$: It is irreducible as a representation of $\SL(n, \mathbb C), \GL(n, \mathbb C)$.
+    \end{enumerate}
+\end{example}
+
+\begin{example}[Reducible representations]
+    \begin{enumerate}[label = (\roman*)]
+        \item $\mathbb R$: It is reducible but not completely reducible as a representation of $\mathbb R$ (either seen as a group, or a Lie algebra).
+        \item $\mathbb C^n \otimes \mathbb C^n$: It is completely reducible as $\mathbb C^n \otimes \mathbb C^n = S^2 \mathbb C^n \oplus \Lambda^2 \mathbb C^n$, where $S^2 \mathbb C^n$ is the symmetric tensor product and $\Lambda^2 \mathbb C^n$ is the antisymmetric tensor product.
+    \end{enumerate}
+\end{example}
+\begin{proof}
+    \begin{enumerate}[label = (\roman*)]
+        \item\label{ex:R_not_completely_irreducible} Representations of $\mathbb R$ are of the form $t \mapsto e^{tA}$ for some $A \in \mathfrak{gl}(V)$ (when $\mathbb R$ is seen as a Lie group), or $t \mapsto tA$ for some $A \in \mathfrak{gl}(V)$ (when $\mathbb R$ is seen as a Lie algebra).
+        If $v \in V$ is an eigen vector of $A$, then $\mathbb Cv$ is a subrepresentation in $V$, so the only irreducible representations of $\mathbb R$ are one-dimensional.
+        In fact, $t \mapsto e^{tA}$ is completely irreducible if and only if $A$ is diagonalizable.
+    \end{enumerate}
+\end{proof}
+
+One tool which can be used in decomposing representations into direct sum
+is the use of central elements.
+\begin{lemma}
+    Let $V$ be a representation of a Lie group $G$ (or a Lie algebra $\mathfrak g$ respectively).
+    \begin{enumerate}[label = (\roman*)]
+        \item Let $A \in \hom_G(V, V)$ be a diagonalizable interwining operator. 
+        Then each eigenspace $V_\lambda$ of $A$ is an invariant subspace and we have the decomposition $V = \oplus V_\lambda$ into subrepresentations.
+        \item If $Z \in Z(G)$ is a central element such that $\rho(Z)$ is diagonalizable, then as a representation of $G$, $V$ decomposes into a direct sum of eigenspaces of $\rho(Z)$: $V = \oplus V_\lambda$. 
+    \end{enumerate} 
+\end{lemma}
+
+Of course, there is no guarantee that $V_\lambda$ will be an irreducible representation;
+moreover, in many cases the Lie groups we consider have no central elements
+at all.
+
+\section{Intertwining operators and Schur’s lemma}
+In this section we consider the following questions:
+\begin{question}\label{q:invariance_eigenvalues}
+How can $G$-invariance of an operator $A \in \mathfrak{gl}(V)$ helps computing eigenvalues and eigenspaces?
+\end{question}
+
+\begin{question}\label{q:centre_classical_lie_groups}
+    What is an easy way to compute the centre of classical Lie groups?
+\end{question} 
+
+The following Lemma can be seen as a way to answer these questions:
+\begin{lemma}[Schur's lemma]
+    \begin{enumerate}[label = (\roman*)]
+        \item Let $V$ be an irreducible representation of a Lie group $G$ (similar result holds for representations of a Lie algebra $\mathfrak g$.).
+        Then the space of intertwining operators is one-dimensional:
+        \[
+        \hom_G(V, V) = \mathbb C \id.
+        \]
+        \item Let $V, W$ be irreducible representations of a Lie group $G$ which are not isomorphic.
+        Then $\hom_G(V, W) = 0$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{example}[Answer to \cref{q:centre_classical_lie_groups}]
+Consider the group \( \mathrm{GL}(n, \mathbb{C}) \). Since \( \mathbb{C}^n \) is irreducible as a representation of \( \mathrm{GL}(n, \mathbb{C}) \), every operator commuting with \( \mathrm{GL}(n, \mathbb{C}) \) must be scalar. Thus, the center \( Z(\mathrm{GL}(n, \mathbb{C})) = \{ \lambda \cdot \mathrm{id}, \lambda \in \mathbb{C}^\times \} \); similarly, the center of the Lie algebra is \( Z(\mathfrak{gl}(n, \mathbb{C})) = \{ \lambda \cdot \mathrm{id}, \lambda \in \mathbb{C} \} \).
+
+Since \( \mathbb{C}^n \) is also irreducible as a representation of \( \mathrm{SL}(n, \mathbb{C}) \), \( \mathrm{U}(n) \), \( \mathrm{SU}(n) \), \( \mathrm{SO}(n, \mathbb{C}) \), a similar argument can be used to compute the center of each of these groups. The answer is
+\[
+\begin{array}{ll}
+Z(\mathrm{SL}(n, \mathbb{C})) = Z(\mathrm{SU}(n)) = \{\lambda \cdot \mathrm{id}, \, \lambda^n = 1 \} & \mathfrak{z}(\mathrm{U}(n)) = \{ \lambda \cdot \mathrm{id}, \, |\lambda| = 1 \} \\
+Z(\mathfrak{sl}(n, \mathbb{C})) = Z(\mathfrak{su}(n)) = 0 & \mathfrak{z}(\mathfrak{u}(n)) = \{ \lambda \cdot \mathrm{id}, \, \lambda \in i\mathbb{R} \} \\
+Z(\mathrm{SO}(n, \mathbb{C})) = Z(\mathrm{SO}(n, \mathbb{R})) = \{\pm 1\} & \mathfrak{z}(\mathfrak{so}(n, \mathbb{C})) = \mathfrak{z}(\mathfrak{so}(n, \mathbb{R})) = 0.
+\end{array}
+\]
+\end{example}
+
+To answer \cref{q:invariance_eigenvalues}, we can use the following corollary of Schur's lemma:
+\begin{corollary}
+Let \( V \) be a completely reducible representation of Lie group \( G \) (respectively, Lie algebra \( \mathfrak{g} \)). Then
+\begin{enumerate}
+    \item If \( V = \bigoplus V_i \), \( V_i \) irreducible, pairwise non-isomorphic, then any intertwining operator \( \Phi : V \to V \) is of the form \( \Phi = \bigoplus \lambda_i \mathrm{id}_{V_i} \).
+    \item If \( V = \bigoplus n_i V_i = \bigoplus n_i \mathbb{C}^{n_i} \otimes V_i \), \( V_i \) irreducible, pairwise non-isomorphic, then any intertwining operator \( \Phi : V \to V \) is of the form \( \Phi = \bigoplus (A_i \otimes \mathrm{id}_{V_i}) \), where \( A_i \in \mathrm{End}(\mathbb{C}^{n_i}) \).
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+For part (1), notice that any operator \( V \to V \) can be written in a block form: \( \Phi = \bigoplus \Phi_{ij}, \Phi_{ij} : V_i \to V_j \). By Schur's lemma, \( \Phi_{ij} = 0 \) for \( i \neq j \) and \( \Phi_{ii} = \lambda_i \mathrm{id}_{V_i} \). Part (2) is proved similarly.
+\end{proof}
+
+This result shows that indeed, if we can decompose a representation \( V \) into irreducible ones, this will give us a very effective tool for analyzing intertwining operators. For example, if \( V = \bigoplus V_i, V_i \neq V_j \), then \( \Phi = \bigoplus \lambda_i \mathrm{id}_{V_i} \), so one can find \( \lambda_i \) by computing \( \Phi(v) \) for just one vector in \( V_i \). It also shows that each eigenvalue \( \lambda_i \) will appear with multiplicity equal to \( \dim V_i \). This is exactly what we did in the baby example above, only now \( V_i \) was one-dimensional, where we had \( G = \mathbb{Z}_n \).
+
+We also have the following corrolary on commutative groups and algebras.
+\begin{proposition}
+    If $G$ is a commutative group, then any irreducible complex
+representation of $G$ is one-dimensional. Similarly, if $\mathfrak g$ is a commutative Lie algebra, then any irreducible complex representation of $\mathfrak g$ is one-dimensional.
+\end{proposition}
+Now we are ready to give a classification of irreducible representations of $\mathbb R$ and $\mathbb S^1$
+\begin{example}\label{ex:irreducible_representations_of_R}
+    Let $G = \mathbb R$.
+    Then the only irreducible representations of $G$ are one-dimensional (which follows either from the proposition above, or from \cref{ex:irreducible_representations_of_R}), and are given by $t \mapsto e^{\lambda t} $ for some $\lambda \in \mathbb C$.
+    In a similar way, the only irreducible representations of $\mathbb S^1 = \mathbb R/ \mathbb Z$ are one-dimensional complex spaces $V_k$ for $k \in \mathbb Z$, and are given by $t \mapsto e^{2\pi i k t}$.
+\end{example}
 \appendix
 
 \chapter{Covering theory reminder}
