@@ -1212,5 +1212,41 @@ $\SU(2)$.
     In particular, it is simply connected.
 \end{proposition}
 
+\chapter{$SO(d,d)$}
+The goal of this chapter is to show that $SO(d,d)$ has 2 connected components.
+First we show that a Lie group $G$ has the same number of components as its maximal compact subgroup.
+\begin{proposition}
+    Let $G$ be a Lie group and $K$ its maximal compact subgroup.
+    Then $G$ has the same number of connected components as $K$.
+\end{proposition}
+\begin{proof}
+    The Cartan decomposition of $G$ tells us that 
+    \begin{align*}
+        K \times \mathfrak p &\overset{\simeq}{\to} G\\
+        (k, X) &\mapsto k e^X
+    \end{align*}
+    is a diffeomorphism.
+    Since $K \times \mathfrak p$ is contractible to $K$, they have the same number of components.
+\end{proof}
+Given this, we just need to calculate a maximal compact subgroup of $SO(d,d)$.
+\begin{proposition}
+    A maximal compact subgroup of $SO(d,d)$ is $S(O(d) \times O(d))$.
+\end{proposition}
+\begin{proof}
+    Clearly it suffices to show that each $g \in \SO(d,d)$ has the form
+    \[
+    g = \begin{pmatrix} A & 0 \\ 0 & D \end{pmatrix}
+    \]
+    for certain square matrices $A, D$, since then they will both necessarily lie in $\mathrm{O}(d)$.
+    Since the maximal compact subgroup of an algebraic subgroup $G$ of $\GL(d, \mathbb C)$ is given by the set of fixed points of the involution $A \mapsto (A^*)^{-1}$, we see that its Lie algebra $\mathfrak k$ is the space of antisymmetric matrices that commute with $J = \begin{pmatrix} I & 0 \\ 0 & -I \end{pmatrix}$.
+    These are then matrices of the form 
+    \[
+    x = \begin{pmatrix} A & 0 \\ 0 & D \end{pmatrix}
+    \]
+    with $A, D$ square and antisymmetric.
+    Thus $e^{\mathfrak k}$ has matrices of the desired form and is a generating set for $K$.
+\end{proof}
+
+
 \printbibliography
 \end{document}
