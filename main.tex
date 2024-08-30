@@ -878,14 +878,19 @@ the following questions:
 \begin{example}[Reducible representations]
     \begin{enumerate}[label = (\roman*)]
         \item $\mathbb R$: It is reducible but not completely reducible as a representation of $\mathbb R$ (either seen as a group, or a Lie algebra).
-        \item $\mathbb C^n \otimes \mathbb C^n$: It is completely reducible as $\mathbb C^n \otimes \mathbb C^n = S^2 \mathbb C^n \oplus \Lambda^2 \mathbb C^n$, where $S^2 \mathbb C^n$ is the symmetric tensor product and $\Lambda^2 \mathbb C^n$ is the antisymmetric tensor product.
+        \item $\mathbb C^n \otimes \mathbb C^n$: It is completely reducible as a representation of $\GL(n, \mathbb C)$, since $\mathbb C^n \otimes \mathbb C^n = S^2 \mathbb C^n \oplus \Lambda^2 \mathbb C^n$, where $S^2 \mathbb C^n$ is the symmetric tensor product and $\Lambda^2 \mathbb C^n$ is the antisymmetric tensor product.
+        \item Unitary representations are completely irreducible (see \cref{thm:unitary_implies_completeley_reducible}).
+        This includes in particular representations of compact groups (see \cref{thm:compact_implies_unitary}).
     \end{enumerate}
 \end{example}
 \begin{proof}
     \begin{enumerate}[label = (\roman*)]
-        \item\label{ex:R_not_completely_irreducible} Representations of $\mathbb R$ are of the form $t \mapsto e^{tA}$ for some $A \in \mathfrak{gl}(V)$ (when $\mathbb R$ is seen as a Lie group), or $t \mapsto tA$ for some $A \in \mathfrak{gl}(V)$ (when $\mathbb R$ is seen as a Lie algebra).
-        If $v \in V$ is an eigen vector of $A$, then $\mathbb Cv$ is a subrepresentation in $V$, so the only irreducible representations of $\mathbb R$ are one-dimensional.
+        \item\label{ex:R_not_completely_irreducible} 
+        Looking at the Lie algebra $\mathfrak g = \mathbb R$, representations on $V$ are linear maps $\rho_*: \mathbb R \to \mathfrak{gl}(V)$ who will have the form $t \mapsto t A$, where $A = \rho_*(1)$. 
+        Hence representations of $G = \mathbb R$ are the Lie group morphisms $\mathbb R \to \GL(d, \mathbb C)$ that have the form $t \mapsto e^{tA}$, where $A = \rho_*(1) \in \mathfrak{gl}(\mathbb C, d)$.
+        If $v \in V$ is an eigenvector of $A$, then $\mathbb Cv$ is a subrepresentation in $V$, so the only irreducible representations of $\mathbb R$ are one-dimensional.
         In fact, $t \mapsto e^{tA}$ is completely irreducible if and only if $A$ is diagonalizable.
+        Hence, the irreducible ones are given as the linear maps $\rho_*: \mathbb R \to \mathfrak{gl}(V) \simeq \mathbb C, t \mapsto t \lambda$, for some $\lambda = \lambda_{\rho_*} \in \mathbb C$, and the corresponding representation of $G$ is given by $\rho: \mathbb R \to \GL(V) \simeq \mathbb C^{\times}, t \mapsto e^{t \lambda}$.
     \end{enumerate}
 \end{proof}
 
@@ -964,13 +969,190 @@ Now we are ready to give a classification of irreducible representations of $\ma
 \begin{example}\label{ex:irreducible_representations_of_R}
     Let $G = \mathbb R$.
     Then the only irreducible representations of $G$ are one-dimensional (which follows either from the proposition above, or from \cref{ex:irreducible_representations_of_R}), and are given by $t \mapsto e^{\lambda t} $ for some $\lambda \in \mathbb C$.
-    In a similar way, the only irreducible representations of $\mathbb S^1 = \mathbb R/ \mathbb Z$ are one-dimensional complex spaces $V_k$ for $k \in \mathbb Z$, and are given by $t \mapsto e^{2\pi i k t}$.
+    Similarly, the only irreducible representations of $\mathbb S^1 = \mathbb R/ \mathbb Z$ are one-dimensional complex spaces $V_k$ for $k \in \mathbb Z$, and are given by $t \mapsto e^{2\pi i k t}$.
+\end{example}
+
+\section{Complete irreducibility of unitary representations, representations on finite groups}
+
+\begin{definition}
+    A complex representation $V$ of a real group $G$ is unitary if there exists a $G$-invariant inner-product (i.e.\ positive Hermitian form) on $V$: $\rho(G) \subseteq U(V)$.
+    Similarly, a representation $V$ of a Lie algebra $\mathfrak g$ is unitary if there exists a $\mathfrak g$-invariant inner-product on $V$: $\rho(\mathfrak g) \subseteq \mathfrak u(V)$, or equivalently $(\rho(x)v, w) + (v, \rho(x)w) = 0$ for all $x \in \mathfrak g, v, w \in V$.
+\end{definition}
+
+\begin{theorem}\label{thm:unitary_implies_completeley_reducible}
+    Unitary representations are completely reducible.
+\end{theorem}
+
+\begin{example}[Unitary representations]
+    \begin{enumerate}[label = (\roman*)]
+        \item If $G$ acts by permutations on a finite set $S$, then the representation $\rho(g)f \equaldef f \circ g^{-1}$ on the space $F(S)$ of complex functions over $S$ is unitary.
+        \item Representations of finite groups.
+        \item Representations of compact groups (see \cref{thm:compact_implies_unitary}).
+    \end{enumerate}
+\end{example}
+
+\section{Haar measure on compact Lie groups}
+Since the proof that finite group representations are unitary is based on the existence of a right-invariant integral on the group, it is natural to ask whether a similar result holds for a broader class of Lie groups.
+
+\begin{definition}
+    A right Haar measure on a Lie group $G$ is a measure $\mu$ on $G$ that is invariant under the right action of $G$ on itself: $R_g^* \mu = \mu$.
+    Equivalently $\int_G f(g) d\mu(g) = \int_G f(gh) d\mu(g)$ for all $h \in G$ and integrable functions $f$ on $G$.
+\end{definition}
+
+\begin{theorem}
+    Let $G$ be a real Lie group.
+    \begin{enumerate}
+        \item Then $G$ is orientable and admits an orientation that is invariant under the right action of $G$ on itself.
+        \item If $G$ is compact, then for a fixed choice of right-invariant orientation on $G$, there exists a unique right-invariant top degree non-vanishing differential form $\omega$ such that $\int_G \omega = 1$.
+        This form is left-invariant and left-invariant  and invariant up to a sign under $i: g 
+    \mapsto g^{-1}, i^*\omega = (-1)^{\dim G} \omega$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    Let $G$ be a compact Lie group.
+    Then $G$ admits a right Haar measure, which is a Borel measure, and invariant under the right and left actions of $G$ on itself, and under inversion $i: g \mapsto g^{-1}$.
+\end{theorem}
+
+\begin{example}
+    The Haar measure for $G= S^1 = \mathbb R/ \mathbb Z$ is the Lebesgue measure $\d x$ on $[0, 1]$.
+\end{example}
+
+\begin{theorem}\label{thm:compact_implies_unitary}
+    Any finite-dimensional representation of a compact Lie group is unitary and thus completely reducible.
+\end{theorem}
+
+\section{Orthogonality of characters and Peter--Weyl theorem}
+Throughout this section, we will assume that $G$ is a compact real Lie group with Haar measure $\d g$.
+In the previous section, we saw that it is completely reducible, but we have no way of knowing what the factors of $G$ are, or what the multiplicities are.
+This is what we will try to discuss in this section.
+
+When $V$ is a representation of $G$ and $v_i$ a basis for $V$, we can consider the matrix corresponding to $\rho(g) \in \GL(V)$ in this basis, and denote with $\rho_{ij}$ its coefficients.
+In this way we obtain scalar-valued functions $\rho_{ij}(g)$ on $G$.
+
+We will make use of the following inner product on functions over $G$:
+\begin{equation}\label{eq:inner_product}
+    (f, g) = \int_G f(g) \overline{g(g)} \d g.
+\end{equation}
+
+The next theorem tells us that irreducible representations of a compact Lie group $G$ can give us an orthogonal set of functions on $G$.
+\begin{theorem}
+    Let $G$ be a compact real Lie group with Haar measure $\d g$.
+    \begin{enumerate}[label = (\roman*)]
+        \item Let $V, W$ be non-isomorphic irreducible representations of $G$ with basis $v_i, w_a$.
+        Then the corresponding matrix coefficients are orthogonal:
+        \[
+        \left( \rho^V_{ij}, \rho^W_{ab} \right) = 0
+        \]
+        for all $i,j,a,b$, where the inner-product is defined as in \cref{eq:inner_product}.
+        \item Let $V$ be an irreducible representation of $G$, and $v_i$ be an orthonormal basis with respect to a $G$-invariant inner product.
+        Then the matrix coefficients $\rho_{ij}(g)$ are orthogonal:
+        \[
+        \left(\rho_{ij}, \rho_{kl} \right) = \frac{ \delta_{ik} \delta_{jl} }{\dim V}.
+        \]
+    \end{enumerate}
+\end{theorem}
+
+It is evident though that the set of matrix coefficients does depend on the choice of basis for the vector spaces.
+For this reason, one considers a linear combination of coefficients that is basis-independent.
+
+\begin{definition}
+    A character of a representation $V$ of a real Lie group $G$ is the scalar function on the group defined by
+    \[
+    \chi_V(g) = \tr_V \rho(g) = \sum_i \rho_{ii}(g),
+    \]
+    where $\rho_{ij}(g)$ are the matrix coefficients of $\rho(g)$ in some basis of $V$.
+\end{definition}
+We have the following properties:
+\begin{proposition}
+    Let $V$ be a representation of a real Lie group $G$.
+    \begin{enumerate}[label = (\roman*)]
+        \item If $V = \mathbb C$ is the trivial representation, then $\chi_V(g) = 1$.
+        \item $\chi_{V \oplus W} = \chi_V + \chi_W$.
+        \item $\chi_{V \otimes W} = \chi_V \chi_W$.
+        \item Characters are conjugation invariant: $\chi_V(hgh^{-1}) = \chi_V(g)$.
+        \item If $G$ is compact, then $\chi_{V^*} = \overline{\chi_V}$.
+    \end{enumerate}
+\end{proposition}
+
+The following theorem which follows from the orthogonality of matrix coefficients, tells us that characters of irreducible representations of a compact Lie group form an orthogonal family of functions on $G$.
+\begin{theorem}
+    Let $G$ be a compact real Lie group with Haar measure $\d g$.
+    \begin{enumerate}[label = (\roman*)]
+        \item Characters of non-isomorphic irreducible representations of $G$ are orthogonal:
+        \[
+        \left( \chi_V, \chi_W \right) = 0
+        \]
+        for all non-isomorphic irreducible representations $V, W$.
+        \item For any representation $V$ of $G$ we have 
+        \[
+            \left( \chi_V, \chi_V \right) = 1 \text{ if and only if } V \text{ is irreducible}.
+        \]
+        \item The set $\left\{ \chi_V : V \in \hat G \right\}$ is an orthonormal family of functions of $G$, where $\hat G$ is the set of isomorphism classes of irreducible representations of $G$.
+        \item For any representation $V$ of $G$ we can compute its multiplicities via:
+        \[
+        n_i = \left( \chi_V, \chi_{V_i} \right),
+        \]
+        where $V = \oplus_i n_i V_i$, and $V_i$ are pair-wise non-isomorphic irreducible representations.
+    \end{enumerate}
+\end{theorem}
+Note that the last part of the theorem implies in particular that the factors and the multiplicities of a completely reducible representation of a compact Lie group can be computed from its character and are unique.
+
+    
+Returning to the matrix coefficients of representations, one might ask whether it is possible to give a formulation of their orthogonality in a way that does not require a choice of basis. The answer is “yes”. Indeed, let \( v \in V \), \( v^* \in V^* \). Then we can define a function on the group \( \rho_{v^*, v}(g) \) by
+\[
+\rho_{v^*, v}(g) = \langle v^*, \rho(g)v \rangle,
+\]
+and this correspondence extends to a mapping $ V^* \otimes V \rightarrow C^\infty(G, \mathbb{C})$
+This is a generalization of a matrix coefficient: if \( v = v_j, v^* = v_j^* \), we recover matrix coefficient \( \rho_{ij}(g) \).
+
+The space \( V^* \otimes V \) has additional structure. First, we have two commuting actions of \( G \) on it, given by action on the first factor and on the second one; in other words, \( V^* \otimes V \) is a \( G \)-bimodule. In addition, if \( V \) is unitary, then the inner product defines an inner product on \( V^* \) (the simplest way to define it is to say that if \( v_i \) is an orthonormal basis in \( V \), then the dual basis \( v_i^* \) is an orthonormal basis in \( V^* \)). Define an inner product on \( V^* \otimes V \) by
+\begin{equation}\label{eq:inner_product_tensors}
+    \langle v_1^* \otimes w_1, v_2^* \otimes w_2 \rangle = \frac{1}{\dim V} \langle v_1^*, v_2^* \rangle \langle w_1, w_2 \rangle.
+\end{equation}
+
+\begin{theorem}[Peter-Weyl theorem]
+Let \( \hat{G} \) be the set of isomorphism classes of irreducible representations of \( G \). Define the map
+\begin{align*}
+    m : \bigoplus_{V_i \in \hat{G}} V_i^* \otimes V_i &\rightarrow C^\infty(G, \mathbb{C}), 
+\text{ by}\\
+    v^* \otimes v &\mapsto \langle v^*, \rho(\cdot)v \rangle.  
+\end{align*}
+Then
+\begin{enumerate}[label = (\roman*)]
+    \item $m$ is an isomorphism of \( G \)-bimodules, i.e.\ it is a linear isomorphism that commutes with the actions of \( G \) on the domain and the codomain:
+    \begin{align*}
+        m((gv^*) \otimes v) &= L_g(m(v^* \otimes v)),\\
+        m(v^* \otimes (gv)) &= R_g(m(v^* \otimes v)),
+    \end{align*}
+    where $R_g, L_g$ are the right and left actions of $G$ on $C^\infty(G, \mathbb{C})$ given by $(R_g f)(x) = f(xg)$ and $(L_g f)(x) = f(g^{-1}x)$.
+    \item The map $m$ extends to a Hilber spaces isomorphism:
+    \[
+    \hat{\bigoplus}_{V_i \in \hat{G}} V_i^* \otimes V_i \overset{\simeq}{\rightarrow} L^2(G, \d g),
+    \] 
+    where $\hat \oplus$ denotes the Hilbert space direct sum i.e.\ the completion of the algebraic direct sum with respect to the metric given by inner product defined by \cref{eq:inner_product_tensors}, and $L^2(G, \d g)$ is the Hilbert space of complex-valued square-integrable functions on G with respect to the Haar measure, with the inner product defined by \cref{eq:inner_product}.
+    \item The set of characters 
+    $$\left\{ \chi_V : V \in \hat G \right\}$$
+    is an orthonormal basis of the space $\left(L^2(G, \d g)\right)^G$ of conjugation invariant functions on $G$, where $\hat G$ denotes the isomorphism classes of irreducible representations of $G$.
+\end{enumerate}
+\end{theorem}
+
+The following example suggests that the study of $L^2(G)$ can be considered as a generalisation of harmonic analysis:
+\begin{example}\label{ex:peter_wheyl_fourier}
+    Let \( G = \mathbb S^1 = \mathbb{R}/\mathbb{Z} \). 
+    As we have already discussed, the Haar measure on \( G \) is given by \( dx \) and the irreducible representations are parametrized by \( \mathbb{Z} \): for any \( k \in \mathbb{Z} \), we have one-dimensional representation \( V_k \) with the action of \( \mathbb S^1 \) given by \( \rho(a) = e^{2\pi i k a} \). The corresponding matrix coefficient is the same as character and is given by \( \chi_k(a) = e^{2\pi i k a} \).
+
+Then the orthogonality relation of matrix coefficients gives
+\[
+\int_0^1 e^{2\pi i k x} e^{2\pi i l x} \, dx = \delta_{k l},
+\]
+which is the usual orthogonality relation for exponents. The Peter–Weyl theorem in this case just says that the exponents \( e^{2\pi i k x}, k \in \mathbb{Z} \), form an orthonormal basis of \( L^2(\mathbb S^1, dx) \) which is one of the main statements of the theory of Fourier series: every \( L^2 \) function on \( \mathbb S^1 \) can be written as a series \( f(x) = \sum_{k \in \mathbb{Z}} c_k e^{2\pi i k x} \) which converges in \( L^2 \) metric. For this reason, the study of the structure of \( L^2(G) \) can be considered as a generalization of harmonic analysis.
 \end{example}
 \appendix
 
 \chapter{Covering theory reminder}
 In this chapter we recall certain facts and definitions from basic covering theory.
-A nice reference for these is the Chapter 2 from \cite{hatcher2002topology}.
+A nice reference for these, is the Chapter 2 from \cite{hatcher2002topology}.
 We begin by defining covering spaces.
 \begin{definition}
     A covering map is a continuous surjective map $p: \tilde X \to X$ such that for every $x \in X$ there exists an open neighborhood $U$ of $x$ such that $p^{-1}(U)$ is a disjoint union of open sets in $\tilde X$, each of which is mapped homeomorphically onto $U$ by $p$.
@@ -1204,6 +1386,35 @@ $\SU(2)$.
     Since $G$ is connected and simply connected, the second fundamental theorem of Lie groups tells us that $\theta$ can be lifted to a Lie group automorphism $\Theta: G \to G$.
     Then $K = G^\Theta$ is a real form of $G$ with Lie algebra $\ker \theta = \mathfrak k$.
 \end{proof}
+\section{Linear algebra exercises}
+\begin{exercise}
+    Let $A$ be a diagonalizable operator with distinct eigenvalues.
+    Then the invariant subspaces of $A$ are exactly the ones that are spanned by some family of its eigenvectors.
+\end{exercise}
+\begin{proof}[First Solution]
+Let $n$ be the ambient dimension and $W$ be an invariant subspace of $A$ and consider some complement $W^{\perp}$ of $W$.
+Considering some basis $e_1, \ldots, e_k$ of $W$ and $e_{k+1}, \ldots, e_n$ of $W^{\perp}$, we have that in this basis $A$ is block-diagonal:
+\[
+A = \begin{pmatrix} A_1 & 0 \\ 0 & A_2 \end{pmatrix}
+\]
+where $A_1$ is the restriction of $A$ to $W$ and $A_2$ is the restriction to $W^{\perp}$.
+In particular, the characteristic polynomial of $A$ is the product of the characteristic polynomials of $A_1$ and $A_2$.
+In particular, $A_1$ and $A_2$ will be diagonalisable with distinct eigenvalues (that are also eigenvalues of $A$).
+Letting $w_1, \ldots, w_k$ be a basis of eigenvectors of $A_1$, we see that these must be 
+eigenvectors of $A$ as well, so $W$ is indeed generated by eigenvectors of $A$.
+\end{proof}
+\begin{proof}[Second Solution]
+    Let $e_1, \cdots, e_d$ be a basis of eigenvectors of $A$.
+    If the result were not true, then there would exist an invariant subspace $W$, some element $w = a_1 e_{i_1} + \cdots a_k e_{i_k} \in W$ with $a_1, \cdots a_k \neq 0$ and some $j_0 \in \llbracket 1, k \rrbracket $ such that $e_{i_{j_0}}$ is contained in $W$.
+    Without loss of generality assume that $j_0 = k$.
+    Then 
+    \begin{align*}
+        (A = \lambda_1 I)w &= a_2 (\lambda_1 - \lambda_2) e_{i_2} + \cdots + a_k (\lambda_1 - \lambda_k) e_{i_k} = \\
+        a_2' e_{i_2} + \cdots + a_{k-1}' e_{i_{k-1}}
+    \end{align*}
+    which is contained in $W$ and $a_2', \cdots, a_{k-1}' \neq 0$.
+    Keeping on like that, we arrive at $e_k \in W$, which is a contradiction.
+\end{proof}
 
 \chapter{Geomtric realisation}
 
@@ -1245,6 +1456,31 @@ Given this, we just need to calculate a maximal compact subgroup of $SO(d,d)$.
     \]
     with $A, D$ square and antisymmetric.
     Thus $e^{\mathfrak k}$ has matrices of the desired form and is a generating set for $K$.
+\end{proof}
+
+\chapter{Case studies}
+\section{$\mathbb R$}
+The representations of $\mathfrak g = \mathbb R$ are given as $\rho_*: \mathbb R \to \mathfrak{gl}(V)$, $t \mapsto t A$, where $A = \rho_*(1)$, and the representations of $G = \mathbb R$ are given by $\rho: \mathbb R \to \GL(V)$, $t \mapsto e^{tA}$ for $A = \rho_*(1)$.
+The irreducible representations of $\mathbb R$ are one-dimensional and are given by $\rho_*: \mathbb R \to \mathfrak{gl}(V) \simeq \mathbb C, t \mapsto t \lambda$ for some $\lambda \in \mathbb C$, and the corresponding representation of $G$ is given by $\rho: \mathbb R \to \GL(V) \simeq \mathbb C^{\times}, t \mapsto e^{t \lambda}$ (see \cref{ex:irreducible_representations_of_R}).
+\section{$\mathbb S^1$}
+The representations $\rho:\mathbb S^1 \to \GL(V)$ are in bijective correspondence with the ones $\tilde \rho: \mathbb R \to \GL(V)$ such that $\rho(\mathbb Z) = \id$, since $p: \mathbb R \to \mathbb S^1 = \mathbb R / \mathbb Z$ is a covering group.
+\[
+    \begin{tikzcd}
+        \mathbb R \arrow[dr, "\tilde \rho"] \arrow[d, "p"']  \\
+        \mathbb S^1 \arrow[r, "\rho"] & \GL(V)
+    \end{tikzcd}
+\]
+
+The irreducible ones of $\mathbb S^1$ are in (the same) bijective correspondence with the irreducible ones of $\mathbb R$ such that $\tilde \rho(1) = 1$, where we recall that the irreducible representations of $\mathbb R$ are exactly the one-dimensional ones and they have the form $\rho(t) = e^{t \lambda} \in \GL(V) \simeq \mathbb C^{\times}$.
+Hence the irreducible representations of $\mathbb S^1$ are exactly one-dimensional complex vector spaces $V_k$ and are given by $\mathbb S^1 = \mathbb R/ \mathbb Z \to \GL(V_k) \simeq C^{\times}, t + \mathbb Z \mapsto e^{2 \pi i k }$.
+
+\chapter{Fun facts}
+
+\begin{question}
+    What do Lie groups have to do with harmonic analysis?
+\end{question}
+\begin{proof}[Answer]
+    The study of the space $L^2(G, \d g)$ where $G$ is a compact real Lie group and $\d g$ denotes its Haar measure, can be considered as a generalisation of the classical Fourier analysis on the circle $\mathbb S^1$, as can be seen by setting $G = \mathbb S^1$ (see \cref{ex:peter_wheyl_fourier}).
 \end{proof}
 
 
