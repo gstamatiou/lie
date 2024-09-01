@@ -811,7 +811,7 @@ where $e_1, \ldots, e_n$ are any basis of $V$ and $e_1, \cdots, e^n$ are its dua
 \begin{definition}
     Let $V$ be a representation of a Lie group $G$. A vector $v \in V$ is
     called invariant if $\rho(g)v = v$ for all $g \in G$. The subspace of invariant vectors
-    in $V$ is denoted by $V^G$ .
+    in $V$ is denoted by $V^G$.
     Similarly, let $V$ be a representation of a Lie algebra $\mathfrak g$. A vector $v \in V$ is
     called invariant if $\rho(x)v = 0$ for all $x \in g$. The subspace of invariant vectors
     in $V$ is denoted by $V^{\mathfrak g}$ .
@@ -881,6 +881,7 @@ the following questions:
         \item $\mathbb C^n \otimes \mathbb C^n$: It is completely reducible as a representation of $\GL(n, \mathbb C)$, since $\mathbb C^n \otimes \mathbb C^n = S^2 \mathbb C^n \oplus \Lambda^2 \mathbb C^n$, where $S^2 \mathbb C^n$ is the symmetric tensor product and $\Lambda^2 \mathbb C^n$ is the antisymmetric tensor product.
         \item Unitary representations are completely irreducible (see \cref{thm:unitary_implies_completeley_reducible}).
         This includes in particular representations of compact groups (see \cref{thm:compact_implies_unitary}).
+        \item $\mathfrak{sl}(2, \mathbb C)$: Putting aside that we can classify all its finite-dimensional representations: any representation of $V$ is completely reducible, and any irreducible representation is isomorphic to a highest weight representation (see \cref{thm:irreducible_representations_of_sl2}).
     \end{enumerate}
 \end{example}
 \begin{proof}
@@ -987,7 +988,7 @@ Now we are ready to give a classification of irreducible representations of $\ma
     \begin{enumerate}[label = (\roman*)]
         \item If $G$ acts by permutations on a finite set $S$, then the representation $\rho(g)f \equaldef f \circ g^{-1}$ on the space $F(S)$ of complex functions over $S$ is unitary.
         \item Representations of finite groups.
-        \item Representations of compact groups (see \cref{thm:compact_implies_unitary}).
+        \item Representations of compact groups (see \cref{thm:compact_implies_unitary}), e.g.\ finite groups, $\SU(n)$, $\SO(n)$, $\mathrm{U}(n)$, $\mathrm{SO}(n)$.
     \end{enumerate}
 \end{example}
 
@@ -1148,6 +1149,199 @@ Then the orthogonality relation of matrix coefficients gives
 \]
 which is the usual orthogonality relation for exponents. The Peter–Weyl theorem in this case just says that the exponents \( e^{2\pi i k x}, k \in \mathbb{Z} \), form an orthonormal basis of \( L^2(\mathbb S^1, dx) \) which is one of the main statements of the theory of Fourier series: every \( L^2 \) function on \( \mathbb S^1 \) can be written as a series \( f(x) = \sum_{k \in \mathbb{Z}} c_k e^{2\pi i k x} \) which converges in \( L^2 \) metric. For this reason, the study of the structure of \( L^2(G) \) can be considered as a generalization of harmonic analysis.
 \end{example}
+
+\section{Representation theory of $\mathfrak{sl}(2, \mathbb C)$}\label{sec:representation_theory_sl2}
+Throughout this section, when we consider a representation $V$ of $\mathfrak{sl}(2, \mathbb C)$, we will denote the action of $\mathfrak{sl}(2, \mathbb C)$ on $V$ by $x v$ instead of $\rho_*(x)v$.
+Note also that the following results are valid for the algebras $\mathfrak{su}(2)$ and $\mathfrak{so}(3)$, since they are isomorphic to $\mathfrak{sl}(2, \mathbb C)$.
+\begin{theorem}
+    Any finite-dimensional representation of $\mathfrak{sl}(2, \mathbb C)$ is completely reducible.
+\end{theorem}
+\begin{proof}
+    This is because $\mathfrak{sl}(2, \mathbb C)$ is the complexification of $\su(2)$, which is compact, and thus unitary.
+\end{proof}
+
+Recall that $\mathfrak{sl}(2, \mathbb C)$ has a basis $e, f, h$ given by
+\[
+e = \begin{pmatrix}
+    0 & 1 \\
+    0 & 0
+\end{pmatrix},
+f = \begin{pmatrix}
+    0 & 0 \\
+    1 & 0
+\end{pmatrix},
+f = \begin{pmatrix}
+    1 & 0 \\
+    0 & -1
+\end{pmatrix},
+\]
+that satisfy the commutation relations
+\[
+[h, e] = 2e, [h, f] = -2f, [e, f] = h.
+\]
+
+\begin{definition}
+    Let $V$ be a representation of $\mathfrak{sl}(2, \mathbb C)$.
+    A vector $v \in V$ is called a vector of weight $\lambda \in \mathbb C$ if it is an eigenvector of $h$ with eigenvalue $\lambda$:
+    \[
+    h v = \lambda v.
+    \]
+    The subspaces of vectors of weight $\lambda$ are denoted by $V[\lambda]$.
+    A "highest weight" of $V$ is a weight $\lambda$ (meaning that $V[\lambda] \neq 0$) with maximal real part, i.e.\ $\Re \lambda \geq \Re \mu$ for all weights $\mu$ of $V$.
+\end{definition}
+\begin{lemma}
+    Let $V$ be a representation of $\mathfrak{sl}(2, \mathbb C)$.
+    Then for every $\lambda \in \mathbb C$:
+    \[
+    e V[\lambda] \subseteq V[\lambda + 2], \text{ and } f V[\lambda] \subseteq V[\lambda - 2].
+    \]
+\end{lemma}
+
+Given the above relations, one can show that every finite-dimensional representation of $\mathfrak{sl}(2, \mathbb C)$ is of the form:
+\[
+V = \bigoplus_{\lambda \in \mathbb C} V[\lambda],
+\]
+called the weight decomposition of $V$.
+In fact, we will show below that the weights are integers.
+
+\begin{lemma}
+    Let $V$ be a finite-dimensional representation of $\mathfrak{sl}(2, \mathbb C)$, and $v \in V[\lambda]$ be a highest weight vector. Then
+    \begin{enumerate}[label = (\roman*)]
+        \item e v = 0\\
+        \item For 
+        \[
+        v^k = \frac{f^k}{k!} v, k \geq 0,
+        \]
+        we have
+        \begin{align}\label{eq:sl2_highest_weight_relations}
+            h v^k &= (\lambda - 2k) v^k,\\
+            f v^k &= (k+1) v^{k+1},\\
+            e v^k &= (\lambda - k + 1) v^{k-1}, k > 0.           
+        \end{align}
+    \end{enumerate}
+\end{lemma}
+Although only finitely many of $v^k$ are nonzero, it is convenient to consider $V$ as a quotient of an infinite-dimensional vector space with basis $v^k$:
+\begin{lemma}
+    Let $\lambda \in \mathbb C$ and define $M_\lambda$ as the infinite-dimensional vector space with basis $v_0, v_1, \cdots$. Then:
+    \begin{enumerate}[label = (\roman*)]
+        \item The relations in \cref{eq:sl2_highest_weight_relations} make $M_\lambda$ into an infinite-dimensional representation of $\mathfrak{sl}(2, \mathbb C)$.
+        \item If $V$ is a finite-dimensional reducible representation of $\mathfrak{sl}(2, \mathbb C)$, then $V$ is isomorphic to a quotient $M_\lambda / W$ for some $\lambda \in \mathbb C$ and some subrepresentation $W$ of $M_\lambda$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{theorem}
+    Let $V_n$ be be the finite-dimensional vector space with basis $v_0, v_1, \cdots, v_n$ and the action of $\mathfrak{sl}(2, \mathbb C)$ given by
+    \begin{align*}
+        h v^k &= (n - 2k) v^k,\\
+        f v^k &= (k+1) v^{k+1}, k < n; fv^n = 0\\
+        e v^k &= (n - k + 1) v^{k-1}, k > 0; ev^0 = 0.        
+    \end{align*}
+    Then $V_n$ is an irreducible representation of $\mathfrak{sl}(2, \mathbb C)$ of dimension $n+1$, which we call the irreducible representation with highest weight $n$.
+    \item For $n \neq m$, $V_n$ and $V_m$ are non-isomorphic.
+    \item Every finite-dimensional irreducible representation $V$ of $\mathfrak{sl}(2, \mathbb C)$ is isomorphic to $V_n$, for $n = \dim V - 1$.
+    \item Let $V$ be a finite-dimensional representation of $\mathfrak{sl}(2, \mathbb C)$. Then:
+    \begin{enumerate}[label = (\roman*)]
+        \item V admits a weight decomposition with integer weights:
+        \[
+        V = \bigoplus_{n \in \mathbb Z} V[n].
+        \]
+        \item $\dim V[n] = \dim V[-n]$, and for $n \geq 0$, the maps
+        \begin{align*}
+            e^n: V[n] &\rightarrow V[-n],\\
+            f^n: V[-n] &\rightarrow V[n],
+        \end{align*}
+        are isomorphisms.
+    \end{enumerate}
+\end{theorem}
+
+
+\chapter{Structure theory of Lie algebras}
+In this chapter we will discuss the structure theory of Lie algebras, with the eventual goal of the full classification of semi-siple Lie algebras and their representations.
+In this chapter $\mathfrak g$ will be a finite-dimensional Lie algebra over $\mathbb K \in \{\mathbb R, \mathbb C\}$.
+\section{Universal enveloping algebra}
+Note that while there exists no product in a Lie algebra $V$, for every representation $\rho: \mathfrak g \to \mathfrak{gl}{V}$ the product $\rho(x) \rho(y)$ is well-defined.
+While this may indeed depend on the representation $\rho$, the commutation relations of $\mathfrak g$ are preserved by the representation, and thus the product $\rho(x) \rho(y) - \rho(y) \rho(x)$ is a well-defined (in the sense of being independent to the representation $\rho$) element of $\mathfrak{gl}{V}$.
+Motivated by this, we should think of the universal enveloping algebra as the "universal" associative algebra generated by products of operators of the form $\rho(x), x \in \mathfrak g$, and subject to relations imposed by the Lie algebra structure of $\mathfrak g$.
+
+To be more rigorous, we recall the definition of a tensor algebra generated by a vector space $V$:
+\begin{definition}
+    Let $V$ be a vector space over a field $\mathbb K$.
+    \begin{enumerate}[label = (\roman*)]
+        \item 
+        The tensor algebra $T(V)$ of $V$ as the vector space
+    \[
+    T(V) = \bigoplus_{n=0}^\infty V^{\otimes n},
+    \]
+    endowed with the product
+    \begin{align*}
+        V^{\otimes n} \times V^{\otimes m} &\to V^{\otimes n+m},\\
+        (v_1 \otimes \cdots \otimes v_n, w_1 \otimes \cdots \otimes w_m) &\mapsto v_1 \otimes \cdots \otimes v_n \otimes w_1 \otimes \cdots \otimes w_m,
+    \end{align*}
+    where $V^{\otimes 0} = \mathbb K$ by convention.
+    It is the free algebra on the vector space $V$ in the sense that it satisfies the following universal property:
+    Any linear map $f: V \to A$ from $V$ to an associative algebra $A$ extends uniquely to an algebra homomorphism $T(V) \to A$.
+    \[
+    \begin{tikzcd}
+        V \arrow[r, "f"] \arrow[d, hook] & A\\
+        T(V) \arrow[ur, dashed]
+    \end{tikzcd}
+    \]
+    \item
+    The symmetric algebra $S(V)$ is the quotient of $T(V)$ by the ideal generated by elements of the form $v \otimes w - w \otimes v$.
+    Fixing a basis $x_1, \cdots, x_n$ of $V$, we have that it is isomorphic to the polynomial ring $\mathbb K[x_1, \cdots, x_n]$.
+    \end{enumerate}
+\end{definition}
+Note that the map $i: \mathfrak g \to U \mathfrak g$ can be shown to be injective.
+
+We can now give a rigorous definiction of the universal enveloping algebra of a Lie algebra $\mathfrak g$.
+\begin{definition}
+    The universal enveloping algebra $U \mathfrak g$ of a Lie algebra $\mathfrak g$ is the associative algebra with unit over $\mathbb K$ with generators $i(x), x \in \mathfrak g$, subject to relations $i(x+y) = i(x)+i(y), i(c x) = ci(x), c \in \mathbb K $ and  $i(x) i(y) - i(y) i(x) = i([x,y])$.
+
+    Alternatively, it is the quotient of the tensor algebra $T(\mathfrak g)$ by the ideal generated by elements of the form $x \otimes y - y \otimes x - [x,y]$:
+    \[
+    U \mathfrak g = T(\mathfrak g) / \langle x \otimes y - y \otimes x - [x,y] : x, y \in \mathfrak g \rangle.
+    \]
+\end{definition}
+
+\begin{example}
+    When $\mathfrak g$ is a commutative Lie algebra, the universal enveloping algebra is the symmetric algebra $S(\mathfrak g)$.
+\end{example}
+Note that in this example, the universal enveloping algebra is infinite-dimensional, which is in fact the case for any non-trivial Lie algebra.
+
+\begin{remark}
+    Even when $\mathfrak g \subseteq \mathfrak{gl}(n, \mathbb K)$ is a matrix algebra, multiplication in $U \mathfrak g$ is different from multiplication of matrices. For example, let $e$ be the standard generator of $\mathfrak{sl}(2, \mathbb C)$. 
+    Then $e^22 = 0$ as a $2 \times 2$ matrix, but not in $U \mathfrak g$- and for a good reason: there are many representations of $\mathfrak sl(2, C)$ in which $\rho(e)^2 \neq 0$.
+\end{remark}
+
+The universal enveloping algebra has a universal property of its own:
+\begin{theorem}[Universal property of universal enveloping algebra]
+    Let $A$ be an associative algebra with unit over $\mathbb K$ and a linear map $f: \mathfrak g \to A$ such that $f([x,y]) = f(x)f(y) - f(y)f(x)$.
+    Then there exists a unique algebra homomorphism $\tilde f: U \mathfrak g \to A$ such that $\tilde f \circ i = f$.
+\end{theorem}
+Given a representation $V$, we may let $A = \mathfrak{gl}(V)$ and $f = \rho$:
+\[
+\begin{tikzcd}
+    \mathfrak g \arrow[r, "\rho"] \arrow[d, hook] & \mathfrak{gl}(V)\\
+    U \mathfrak g \arrow[ur, dashed, "\tilde \rho"]
+\end{tikzcd}
+\]
+Noting that every ring homomorphism $\phi: R \to \mathfrak{gl}(V)$ induces an $R$-module structure on $V$ by $r \cdot v = \phi(r) v$, we can obtain:
+\begin{corollary}
+    The categories of representations of a (not necessarily finite-dimensional) Lie algebra $\mathfrak g$ and of $U \mathfrak g$ modules are equivalent. 
+    More concretely, any representation of $\mathfrak g$ has a canonical structure of a $U \mathfrak g$ module, and conversely, every $U \mathfrak g$ module has a canonical structure of a representation of $\mathfrak g$.
+\end{corollary}
+
+The following example shows us that we can use the universal enveloping algebra to construct interwining operators between representations of a Lie algebra.
+The element $C$ defined below is known as the Casmir element in $\mathfrak{sl}(2, \mathbb C)$.
+\begin{example}
+    Let $C = e f + f e + \frac{1}{2}h^2 \in U \mathfrak{sl}(2, \mathbb C)$.
+    Then $C$ is central in $U \mathfrak{sl}(2, \mathbb C)$, i.e.\ $C a = a C $ for all $a \in U \mathfrak{sl}(2, \mathbb C)$.
+    This calculation is merely based in using the commutation relations of $\mathfrak{sl}(2, \mathbb C)$ to move $a$ from one side of $C$ to the other.
+
+    In particular, for every representation $V$ of $\mathfrak{sl}(2, \mathbb C)$, $\rho(C): V \to V$ is an interwining operator.
+    In particularm, it acts as a scalar on every irreducible representation $V[n]$, and if $V$ is not irreducible, then it can be decomposed into a direct sum of irreducible representations, and $\rho(C)$ acts as a scalar on each of them.
+\end{example}
+
 \appendix
 
 \chapter{Covering theory reminder}
