@@ -378,7 +378,17 @@ For instance when $G$ is commutative, the commutator is zero (and the exponentia
     A subalgebra of a Lie algebra $\mathfrak g$ is a subspace $\mathfrak h \subseteq \mathfrak g$ that is closed under the Lie bracket: $[x,y] \in \mathfrak h$ for all $x,y \in \mathfrak h$.
     An ideal is a subalgebra $\mathfrak h$ such that $[x,y] \in \mathfrak h$ for all $x \in \mathfrak h, y \in \mathfrak g$.
 \end{definition}
-It is easy to see that one can take quotients of Lie algebras by ideals and thus obtain Lie algebras.
+Given some ideals, we can perform operations on them to get new ideals:
+\begin{proposition}[Proposition 3.19, \cite{kirillov2008introduction}]
+    Let $I_1, I_2$ be ideals of a Lie algebra $\mathfrak g$.
+    Then $I_1 + I_2, I_1 \cap I_2, [I_1, I_2]$ are ideals as well.
+\end{proposition}
+It is easy to see a quotient of a Lie algebra by an ideal carries a canonical structure of a Lie algebra.
+We moreover have the following lemma, reminiscent of the homomorphism theorem for groups:
+\begin{lemma}
+    Let $f: \mathfrak g_1 \to \mathfrak g_2$ be a Lie algebra morphism.
+    Then $\ker f$ is an ideal of $\mathfrak g_1, \im f$ is a subalgebra of $\mathfrak g_2$ and $f$ gives rise to an isomorphism of Lie algebras: $\mathfrak g_1/\ker f \simeq \im f$.
+\end{lemma}
 
 The next theorem tells us that Lie subgroups correspond to subalgebras, and normal closed Lie subgroups correspond to ideals.
 In the case of the latter, a converse statement gives us a way to check if a subgroup is normal by checking whether the corresponding subalgebra is an ideal.
@@ -393,6 +403,124 @@ In this way we obtain a link between an algebraic condition (being a normal subg
     \end{enumerate}
 \end{theorem}
 
+One of the first ways to study a Lie algebra is by analyzing how close it is to a commutative Lie algebra.
+There are numerous ways to do this, some of which will be elaborated below.
+\begin{enumerate}[label = (\roman*)]
+    \item By looking at the center $\mathfrak z(\mathfrak g) = \ker \ad$ of $\mathfrak g$. The bigger the center, the more commutative the Lie algebra.
+    \item By looking at the commutator $[\mathfrak g, \mathfrak g]$. The smaller the commutator, the more commutative the Lie algebra.
+    \item By looking at the degree of solvability of $\mathfrak g$. The smaller the degree of solvability, the more commutative the Lie algebra, since derived series are merely succesive extensions of commutative subalgebras.
+\end{enumerate}
+To support this, take for instance the commutant.
+It is the smallest ideal of the Lie algebra, such that the quotient is abelian.
+\begin{lemma}
+    Let $\mathfrak g$ be a Lie algebra.
+    Then for every ideal $I$ of $\mathfrak g$ such that the quotient $\mathfrak g/I$ is abelian, $I \supseteq [\mathfrak g, \mathfrak g]$.
+\end{lemma}
+Going on to solvable algebras, we give the following definition.
+\begin{definition}
+    Let $\mathfrak g$ be a Lie algebra. We define the derived series of $\mathfrak g$ as the decreasing sequence of ideals
+    \[
+    D^i \mathfrak g = [D^i \mathfrak g, D^i \mathfrak g],
+    \]
+    starting with $D^0 \mathfrak g = \mathfrak g$.
+    The Lie algebra $\mathfrak g$ is said to be solvable if one of the following equivalent conditions holds:
+    \begin{enumerate}[label = (\roman*)]
+        \item The derived series terminates, i.e.\ there exists $n \in \mathbb N$ such that $D^n \mathfrak g = 0$.
+        \item There exists a chain of subalgebras $\mathfrak a^0 = \mathfrak g \supseteq \mathfrak a^1 \supseteq \cdots \supseteq \mathfrak a^k  = 0$ such that $\mathfrak a^i$ is an ideal in $\mathfrak a^i$ and the quotient $\mathfrak a^i/ \mathfrak a^{i+1}$ is abelian.
+        \item For large enough $n$, every commutator of the form $[x_1, [x_2, \ldots [x_{n-1}, x_n]\ldots]]$ ($2^n$ terms arranged in a binary tree of length $n$) is zero (see \cref{fig:derived_series}).
+    \end{enumerate}
+\end{definition}
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}[b]{0.55\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{derived_series_tree.jpg}
+        \caption{Illustration of derived series. Each node is the bracket of its children.}
+        \label{fig:derived_series}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{lower_central_series_graph.jpg}
+        \caption{Illustration of lower central series. Each node is the bracket of its children.}
+        \label{fig:lower_central_series}
+    \end{minipage}
+\end{figure}
+
+Similar to the solvable algebras, we also have the notion of nilpotent algebras.
+\begin{definition}
+    Let $\mathfrak g$ be a Lie algebra. We define the lower central series of $\mathfrak g$ as the decreasing sequence of ideals, begining with $D_0 \mathfrak g = \mathfrak g$ and
+    \[
+    D_{i+1} \mathfrak g = [\mathfrak g, D_i \mathfrak g].
+    \]
+    The algebra is called nilpotent if one of the following conditions holds:
+    \begin{enumerate}[label = (\roman*)]
+        \item The lower central series terminates, i.e.\ there exists $n \in \mathbb N$ such that $D_n \mathfrak g = 0$.
+        \item There exists a chain of ideals $\mathfrak a_0 = \mathfrak g \supseteq \mathfrak a_1 \supseteq \cdots \supseteq \mathfrak a_k = 0$ such that $[\mathfrak g, \mathfrak a_i] \subseteq \mathfrak a_{i+1}$.
+        \item For large enough $n$, every commutator of the form $[x_1, [x_2, \ldots [x_{n-1}, x_n]\ldots]]$ ($n$ terms) is zero (see \cref{fig:lower_central_series}).
+    \end{enumerate}
+\end{definition}
+
+
+
+
+An important example is $\mathfrak{gl}(n , \mathbb K)$.
+Before we describe it, we make some preliminary remarks that will facilitate the computations.
+We shall call $k$-diagonal of a matrix $a_{ij}$ the entries whose indices satisfy $i-j=k$, and denote with $A_k \subseteq \gl(n, \mathbb K)$ the additive group of matrices whose entries are zero below the $k$-diagonal (i.e.\ $a_{ij} \neq 0$ implies $i-j \leq k$).
+Note then $A_k A_l \subseteq A_{k+l}$.
+
+On the other hand, let $\mathcal F$ be a flag in a finite-dimensional vector space $V$, that is a chain of subspaces (without repetitions and without restriction on the dimensions of the subspaces):
+\[
+\mathcal F = \left\{ 0 \subsetneq V_1 \subsetneq V_2 \subsetneq \cdots \subsetneq V_n \right\}.
+\]
+Then we define:
+\begin{align*}
+    \mathfrak b(\mathcal F) &= \left\{ x \in \gl(V) : x V_i \subseteq V_i \text{ for all } i \right\}\\
+    \mathfrak n(\mathcal F) &= \left\{ x \in \gl(V) : x V_i \subseteq V_{i-1} \text{ for all } i \right\}\\
+    \mathfrak a_k(\mathcal F) &= \left\{ x \in \gl(V) : x V_i \subseteq V_{i - k} \right\}.
+\end{align*}
+Note that $\mathfrak b(\mathcal F) = \mathfrak a_0(\mathcal F)$ and $\mathfrak n(\mathcal F) = \mathfrak a_1(\mathcal F)$, while $\mathfrak a_{k} \mathfrak a_l, [\mathfrak a_k, \mathfrak a_l] \subseteq \mathfrak a_{k+l}$.
+Using induction, this means that $D_i \mathfrak n(\mathcal F) \subseteq \mathfrak a_{i+1}$, 
+so $\mathfrak n(\mathcal F)$ is nilpotent.
+In particular, letting $\mathcal F = \mathcal F_0$ be the standard flag in $\mathbb K^n$, the algebras $\mathfrak a_k$ are the matrices that are zero below the $k$-th diagonal:
+\[
+\left\{ A : a_{ij} = 0 \text{ for } i - j > k
+\right\}
+\]
+\begin{example}
+    The commutator of $\mathfrak{gl}(n, \mathbb K)$ is given by
+    \[
+    [\gl(n, \mathbb K), \gl(n, \mathbb K)] = \ssl(n, \mathbb K).
+    \]
+    Let now $\mathfrak b \subseteq \gl(n, \mathbb K)$ be the subalgebra of upper triangular matrices and $\mathfrak n$ be the subalgebra of strictly upper triangular matrices.
+    Then $\mathfrak b$ is solvable and $\mathfrak n$ is nilpotent.
+
+    Noting that $\mathfrak b = \mathfrak b (\mathcal F_0), \mathfrak n = \mathfrak n(\mathcal F_0)$ for $\mathcal F_0$ being the standard flag in $\mathbb K^n$, we have seen above that $\mathfrak n$ is nilpotent.
+    
+    To see that $\mathfrak b$ is solvable, note that $D^1 \mathfrak b = [\mathfrak b, \mathfrak b] \subseteq \mathfrak n = \mathfrak a_i$ since the diagonal entries of $xy$ and $yx$ coincide.
+    Inductively, this implies that $D^{i+1} \mathfrak b \subseteq \mathfrak a_{2^i}$.
+
+    Note finally that $\mathfrak b $ is not nilpotent because $D_i \mathfrak b = \mathfrak n$.
+    Indeed, we have seen that $D_1 \mathfrak b = [\mathfrak b, \mathfrak b] \subseteq \mathfrak n$.
+    On the other hand, the relation 
+    \[
+    E_{ij} E_{kl} = \delta_{jk} E_{il}
+    \]
+    tells us that $E_{ij} = [E_{ii}, E_{ij}] \in D_2 \mathfrak b$, so $D_2 \mathfrak b = D_1 \mathfrak b = \mathfrak n$, so it follows by induction.
+\end{example}
+
+Finally, we have the following properties for solvable and nilpotent algebras.
+\begin{proposition}
+    \begin{enumerate}[label = (\roman*)]
+        \item A real Lie algebra is solvable (resp.\ nilpotent) if and only if its complexification is.
+        \item If $\mathfrak g$ is solvable (resp.\ nilpotent), then every subalgebra and quotient of $\mathfrak g$ is solvable (and resp.\ nilpotent).
+        \item If $\mathfrak g$ is nilpotent, it is solvable.
+        \item If $I \subseteq \mathfrak g$ is an ideal such that both $\mathfrak g, \mathfrak g/I$ are solvable, then $\mathfrak g$ is solvable.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+For certain points, it is useful to note that if $I\subseteq \mathfrak g$ is an ideal, then $D^i \mathfrak (g/I) = (D^i \mathfrak g) + I$.
+\end{proof}
 
 \section{Lie algebra of vector fields}
 For a manifold $M$, the space $\mathrm{Vect}(M)$ can be made into a Lie algebra by directly defining the bracket of two vector fields and showing that it is skew-symmetric and bilinear.
@@ -1341,6 +1469,96 @@ The element $C$ defined below is known as the Casmir element in $\mathfrak{sl}(2
     In particular, for every representation $V$ of $\mathfrak{sl}(2, \mathbb C)$, $\rho(C): V \to V$ is an interwining operator.
     In particularm, it acts as a scalar on every irreducible representation $V[n]$, and if $V$ is not irreducible, then it can be decomposed into a direct sum of irreducible representations, and $\rho(C)$ acts as a scalar on each of them.
 \end{example}
+
+\section{Poincaré--Birkhoff--Witt theorem}
+We will assume throughout this section that $\mathfrak g$ is a finite-dimensional Lie algebra over a field $\mathbb K$ and $U \mathfrak g$ its universal enveloping algebra.
+We have already seen that when $\mathfrak g$ is commutative, $U \mathfrak g$ is the symmetric algebra $S(\mathfrak g)$ and its infinite dimensional.
+The Poincaré--Birkhoff--Witt theorem gives us a more precise answer to the question of the dimension of $U \mathfrak g$.
+
+Unlike a polynomial algebra, the universal enveloping algebra is not graded.
+Indeed, if we were to define a degree by $\deg(x_1 \cdots x_k) = k$, then the commuting relation would imply that the degree of $[x,y]$ is 1, hence homogenous sums of degree-2 elements would not be closed under addition.
+Instead, $ U g$ is a filtered algebra, where the filtration is given by:
+\[
+U_k \mathfrak g = \spa\left\{ x_1 \cdots x_p: p \leq k, x_i \in \mathfrak g \right\}.
+\]
+Then $\mathfrak U g $ becomes a filtered algebra:
+\[
+U g = \bigcup_{k=0}^\infty U_k \mathfrak g, \quad U_k \mathfrak g \cdot U_l \mathfrak g \subseteq U_{k+l} \mathfrak g.
+\]
+\begin{proposition}
+    \begin{enumerate}[label = (\roman*)]
+        \item If $x \in U_p \mathfrak g, y \in U_q \mathfrak g$, then $[x,y] \in U_{p+q-1} \mathfrak g$.
+        \item The associated graded algebra
+        \[
+        \mathrm{Gr}U \mathfrak g = \bigoplus_{k=0}^\infty U_k \mathfrak g / U_{k-1} \mathfrak g
+        \]
+        is commutative.
+        \item Let $x_1, \cdots, x_n$ be an ordered basis for $\mathfrak g$.
+        Then the monomials
+        \[
+        x_1^{k_1} \cdots x_n^{k_n}, \quad \sum k_i \leq p,
+        \]
+        span $U_p \mathfrak g$. 
+        In particular, each $U_p \mathfrak g$ is finite-dimensional.
+    \end{enumerate}
+\end{proposition}
+
+\begin{theorem}[Poincaré -- Birkhoff -- Witt theorem ]
+    Let $\mathfrak g$ be a finite-dimensional Lie algebra over $\mathbb K$ and denote with $U \mathfrak g$ its universal enveloping algebra.
+    \begin{enumerate}[label = (\roman*)]
+        \item Let $x_1, \cdots x_n$ be an ordered basis for $\mathfrak g$.
+        Then the monomials
+        \[
+        x_1^{k_1} \cdots x_n^{k_n}, \quad \sum k_i \leq p,
+        \]
+        form a basis for $U_p \mathfrak g$.
+        \item The graded algebra $\mathrm{Gr}U \mathfrak g$ is isomorphic to the symmetric algebra $S(\mathfrak g)$, with the isomoprism given by
+        \begin{align*}
+            S^p(\mathfrak g) &\to \mathrm{Gr}^p U \mathfrak g,\\
+            a_1 \cdots a_p &\mapsto a_1 \cdots a_p \mod U_{p-1} \mathfrak g.
+        \end{align*}
+        and the inverse isomorphism given by
+        \begin{align*}
+            \mathrm{Gr}^p U \mathfrak g &\to S^p(\mathfrak g),\\
+            a_1 \cdots a_p  &\mapsto a_1 \cdots a_p,\\
+            a_1 \cdots a_l &\mapsto 0, l < p.
+        \end{align*}
+    \end{enumerate} 
+\end{theorem}
+
+\begin{corollary}
+    Let $\mathfrak g$ be a finite-dimensional Lie algebra over $\mathbb K$ and denote with $U \mathfrak g$ its universal enveloping algebra.
+    \begin{enumerate}[label = (\roman*)]
+        \item The natural map $i: \mathfrak g \to U \mathfrak g$ is injective.
+        \item Let $\mathfrak g_1, g_2$ be subalgebras of $\mathfrak g$.
+        If $\mathfrak g = \mathfrak g_1 \oplus \mathfrak g_2$ as a vector space, then the multiplication map
+        \[
+        U \mathfrak g_1 \otimes U \mathfrak g_2 \overset{\simeq}{\to} U \mathfrak g
+        \]
+        is a vector space isomorphism.
+        \item The unversal enveloping algebra $U \mathfrak g$ is a domain (it has no zero-divisors).
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    For the last point, follows by contradiction after we assume that $f, g \in U \mathfrak g - \left\{ 0 \right\}$ with unit leading coefficient and $f g = 0$.
+\end{proof}
+
+Clearly the isomorphism between $\mathrm{Gr}U\mathfrak g$ and $S(\mathfrak g)$ can't be extended to an isomorphism between $U \mathfrak g$ and $S(\mathfrak g)$, unless of course $\mathfrak g$ is commutative.
+However the following result is true for general Lie algebras:
+\begin{proposition}
+    The map $S \mathfrak g \to U \mathfrak g$ given by
+    \begin{align*}
+        S_p \mathfrak g &\to U_p \mathfrak g,\\
+        \mathrm{sym}(x_1 \cdots x_p) &\mapsto \frac{1}{p!} \sum_{s \in S_p} x_{s(1)} \cdots x_{s(p)},
+    \end{align*}
+    is a $\mathfrak g$-module isomorphism.
+\end{proposition}
+\begin{proof}
+    It is clearly a $\mathfrak g$-module morphism.
+    It is an isomorphism, since it is a sum of isomorphisms $S_p \mathfrak g \to U_p \mathfrak g$.
+\end{proof}
+
+\section{Ideals and commutant}
 
 \appendix
 
