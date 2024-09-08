@@ -1558,8 +1558,115 @@ However the following result is true for general Lie algebras:
     It is an isomorphism, since it is a sum of isomorphisms $S_p \mathfrak g \to U_p \mathfrak g$.
 \end{proof}
 
-\section{Ideals and commutant}
+\section{Lie's and Engel's theorems}
+The following theorem can be thought of as the reason that solvable Lie algebras are nice enough to study.
+\begin{theorem}[Lie's theorem on solvable algebras]
+    Let $\rho: \mathfrak g \to \gl(V)$ be a complex representation if a solvable Lie algebra $\mathfrak g$.
+    Then there exists a basis in $V$ with respect to which all operators $\rho(x)$ are upper triangular.
+\end{theorem}
+This theorem is a generalization of the fact that every operator in a complex vector space is upper-triangular in some basis.
+The proof is based on the following result:
+\begin{proposition}
+    Let $\rho: \mathfrak g \to \gl(V)$ be a complex representation of a solvable Lie algebra $\mathfrak g$.
+    Then there exists an eigenvector in $V$, common to every operator $\rho(x)$.
+\end{proposition}
 
+We have the following corollaries of Lie's theorem:
+\begin{corollary}
+    \begin{enumerate}[label = (\roman*)]
+        \item Any irreducible complex representation of a solvable Lie algebra is one-dimensional.
+        \item If a complex Lie algebra $\mathfrak g$ is solvable, then there exists a sequence of ideals in $\mathfrak g$: $0 \subseteq I_1 \subseteq I_2 \subseteq \cdots \subseteq I_n = \mathfrak g$ such that each $I_{k+1}/I_k$ is one-dimensional.
+        \item $\mathfrak g$ is solvable if and only if $[\mathfrak g, \mathfrak g]$ is nilpotent.
+    \end{enumerate}
+\end{corollary}
+
+One might ask if there is an analog of Lie's theorem for nilpotent Lie algebras.
+Since every nilpotent algebra is solvable, the result of Lie's theorem holds, but one could wonder whether a stronger result is true; for example whether operators can be made strictly upper-triangular.
+This is however false, as we can consider a commutative Lie algebra which acts diagonally in $\mathfrak C^n$.
+However, the following result - which also explains the name of nilpotent algebras - and serves as an analog to Lie's theorem. 
+\begin{theorem}[Engel's theorem]
+    \begin{enumerate}[label = (\roman*)]
+        \item Let $V$ be a finite-dimensional (real or complex) vector space and $\mathfrak g \subseteq \gl(V)$ be a Lie subalgebra consisting of nilpotent operators.
+        Then there exists a basis in $V$ with respect to which all operators in $\mathfrak g$ are strictly upper-triangular.
+        \item A Lie algebra is nilpotent if and only if all its adjoint operators are nilpotent.
+        In that case, there exists a basis in $\mathfrak g$ with respect to which all operators $ad_x$ for $x \in \mathfrak g$ are strictly upper-triangular.
+    \end{enumerate}
+\end{theorem}
+
+\section{The radical. Semisimple and reductive Lie algebras}
+So far we have defined the notion of solvable Lie algebras, which in a sense are close to being abelian.
+Now we will introduce the notion of semisimple Lie algebras, which are as far as possible from being abelian, and show that any Lie algebra is built out of a solvable and a semisimple one.
+
+\begin{definition}
+    Let $\mathfrak g$ be a Lie algebra.
+    \begin{enumerate}[label = (\roman*)]
+        \item The radical $\rad \mathfrak g$ is the maximal solvable ideal of $\mathfrak g$.
+        In particular, it exists and it is unique.
+        \item $\mathfrak g$ is called semisimple if any of the following equivalent statements holds:
+        \begin{enumerate}[label=\alph*]
+            \item It contains no non-zero solvable ideals
+            \item  It has trivial radical: $\rad \mathfrak g = 0$
+            \item The Killing form is non-degenerate.
+        \end{enumerate} 
+        \item $\mathfrak g$ is called semisimple if any of the following equivalent statements holds:
+        \begin{enumerate}[label = (\alph*)]
+            \item $\mathfrak g$ is not abelian and contains no ideals other than $0$ and $\mathfrak g$
+            \item The commutator $[\mathfrak g, \mathfrak g]$ is orthogonal to the whole algebra $\mathfrak g$ with respect to the Killing form: $K([\mathfrak g, \mathfrak g], \mathfrak g) = 0$.
+        \end{enumerate}
+        \item $\mathfrak g$ is called reductive if $\rad \mathfrak g = \mathfrak z(\mathfrak g)$.
+    \end{enumerate}
+\end{definition}
+
+The reason that we exclude abelian algebras from simple algebras, is because we do not want to include one-dimensional algebras in the class of simple algebras.
+One of the reasons for this is that the following result would not hold:
+\begin{proposition}
+    Any simple Lie algebra is semisimple.
+\end{proposition}
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item $\mathfrak{sl}(2, \mathbb C)$ is simple:
+        Indeed, recall that $\ad h$ is diagonalizable with distinct eigenvalues, so its invariant subspaces are exactly the ones spanned by some of its eigenvectors.
+        If $I\subseteq \mathfrak{sl}(2, \mathbb C)$ is a non-zero ideal, then it must be invariant under $\ad h$, and thus it must be spanned by a subset of $\{e, f, h\}$.
+        However, $\ad_e(\ssl(2, \mathbb C)) = \ad_f(\ssl(2, \mathbb C)) = \ad_h(\ssl(2, \mathbb C)) = \ssl(2, \mathbb C)$, so the only ideals are $0$ and $\ssl(2, \mathbb C)$.
+        \item $\mathfrak{sl}(n \mathbb C), \su(n), \mathfrak{sp}(n, \mathbb C), \so(n, \mathbb C)$ are semisimple (see next section).
+        \item $\gl(n, \mathbb C), \mathfrak u(n)$ are reductive. 
+    \end{enumerate}
+\end{example}
+
+\begin{proposition}
+    For any Lie algebra $\mathfrak g$ and solvable ideal $\mathfrak b \subseteq \mathfrak g$, the quotient $\mathfrak g/ \mathfrak b$ is semisimple if and only if $\mathfrak b = \rad (\mathfrak g)$.
+\end{proposition}
+
+\begin{theorem}{Levi decomposition}
+    Any Lie algebra can be written as a direct sum of a semisimple and a solvable Lie algebra:
+    \[
+    \mathfrak g = \rad(\mathfrak g) \oplus \mathfrak g_{ss},
+    \]
+    where $\mathfrak g_{ss}$ is a semisimple algebra (not necessarily an ideal) in $\mathfrak g$.
+\end{theorem}
+\begin{example}
+    The Levi decomposition for the Poincaré group $G = \SO(3, \mathbb R) \ltimes \mathbb R^3$ is given by
+    \[
+    \mathfrak g = \mathfrak{so}(3, \mathbb R) \oplus \mathbb R^3.
+    \]
+    Indeed, the commutator is given by $[(A_1, b_1), (A_2, b_2)] = ([A_1, A_2], A_1 b_2 - A_2 b_1)$, so $\mathbb R^3$ is an abelian ideal.
+    Also $\so(3, \mathbb R)$ is semisimple, because $\so(3, \mathbb R)_{\mathbb C} = \mathfrak{sl}(2, \mathbb C)$ which is simple.
+\end{example}
+
+Regarding reductive algebras, the reason to consider them is based on the following result:
+\begin{proposition}
+    Let $V$ be an irreducible complex representation of $\mathfrak g$.
+    Then any $h \in \mathfrak g$ acts on $V$ by a scalar: $\rho(h) = \lambda(h) \id_V$, and any $h \in [\mathfrak g, \rad(\mathfrak g)]$ acts on $V$ by $0$.
+\end{proposition}
+Since from the point of view of representation theory, having non-zero elements which act by zero in an irreducible representation complicates the theory, we are led to consider algebras that satisfy $[\mathfrak g, \rad(\mathfrak g)] = 0$, or equivalently $\rad(\mathfrak g) \subseteq \mathfrak z(\mathfrak g)$.
+But since $\mathfrak z(\mathfrak g) \subseteq \rad(\mathfrak g)$, this is equivalent to $\rad(\mathfrak g) = \mathfrak z(\mathfrak g)$, which is the definition of a reductive algebra. 
+Of course any semisimple algebra is reductive, but the converse is not true, as the following remark shows:
+\begin{remark}
+    A Lie algebra is reductive, if and only if it is the direct sum of commuting semisimple and abelian algebras:
+\[
+\mathfrak g = \mathfrak z \oplus \mathfrak g_{ss}, \quad [\mathfrak z, \mathfrak g_{ss}] = 0.
+\]
+\end{remark}
 \appendix
 
 \chapter{Covering theory reminder}
