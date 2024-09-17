@@ -185,7 +185,10 @@ The following theorem tells us that the logarithmic map behaves well when restri
         $\dim G$ & $\frac{n(n-1)}{2}$ & $\frac{n(n-1)}{2}$ & $n^2$ & $n^2 - 1$ & $n(2n+1)$ \\
         $\pi_0(G)$ & $\mathbb{Z}_2$ & $\{1\}$ & $\{1\}$ & $\{1\}$ & $\{1\}$ \\
         $\pi_1(G)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}$ & $\{1\}$ & $\{1\}$ \\
-        $\mathfrak{g}_{\mathbb C}$ &  &  & $\mathfrak{gl}(n, \mathbb C)$ & $\mathfrak{sl}(n, \mathbb C)$ & 
+        $\mathfrak{g}_{\mathbb C}$ &  &  & $\mathfrak{gl}(n, \mathbb C)$ & $\mathfrak{sl}(n, \mathbb C)$ & \\
+        Semisimple & Yes & Yes & No & Yes & Yes \\ 
+        Reductive & Yes & Yes & Yes & Yes & Yes \\
+        $\mathfrak{z}(\mathfrak g)$ & \{0\} & $\{0\}$ & $i \mathbb R \id$ & $\{0\}$ & $\{0\}$ \\
     \end{tabular}
     \caption{Compact classical groups}
     \label{table:classical_groups}
@@ -200,7 +203,10 @@ The following theorem tells us that the logarithmic map behaves well when restri
         $\dim G$ & $n^2$ & $n^2 - 1$ & $n(2n + 1)$ \\
         $\pi_0(G)$ & $\mathbb{Z}_2$ & $\{1\}$ & $\{1\}$ \\
         $\pi_1(G)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}_2 \ (n \ge 3)$ & $\mathbb{Z}$ \\
-        $\mathfrak{g}_{\mathbb C}$ &  & $\mathfrak{sl(n, \mathbb C)}$ &  
+        $\mathfrak{g}_{\mathbb C}$ &  & $\mathfrak{sl(n, \mathbb C)}$ &  \\
+        Semisimple & Yes & When $n = 2$ & Yes \\
+        Reductive & Yes & Yes & Yes \\
+        $\mathfrak{z}(\mathfrak g)$ & $\{0\}$ & $\{0\}$ & $\{0\}$ \\
     \end{tabular}
     \caption{Noncompact real classical groups.}
     \label{table:noncompact_real_classical_groups}
@@ -860,7 +866,7 @@ This is an important result, as Lie algebras are, after all, finite dimensional 
 
 \begin{lemma}
     Let $\mathfrak g $ be a real Lie algebra and $\mathfrak g_{\mathbb C}$ its complexification.
-    Then the categories of complex representations of $mathfrak g$ and $\mathfrak g_{\mathbb C}$ are equivalent.
+    Then the categories of complex representations of $\mathfrak g$ and $\mathfrak g_{\mathbb C}$ are equivalent.
 \end{lemma}
 The next example shows that we can reduce the problem of study of representations of a non-compact Lie group $\SL(2, \mathbb C)$ to 
 \begin{example}
@@ -927,6 +933,7 @@ where $e_1, \ldots, e_n$ are any basis of $V$ and $e_1, \cdots, e^n$ are its dua
                 V \otimes W^* \arrow[r, "\simeq"] & \hom(V,W)
             \end{tikzcd}    
         \end{center}
+        In particular, we have that the isomorphism $\psi: V \otimes W^* \to \hom_K(V,W)$ restricts to an isomorphism $ (V^* \otimes W)^G \simeq \hom_{\mathbb K}(V, W)$.
         \item Bilinear forms: Given a representation $V$, the space of bilinear forms on $V$ becomes a representation when we consider it as a subspace of $V^* \otimes V^*$. It is given by:
         \begin{align*}
             g B(u, v) &= B(g^{-1}u, g^{-1}v), \text{ for } g \in G\\
@@ -1111,7 +1118,10 @@ Now we are ready to give a classification of irreducible representations of $\ma
 \begin{theorem}\label{thm:unitary_implies_completeley_reducible}
     Unitary representations are completely reducible.
 \end{theorem}
-
+\begin{proof}
+    We proceed by induction on the dimension of $V$.
+    To perform the inductive step, we use the fact that if $W$ is a subrepresentation, then $W^\perp$ is a subrepresentation as well.
+\end{proof}
 \begin{example}[Unitary representations]
     \begin{enumerate}[label = (\roman*)]
         \item If $G$ acts by permutations on a finite set $S$, then the representation $\rho(g)f \equaldef f \circ g^{-1}$ on the space $F(S)$ of complex functions over $S$ is unitary.
@@ -1608,7 +1618,7 @@ Now we will introduce the notion of semisimple Lie algebras, which are as far as
             \item  It has trivial radical: $\rad \mathfrak g = 0$
             \item The Killing form is non-degenerate.
         \end{enumerate} 
-        \item $\mathfrak g$ is called semisimple if any of the following equivalent statements holds:
+        \item $\mathfrak g$ is called simple if any of the following equivalent statements holds:
         \begin{enumerate}[label = (\alph*)]
             \item $\mathfrak g$ is not abelian and contains no ideals other than $0$ and $\mathfrak g$
             \item The commutator $[\mathfrak g, \mathfrak g]$ is orthogonal to the whole algebra $\mathfrak g$ with respect to the Killing form: $K([\mathfrak g, \mathfrak g], \mathfrak g) = 0$.
@@ -1633,17 +1643,21 @@ One of the reasons for this is that the following result would not hold:
     \end{enumerate}
 \end{example}
 
-\begin{proposition}
+\begin{proposition}\label{prop:semisimple_quotient}
     For any Lie algebra $\mathfrak g$ and solvable ideal $\mathfrak b \subseteq \mathfrak g$, the quotient $\mathfrak g/ \mathfrak b$ is semisimple if and only if $\mathfrak b = \rad (\mathfrak g)$.
 \end{proposition}
 
-\begin{theorem}{Levi decomposition}
+\begin{theorem}[Levi decomposition]
     Any Lie algebra can be written as a direct sum of a semisimple and a solvable Lie algebra:
     \[
     \mathfrak g = \rad(\mathfrak g) \oplus \mathfrak g_{ss},
     \]
     where $\mathfrak g_{ss}$ is a semisimple algebra (not necessarily an ideal) in $\mathfrak g$.
+    On the other hand, if $\mathfrak g = I \oplus \mathfrak{g}_ss$ can be written as a direct sum of a semisimple subalgebra $\mathfrak g_{ss}$ and a solvable ideal $I$, then $I= \rad(\mathfrak g)$.
 \end{theorem}
+\begin{proof}
+    The second statement follows from \cref{prop:semisimple_quotient}.
+\end{proof}
 \begin{example}
     The Levi decomposition for the Poincaré group $G = \SO(3, \mathbb R) \ltimes \mathbb R^3$ is given by
     \[
@@ -1667,6 +1681,51 @@ Of course any semisimple algebra is reductive, but the converse is not true, as 
 \mathfrak g = \mathfrak z \oplus \mathfrak g_{ss}, \quad [\mathfrak z, \mathfrak g_{ss}] = 0.
 \]
 \end{remark}
+
+\section{Invariant bilinear forms and semisimplicity of classical Lie algebras}
+Recall that a bilinear form $B: \mathfrak g \times \mathfrak g \to \mathbb K$ is called invariant if $B(\ad_x y,z) + B(y,\ad_x z) = 0$ for all $x,y,z \in \mathfrak g$.
+Using it, we can obtain ideals from other ideals:
+\begin{lemma}
+    Let $B$ be an invariant bilinear form on $\mathfrak g$ and $I \subseteq \mathfrak g$ an ideal.
+    Then $I^\perp$ is also an ideal and in particular $\ker B = \mathfrak g^\perp$ is an ideal.
+\end{lemma}
+\begin{proposition}
+    Let $V$ be a representation of $\mathfrak g$ and define a bilinear form on $\mathfrak g$ By
+    \[
+    B_V(x,y) = \tr_V(\rho(x) \rho(y)).
+    \] 
+    Then $B_V$ is a symmetric invariant bilinear form on $\mathfrak g$.
+    When $V = \mathfrak g$ is the adjoint representation, then $B_{\mathfrak g} = K$ is called the Killing form.
+\end{proposition}
+
+The forms $B_V$ that arise from the representations are useful because they provide a criterion for reductibility, as the following result shows.
+Later we will see that the special case of the Killing form provides a characterisation of semisimplicity and solvability as well.
+\begin{proposition}[Reductivity critierion]
+    Let $\mathfrak g$ be a Lie algebra admitting a representation $V$ for which $B_V$ is non-degenerate.
+    Then $\mathfrak g$ is reductive.
+\end{proposition}
+Using this, we can show that the classical Lie algebras are semisimple:
+\begin{theorem}[Semisimplicity of classical Lie algebras]
+    \begin{enumerate}[label = (\roman*)]
+        \item All classical algebras are reductive.
+        \item $\ssl(2, \mathbb C), \so(3,\mathbb R)$ are simple.
+        \item $\mathfrak sl(2, \mathbb K), \so(n, \mathbb K)$ for $n \geq 3$ and $\su(n), \mathfrak{sp}(n, \mathbb K)$ are semisimple.
+        \item $\mathfrak gl(n, \mathbb K) = \mathbb K \id \oplus \mathfrak{sl}(n, \mathbb K), \mathfrak{u}(n) = i \mathbb R \id \oplus \su(n)$ have one-dimensional center. 
+    \end{enumerate}
+\end{theorem}
+
+\section{Killing form and Cartan's criterion}
+\begin{theorem}[Cartan's criterion]
+    Let $\mathfrak g$ be a Lie algebra over $\mathbb K$ with Killing form $K$.
+    \begin{enumerate}[label = (\roman*)]
+        \item $\mathfrak g$ is semisimple if and only if the Killing form $K$ is non-degenerate.
+        \item $\mathfrak g$ is solvable if and only if the $K([\mathfrak g, \mathfrak g], \mathfrak g) = 0$.
+    \end{enumerate}    
+\end{theorem}
+\begin{lemma}
+    Let $V$ be a complex vector space and $\mathfrak g \subseteq \gl(V)$ be a Lie subalgebra.
+    If $\tr(xy) = 0$ for all $x \in [\mathfrak g, \mathfrak g], y \in \mathfrak g$, then $\mathfrak g$ is solvable.
+\end{lemma}
 \appendix
 
 \chapter{Covering theory reminder}
@@ -1904,6 +1963,74 @@ $\SU(2)$.
     \]
     Since $G$ is connected and simply connected, the second fundamental theorem of Lie groups tells us that $\theta$ can be lifted to a Lie group automorphism $\Theta: G \to G$.
     Then $K = G^\Theta$ is a real form of $G$ with Lie algebra $\ker \theta = \mathfrak k$.
+\end{proof}
+
+\begin{exercise}[Exercise 5.1]
+    Let $\mathfrak g $ be a Lie algebra
+    \begin{enumerate}[label = (\roman*)]
+        \item If $0 \to V_1 \to W \to V_2 \to 0$ is a short exact sequence of representations of $\mathfrak g$.
+        Then
+        \[
+        B_W = B_{V_1} + B_{V_2}
+        \]
+        where $B$ is the form defined by $B_W(x,y) = \tr\left(\rho_W(x)\rho_W(y)\right)$ for $x,y \in \mathfrak g$.
+        \item If $I$ is an ideal of $\mathfrak g$, then the restriction of the Killing form to $I$ is the Killing form of $I$.
+    \end{enumerate} 
+\end{exercise}
+\begin{proof}[Solution]
+    \begin{enumerate}[label = (\roman*)]
+        \item 
+        Recall that $0 \to V_1 \to W \to V_2 \to 0$ being a short exact sequence of representations the following diagram commutes for all $x \in \mathfrak g$:
+    \[
+    \begin{tikzcd}
+        0 \arrow[r] & V_1 \arrow[r, "\alpha"] \arrow[d, "\rho_{V_1}(x)"] & W \arrow[r, "\beta"] \arrow[d, "\rho_W(x)"] & V_2 \arrow[r] \arrow[d, "\rho_{V_2}(x)"] & 0\\
+        0 \arrow[r] & V_1 \arrow[r, "\alpha"] & W \arrow[r, "\beta"]  & V_2 \arrow[r] & 0\\
+    \end{tikzcd}
+    \]
+    where both rows are short exact.
+    
+    In particular, using exactness, we see that $\alpha(V_1)$ is a subrepresentation of $W$, so we obtain a quotient representation $W/\alpha(V_1)$.
+    Moreover, $\beta$ passes to the quotient $W/\alpha(V_1)$, giving us a representation isomorphism, shown in the following diagram:
+    \[
+    \begin{tikzcd}
+        W/\alpha(V_1) \arrow[r, "\beta"] \arrow[d, "\rho_{W/V_1}(x)"] & V_2 \arrow[d, "\rho_{V_2}(x)"]\\
+        W/\alpha(V_1) \arrow[r, "\beta'"] & V_2
+    \end{tikzcd}
+    \]
+    
+    Let $v_1, \cdots, v_k$ be a basis for $V_1$.
+    Then by exactness, $\alpha(v_1), \cdots, \alpha(v_k)$ is a basis of $\alpha(V_1)$, which we extend to a basis of $W = \spa{\alpha(v_1), \cdots, \alpha(v_k), w_1, \cdots, w_l}$.
+    With respect to this basis, the matrix of some $\rho_W(x) \in \mathfrak{gl}(W)$ is given by
+    \[
+    \rho_W(x) = 
+    \begin{pmatrix}
+        \rho_{V_1}(x) & *\\
+        0 & \rho_{W/V_1}(x)
+    \end{pmatrix},
+    \]
+    where $\rho_{V_1}(x) \in \mathbb C^{k \times k}$ is the matrix of $\rho_{V_1}(x)$ in the basis $v_1, \cdots, v_k$ and $\rho_{W/V_1}(x) \in \mathbb C^{l \times l}$ is the matrix of $\rho_{W/V_1}(x)$ in the basis $\beta(w_1), \cdots, \beta(w_l)$ of $V_2$.
+    Thus
+    \[
+    \rho_W(x)\rho = 
+    \begin{pmatrix}
+        \rho_{V_1}(x) \rho_{V_1}(y) & *\\
+        0 & \rho_{W/V_1}(x)\rho_{W/V_1}(y)
+    \end{pmatrix},
+    \]
+    so the $B_W(x, y) = \tr(\rho_W(x)\rho_W(y)) = \tr(\rho_{V_1}(x)\rho_{V_1}(y)) + \tr(\rho_{W/V_1}(x)\rho_{W/V_1}(y)) = B_{V_1}(x,y) + B_{V_2}(x,y)$.
+    \item 
+    Let $W$ be a subspace of $\mathfrak g$ that is complementary to $I$, i.e.\ $\mathfrak g = I \oplus W$.
+    Then for any $x,y \in I$, in any basis obtained by adjoining a basis of $I$ with a basis of $W$, the matrix of $\ad_x \ad_y$ will be given by
+    \[
+    \begin{pmatrix}
+        {\ad_x}_{|I} {\ad_y}_{|I} & *\\
+        0 & 0
+    \end{pmatrix},
+    \]
+    since $\ad_x(I), \ad_y(I) \subseteq I$.
+    Thus $B_V(x,y) = \tr({\ad_{\rho(x)}}_{|I} {\ad_{\rho(y)}}_{|I})$ which is the Killing form of $I$.
+    \end{enumerate}
+    
 \end{proof}
 \section{Linear algebra exercises}
 \begin{exercise}
