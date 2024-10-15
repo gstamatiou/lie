@@ -125,7 +125,7 @@ The case of one orbit gives rise to $G$-homogeneous spaces:
 \end{theorem}
 
 The following proposition gives us a way to check whether a Lie group morphism is a covering map:
-\begin{proposition}[Lie morphism covering map criterion]
+\begin{proposition}[Lie morphism covering map criterion]\label{prop:covering_map_criterion}
     Let $f:G_1 \to G_2$ be a Lie group morphism such that $f_*: \mathfrak g_1 \to \mathfrak g_2$ is an isomorphism.
     Then $f$ is a covering map and $\ker f$ is a discrete central group.
 \end{proposition}
@@ -1594,7 +1594,7 @@ One might ask if there is an analog of Lie's theorem for nilpotent Lie algebras.
 Since every nilpotent algebra is solvable, the result of Lie's theorem holds, but one could wonder whether a stronger result is true; for example whether operators can be made strictly upper-triangular.
 This is however false, as we can consider a commutative Lie algebra which acts diagonally in $\mathfrak C^n$.
 However, the following result - which also explains the name of nilpotent algebras - and serves as an analog to Lie's theorem. 
-\begin{theorem}[Engel's theorem]
+\begin{theorem}[Engel's theorem]\label{thm:engel}
     \begin{enumerate}[label = (\roman*)]
         \item Let $V$ be a finite-dimensional (real or complex) vector space and $\mathfrak g \subseteq \gl(V)$ be a Lie subalgebra consisting of nilpotent operators.
         Then there exists a basis in $V$ with respect to which all operators in $\mathfrak g$ are strictly upper-triangular.
@@ -1617,6 +1617,7 @@ Now we will introduce the notion of semisimple Lie algebras, which are as far as
             \item It contains no non-zero solvable ideals
             \item  It has trivial radical: $\rad \mathfrak g = 0$
             \item The Killing form is non-degenerate.
+            \item It is a direct sum of simple Lie algebras.
         \end{enumerate} 
         \item $\mathfrak g$ is called simple if any of the following equivalent statements holds:
         \begin{enumerate}[label = (\alph*)]
@@ -1626,6 +1627,10 @@ Now we will introduce the notion of semisimple Lie algebras, which are as far as
         \item $\mathfrak g$ is called reductive if $\rad \mathfrak g = \mathfrak z(\mathfrak g)$.
     \end{enumerate}
 \end{definition}
+Note that we have the following inclusion relations:
+\[
+\left\{ \text{simple algebras} \right\} \subseteq \left\{ \text{semisimple algebras} \right\} \subseteq \left\{ \text{reductive algebras} \right\}
+\]
 
 The reason that we exclude abelian algebras from simple algebras, is because we do not want to include one-dimensional algebras in the class of simple algebras.
 One of the reasons for this is that the following result would not hold:
@@ -1720,11 +1725,288 @@ Using this, we can show that the classical Lie algebras are semisimple:
     \begin{enumerate}[label = (\roman*)]
         \item $\mathfrak g$ is semisimple if and only if the Killing form $K$ is non-degenerate.
         \item $\mathfrak g$ is solvable if and only if the $K([\mathfrak g, \mathfrak g], \mathfrak g) = 0$.
+        \item $\mathfrak g$ is reductive if it admits a representation $V$ such that the form $B_V(x,y) = \tr_V(\rho(x) \rho(y))$ is non-degenerate.
     \end{enumerate}    
 \end{theorem}
 \begin{lemma}
     Let $V$ be a complex vector space and $\mathfrak g \subseteq \gl(V)$ be a Lie subalgebra.
     If $\tr(xy) = 0$ for all $x \in [\mathfrak g, \mathfrak g], y \in \mathfrak g$, then $\mathfrak g$ is solvable.
+\end{lemma}
+
+\section{Jordan decomposition}
+Throughout this section, $V$ is a finite-dimensional complex vector space.
+\begin{definition}
+    An operator $A \in \gl(V)$ is called semisimple if every $A$-invariant subspace $W$ of $V$ admits an $A$-invariant complement $W'$, i.e. $V = W \oplus W'$.
+    An operator $A$ is called nilpotent if $A^k = 0$ for some $k \in \mathbb N$.
+\end{definition}
+
+\begin{lemma}
+    \begin{enumerate}[label = (\roman*)]
+        \item An operator $A \in \gl(V)$ is semisimple if and only if it is diagonalizable.
+        \item If $A \in \gl(V)$ is semisimple and $W$ is an $A$-invariant subspace, then the restriction of $A$ to $W$ and to $V/W$ are semisimple.
+        \item Sums of commuting semisimple/nilpotent operators are semisimple/nilpotent.
+    \end{enumerate}
+\end{lemma}
+
+\begin{theorem}[Jordan decomposition]
+    Any operator $A \in \gl(V)$ can be uniquely written as a sum of commuting semisimple and nilpotent operators:
+    \[
+    A = A_s + A_n, A_s A_n = A_n A_s.
+    \]
+    Moreover:
+    \begin{enumerate}[label = (\roman*)]
+        \item $A_s, A_n$ can be written as polynomials of $A$, that is there exists $p \in \mathbb C[t]$ that depends on $A$ such that $A_s = p(A), A_n = A - p(A)$.
+        \item There exists a basis for which $A_s$ is diagonal and $A_n$ is strictly upper-triangular.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    The fact that $A_n$ can be strictly upper-triangular in some basis follows from the fact that $A_n$ is nilpotent and \cref{thm:engel}.
+    The fact that $A_s$ will be diagonal in that basis is clear from the construction.
+\end{proof}
+
+\chapter{Complex semisimple Lie algebras}
+Throughout this chapter, $\mathfrak g$ will denote a finite-dimensional semisimple Lie algebra, which when not stated otherwise, will be complex.
+In the first section we show that an equivalent definition for a semisimple Lie algebra is that it is a direct sum of simple Lie algebras.
+We also see that every ideal of a semisimple Lie algebra is the direct sum of simple algebras.
+
+
+\section{Properties of semisimple Lie algebras}
+First, we clear out that considering complex Lie algebras is not a restriction, as the following result shows:
+\begin{proposition}
+    Let $\mathfrak g$ be a real Lie algebra.
+    Then $\mathfrak g$ is semisimple if and only if $\mathfrak g_{\mathbb C}$ is semisimple.
+\end{proposition}
+\begin{proof}
+    Follows other straight from the definition, or from Cartan's criterion of semisimplicity.
+\end{proof}
+The following will be useful in showing that semisimple Lie algebras are merely direct sums of simple ones:
+\begin{proposition}
+    Let $I$ be an ideal in a semisimple Lie algebra $\mathfrak g$.
+    Then there exists an ideal $J$ such that $\mathfrak g = I \overset{\perp}{\oplus} J$, where the orthogonality is with respect to the Killing form.
+\end{proposition}
+Using this, we can obtain the following characterisation:
+\begin{corollary}
+    A Lie algebra is semisimple if and only if it is a direct sum of simple Lie algebras.
+\end{corollary}
+\begin{proof}
+    Let $\mathfrak g$ be semisimple.
+    We prove by induction on $\dim \mathfrak g$ that it is a direct sum of simple Lie algebras.
+    Indeed, it is true for $\dim \mathfrak g = 1$, since $\mathfrak g$ is trivially simple.
+    Assume now that the statement is true for all Lie algebras of dimension less than $n$.
+    If $\mathfrak g$ is not simple, then it has a non-trivial ideal $I$, so we can write $\mathfrak g = I \oplus I^\perp$, with the orthogonality with respect to the Killing form.
+    Then $I^\perp, I^\perp$ are ideals of the semisimple algebra $\mathfrak g$, so they are semisimple as well by the Cartan criterion and the fact that the Killing form on each of them is the restriction of the Killing form of $\mathfrak g$.
+    By the induction hypothesis, we can write both of them as a direct sum of simple Lie algebras.
+    
+    For the other direction, it suffices to show that the direct sum $\mathfrak g \oplus \mathfrak h$ of semisimple Lie algebras $\mathfrak{g}, \mathfrak h$ is semisimple.
+    Since $[\mathfrak g, \mathfrak h] = 0$, we have that the matrix of the operator $\ad_{g + h} \in \gl(\mathfrak g \oplus \mathfrak h)$ is block-diagonal with respect to any basis of $\mathfrak g \oplus \mathfrak h$.
+    \[
+    \ad_{g+h} = \begin{pmatrix}
+        \ad_g & 0\\
+        0 & \ad_h
+    \end{pmatrix}.
+    \]
+    Thus
+    \[
+    K^{(\mathfrak g \oplus \mathfrak h)}((g,h), (g',h')) = K^{(\mathfrak g)}(g,g') + K^{(\mathfrak h)}(h,h'),
+    \]
+    which is clearly non-degenerate.
+\end{proof}
+\begin{corollary}
+    If $\mathfrak g $ is a semisimple Lie algebra, then $[\mathfrak g, \mathfrak g] = \mathfrak g$.
+\end{corollary}
+We now turn our attention to ideals and quotients of semisimple algebras:
+\begin{proposition}
+    Let $\mathfrak g$ be a semisimple Lie algebra.
+    \begin{enumerate}[label = (\roman*)]
+        \item Considering the decomposition $\mathfrak g = \mathfrak g_1 \oplus \cdots \oplus \mathfrak g_n$ into simple algebras, any ideal $I$ of $\mathfrak g$ is of the form
+        \[
+        I = \bigoplus_{j \in J} \mathfrak g_j,
+        \]
+        for some $J \subseteq \left\{ 1, \cdots, n \right\}$.
+        \item Any ideal $I$ of $\mathfrak g$ is semisimple, and any quotient $\mathfrak g/I$ is semisimple.
+    \end{enumerate}
+\end{proposition}
+
+The next proposition tells us that For semisimple Lie algebras, all automorphisms are inner.
+\begin{proposition}
+    Let $\mathfrak g$ be a semisimple Lie algebra, and $G$ a connected Lie group with Lie algebra $\mathfrak g$.
+    Then $\mathrm{Der}\mathfrak g = \ad(\mathfrak g) \simeq \mathfrak g$, and $\mathrm{Aut}(\mathfrak g)/\Ad(G)$ is discrete.
+\end{proposition}
+
+\begin{theorem}\label{thm:compact_real_form}
+    Let $\mathfrak g$ be a complex semisimple Lie algebra.
+    Then there exists a subalgebra $\mathfrak k$ that is a real form for $\mathfrak g$ and that $\mathfrak k$ is the algebra of a compact group $K$.
+    The subalgebra $\mathfrak k$ is unique up to conjugation and is called the compact real form of $\mathfrak g$.
+    
+    If moreover $G$ is a connected Lie group with algebra $\mathfrak g$, then we can choose $K\subseteq G$, in which case we say that $K$ is the compact real form of $G$.
+\end{theorem}
+\section{Complete reducibility for semisimple algebras}
+Throughout we assume that $\mathfrak g$ is a complex semisimple Lie algebra and $V$ is a finite-dimensional complex representation of $\mathfrak g$. 
+\begin{theorem}
+    Every complex finite-dimensinoal representation of a complex semisimple Lie algebra $\mathfrak g$ is completely irreducible.
+\end{theorem}
+\begin{proof}
+    The following method is called Weyl's unitary trick.
+    Let $\mathfrak k$ be the real compact form of $\mathfrak g$, defined in \cref{thm:compact_real_form}, and $K$ be the compact group with Lie($K$) = $\mathfrak k$.
+    Then the representations of $\mathfrak k, K$ and $\mathfrak g$ are the same, and $K$ is compact, so we know that they are all completely reducible.
+\end{proof}
+
+\section{Semisimple elements and toral subalgebras}
+\begin{definition}
+    An element $x \in \mathfrak g$ is called semisimple if the operator $\ad_x : \mathfrak g \to \mathfrak g$ is semisimple (i.e.\ diagonalizable).
+    It is called nilpotent if the operator $\ad_x$ is nilpotent.
+\end{definition}
+One can show (in \cref{ex:semisimple_elements}) that in the case of $\mathfrak g = \mathfrak{gl}(n ,\mathbb C)$, this definition coincides with the definition of semisimple operators.
+
+The following theorem is a generalisation of the Jordan decomposition:
+\begin{theorem}
+    Let $\mathfrak g$ be a complex semisimple Lie algebra. 
+    \[
+    \mathfrak g = \left\{ \text{semisimple elements of} \right\} \oplus \left\{ \text{nilpotent elements of} \right\}
+    \]
+    In particular every nontrivial semisimple Lie algebra has nonzero semisimple elements.
+    Moreover, writing the decomposition $x = x_s + x_n$, then $ad_x y = 0$ for some $y \in \mathfrak g$ implies that $ad_{x_s}(y) = 0$.
+\end{theorem}
+\begin{definition}
+    A subalgebra $\mathfrak h \subseteq \mathfrak g$ is called toral if all its elements are semisimple and it is commutative.
+    In that case, for every $\alpha \in \mathfrak h^*$ we define the root subspace
+    \[
+    \mathfrak g_\alpha = \left\{ x \in \mathfrak g : \ad_h x = \langle \alpha, x \rangle x \right\}
+    \]
+    and the set of roots 
+    \[
+    R = \left\{ \alpha \in \mathfrak h^* : \mathfrak g_\alpha \neq 0 \right\}.
+    \]
+\end{definition}
+Note that the above definitions imply that $\mathfrak h \subseteq \mathfrak g_0$.
+Nevertheless, the reason that we introduced the above definitions is that every toral algebra gives us a root decomposition.
+\begin{theorem}
+    Let $\mathfrak g$ be a complex semisimple algebra, $\mathfrak h \subseteq \mathfrak g$ a toral subalgebra, and $(\cdot, \cdot)$ be a non-degenerate invariant symmetric bilinear product (e.g.\ the Killing form) on $\mathfrak g$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item \[
+        \mathfrak g = \bigoplus_{\alpha \in R} \mathfrak g_{\alpha}
+        \]
+        \item $[\mathfrak g_\alpha, \mathfrak g_\beta] \subseteq \mathfrak g_{\alpha+\beta}$.
+        \item If $\beta \neq - \alpha$, then $\mathfrak g_\beta \perp \mathfrak g_\alpha$ with respect to the product $(\cdot, \cdot)$.
+        \item For every $\alpha \in R$, the product $(\cdot, \cdot)$ induces a non-degenerate pairing $\mathfrak g_\alpha \otimes \mathfrak g_{-\alpha} \to \mathbb C$, i.e.\ for every $x \in \mathfrak g_\alpha$, there exists some $y \in \mathfrak g_{-\alpha}$ such that $(x,y) \neq 0$.
+        \item When restricted to $\mathfrak g_0$, the form $(\cdot, \cdot)$ is non-degenerate.
+        \item $\mathfrak g_0$ is a reductive subalgebra in $\mathfrak g$.
+    \end{enumerate}
+\end{theorem}
+
+We also have the following lemma describing one property of the root decomposition:
+\begin{lemma}
+    Let $\mathfrak g $ be a complex semisimple algebra.
+    Writing $x = x_x + x_n$ for the Jordan decomposition of some $x \in \mathfrak g_0$, we have $x_s, x_n \in \mathfrak g_0$.
+\end{lemma}
+
+\section{Root decomposition and root systems}
+
+\begin{theorem}\label{thm:cartan_subalgebras_of_semisimple_algebras}
+    Let $\mathfrak g_1, \cdots, \mathfrak g_n$ be simple Lie algebras and $\mathfrak g = \mathfrak g_1 \oplus \cdots \oplus \mathfrak g_n$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item Let $\mathfrak h_i \subseteq \mathfrak g_i$ be Cartan subalgebras of $\mathfrak g_i$ and $R_i \subseteq \mathfrak h_i^*$ be the corresponding root systems of $\mathfrak g_i$.
+        Then $\mathfrak h = \mathfrak h_1 \oplus \cdots \oplus \mathfrak h_n$ is a Cartan subalgebra of $\mathfrak g$ and $R = R_1 \sqcup \cdots \sqcup R_n$ is the corresponding root system of $\mathfrak g$.
+        \item Each Cartan subalgebra in $\mathfrak g$ has the form $\mathfrak h = \oplus \mathfrak h_i$ where $\mathfrak h_i \subseteq \mathfrak g_i$ is a Cartan subalgebra of $\mathfrak g_i$. 
+    \end{enumerate}
+\end{theorem}
+
+\begin{lemma}
+    Let $\mathfrak g$ be a complex semisimple Lie algebra and $(\cdot, \cdot)$ be a non-degenerate invariant symmetric bilinear form on $\mathfrak g$.
+    Then:
+    \begin{enumerate}[label = (\roman*)]
+        \item For every root $\alpha \in R: (\alpha, \alpha) \neq 0$.
+        \item Let $e \in \mathfrak g_\alpha, f \in \mathfrak g_{-\alpha}$ be such that $(e, f) = 2/(\alpha, \alpha)$, and let 
+        \[
+        h_\alpha = \frac{2 H_\alpha}{(\alpha, \alpha)}.
+        \]
+        Then $\langle h_\alpha, \alpha \rangle = 2$ and the elements $h_\alpha, e, f$ satisfy the commutation relations of the algebra $\sl(2, \mathbb C)$.
+        We denote with $\mathfrak{sl}(2, \mathbb C) \subseteq \mathfrak g$ the subalgebra that they generate.
+        \item So defined, $h_\alpha$ is independent of the choice of non-degenerate invariant bilinear form $(\cdot, \cdot)$.
+    \end{enumerate}
+\end{lemma}
+
+\chapter{Root systems}
+\section{Abstract root systems}
+We fix a euclidean space $E$, i.e.\ a finite-dimensional real vector space with a positive definite inner product $(\cdot, \cdot)$.
+\begin{definition}
+    \begin{enumerate}
+        \item An \emph{abstract root system} is a finite set $R \subseteq E$ such that:
+        \begin{enumerate}[label = (\roman*)]
+            \item $R$ generates $E$ as a vector space.
+            \item For any two roots $\alpha, \beta \in R$, the length of the projection of $\alpha$ onto the line spanned by $\beta$ is a half-integer multiple of $\beta$, i.e.
+            \[
+            n_{\alpha \beta} = \frac{2(\alpha, \beta)}{(\beta, \beta)} \in \mathbb Z.
+            \]
+            \item The reflection along root gyperplanes $L_\alpha = \alpha^\perp$ sends roots to roots, i.e. for $\alpha \in R, s_\alpha \in \GL(E)$ defined by
+            \[
+            s_{\alpha}(\lambda) = \lambda - \frac{2(\alpha, \lambda)}{(\alpha, \alpha)} \alpha,
+            \]
+            we have $s_\alpha(R) = R$.
+        \end{enumerate}
+        \item The number $r = \dim E$ is called the rank of the root system.
+        \item We say that $R$ is a \emph{reduced root system} if in addition it satisfies the following property:
+        \[ \text{If } \alpha, c \alpha \in R, \text{ then } c = \pm 1.\]
+        \item For each root $\alpha$ we define the coroot $\alpha^\vee \in E^*$ by 
+        \[
+        \langle \alpha^\vee, \lambda \rangle = \frac{2(\alpha, \lambda)}{(\alpha, \alpha)}.
+        \]
+        \item An element $t \in E$ is called regular, if for all $\alpha \in R$ we have $(t, \alpha) \neq 0$.
+        \item Given a regular element, we define the corresponding polarisation of $R$ as a decomposition $R = R^+ \sqcup R^-$, where the positive roots $R_+$ and negative roots $R_-$ are defined as
+        \[
+        R^+ = \left\{ \alpha \in R : (\alpha, t) > 0 \right\}, \quad R^- = \left\{ \alpha \in R : (\alpha, t) < 0 \right\}.
+        \]
+        \item Given a polarisation, a positive root $\alpha \in R_+$ is called simple if it cannot be written as a sum of two positive roots.
+        The set of simple roots is denoted by $\Pi \subseteq R_+$.
+        \item Two root systems $R_1 \subseteq E_1, R_2 \subseteq E_2$ are called isomorphic if there exists an isomorphism $\varphi: E_1 \to E_2$ such that $\varphi(R_1) = R_2$, and $n_{\varphi(\alpha) \varphi(\beta)} = n_{\alpha \beta}$ for all $\alpha, \beta \in R_1$.
+        \item The Weyl group is the group of automorphisms of $R$ generated by the reflections $s_\alpha, \alpha \in R$.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    \begin{enumerate}[label = (\roman*)]
+        \item For an abstract root system, $\alpha, c \alpha \in R$ implies that $c \in \left\{ \pm 1, \pm 2, \pm \frac{1}{2} \right\}$.
+        There exist however cases of abstract root systems that are not reduced.
+        \item With the definitions above, we have the following relations for $\alpha, \beta \in R, \lambda \in E$:
+        \begin{align*}
+            \langle \alpha^\vee,  \alpha \rangle &= 2,\quad n_{\alpha \beta} = \langle\alpha, \beta^\vee \rangle, \quad s_\alpha(\lambda) = \lambda - \langle \lambda, \alpha^\vee \rangle \alpha.
+        \end{align*}
+    \end{enumerate}
+\end{remark}
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item (Semisimple algebras) Let $\mathfrak g$ be a semisimple Lie algebra and $\mathfrak h \subseteq \mathfrak g$ a Cartan subalgebra.
+        Then the set of roots $R = \left\{ \alpha \in \mathfrak h^* - \{0\} : \mathfrak g_\alpha \neq 0 \right\}$ is a reduced root system for $\mathfrak h_{R}^*$.
+        \item ($A_{n - 1}$, the root system of $\mathfrak{sl}(n, \mathbb C)$) Let
+        \begin{align*}
+            E &= \left\{\lambda \in \mathbb R^n: \sum_{\lambda_i} = 0\right\},\\
+            R &= \left\{e_i - e_j: i\neq j\right\},\\
+            s_{e_i - e_j} &= \text{ swapping of coordinates } i, j,\\
+            R_+ &= \left\{e_i - e_j: i < j\right\},\\
+            \Pi &= \left\{\alpha_i = e_i - e_{i+1}: i = 1, \cdots, n-1\right\},\\
+            W ^= S_n = \text{ transpositions of coordinates of } \mathbb R^n.
+        \end{align*}
+        \item (rank $2$ root systems) All rank 2 systems of $\mathbb R^2$ are shown in \cref{fig:rank_two_systems}.
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.8\textwidth]{rank two root systems.png}
+            \caption{Rank 2 root systems}
+            \label{fig:rank_two_systems}
+        \end{figure}
+        
+    \end{enumerate}
+\end{example}
+
+\section{Weyl group}
+\begin{lemma}
+    Let $R$ be a root system in $E$ and denote with $W$ the Weyl group of $R$. Then:
+    \begin{enumerate}[label = (\roman*)]
+        \item $W$ is a finite subgroup of $\mathrm{O}(E)$ and the root system $R$ is invariant under $W$.
+        \item For any $w\in W, \alpha \in R: s_{w(\alpha)}=w s_\alpha w^{-1}$.
+    \end{enumerate}
 \end{lemma}
 \appendix
 
@@ -1868,8 +2150,15 @@ Considering the quotient space $\tilde X / \pi_1(X, x_0)$, we have the following
 \chapter{Exercises}
 In this chapter, we have solutions for certain exercises of \cite{kirillov2008introduction}.
 
+\begin{exercise}[Exercise 2.3]
+    Let $f:G_1 \to G_2$ be a Lie group morphism such that $f_*: \mathfrak g_1 \to \mathfrak g_2$ is an isomorphism.
+    Then $f$ is a covering map and $\ker f$ is a discrete central group.
+\end{exercise}
+\begin{proof}[Solution]
+    See \cref{prop:covering_map_criterion}.
+\end{proof}
 \begin{exercise}[Exercise 2.7]
-Deﬁne a bilinear form on $\mathfrak{su}(2)$ by $(a, b) = \tr(ab^*)/2$. 
+Define a bilinear form on $\mathfrak{su}(2)$ by $(a, b) = \tr(ab^*)/2$. 
 Show that this form is symmetric, positive deﬁnite, and invariant under the adjoint action of
 $\SU(2)$.
 \end{exercise}
@@ -1917,7 +2206,7 @@ $\SU(2)$.
     Deduce from this that $\ker \phi$ is a discrete normal subgroup in $\SU(2)$ and that $\Im \phi$ is an open subgroup in $\SO(3, \mathbb R)$.
 \end{exercise}
 \begin{proof}[Solution]
-    Let $Phi: \SU(2) \to \mathbb R^3$ be the isometry that maps $i\sigma_1, i \sigma_2, i\sigma_3$ to the standard basis of $\mathbb R^3$ and the induced isomohpsism $\GL(\Phi): \GL(\SU(2)) \to \GL(3, \mathbb R), \GL(\Phi)(T) = \Phi T \Phi^{-1}$.
+    Let $\Phi: \SU(2) \to \mathbb R^3$ be the isometry that maps $i\sigma_1, i \sigma_2, i\sigma_3$ to the standard basis of $\mathbb R^3$ and the induced isomohpsism $\GL(\Phi): \GL(\SU(2)) \to \GL(3, \mathbb R), \GL(\Phi)(T) = \Phi T \Phi^{-1}$.
     Then $Phi$ is given as the composition:
     \[\begin{array}{ccccc}
         \SU(2) &\to \quad \GL(\SU(2)) &\overset{\GL(\Phi)}{\to} &\GL(3, \mathbb R) \\
@@ -2032,6 +2321,110 @@ $\SU(2)$.
     \end{enumerate}
     
 \end{proof}
+
+\begin{exercise}[Exercise 5.5]
+    The only real Lie algebra that admits a positive definite Killing form is the trivial $\mathfrak g = 0$.
+\end{exercise}
+\begin{proof}[Solution]
+    Let $\mathfrak g$ be a real Lie algebra admitting a positive definite Killing form $K$.
+    Since $K$ is invariant under algebra automorphisms, we have that $Ad(G) \subseteq \SO(\mathfrak g)$, thus $\ad(\mathfrak g) \subseteq \so(\mathfrak g)$.
+    Thus, for $x \in \mathfrak g$, we have $(\ad_x)^t = -\ad_x$, so $0 \leq K(x,x) = \tr(\ad_x \ad_x) = - \tr(\ad_x (\ad_x)^t) \leq 0 $.
+    Thus $K(x,x) = 0 $ and definiteness implies that $x = 0$.
+\end{proof}
+
+\begin{exercise}[Exercise 6.2]\label{ex:semisimple_elements}
+    Recall that an operator $A:V \to V$ is semisimple if every $A$-invariant subspace has a complementary $A$-invariant subspace, while an element $x \in \mathfrak g$ is semisimple if the operator $\ad_x$ is semisimple.
+    Show that in the case of $\mathfrak g = V = \gl(n, \mathbb C)$, the two definitions agree.
+\end{exercise}
+\begin{proof}[Solution]
+    Recall that an operator $A:V \to V$ is semisimple if and only if it is diagonalisable, so it suffices to show that $x \in \gl(n, \mathbb C)$ is diagonalisable if and only if $\ad_x$ is.
+    
+    We begin by showing that if $x$ is diagonalisable, then $\ad_x$ is.
+    Let $x = \diag(\lambda_1, \cdots, \lambda_n)$.
+    Then the $(i,j)$-th entry of $\ad_x y$ is given by $(\lambda_i - \lambda_j)y_{ij}$, so the basis $E_{ij}$ of $\gl(n, \mathbb C)$ is a basis of eigenvectors of $\ad_x$ corresponding to the eigenvalues $\lambda_i - \lambda_j$.
+    Similarly, if $x = P D P^{-1}$, then $\ad_x (P E_{ij}P^{-1}) = (d_i - d_j) E_{ij}$, so the basis $P E_{ij}P^{-1}$ is a basis of eigenvectors of $\ad_x$ corresponding to the eigenvalues $d_i - d_j$, and thus $ad_x$ is also diagonalisable.
+
+    Similarly, one can show that if $x$ is nilpotent (i.e. $x^n = 0$ for some $n$), then $\ad_x$ is nilpotent.
+    So if $ad_x$ is semisimple, considering the Jordan decomposition $x = x_{ss} + x_n$, we see that $\ad_x - \ad_{x_{ss}} = \ad_{x_n}$ is semisimple and nilpotent, so $x_n = 0$ and $x = x_{ss}$ is semisimple.
+\end{proof}
+
+\begin{exercise}[Exercise 6.7]
+    Let $\mathfrak g$ be a complex semisimple Lie algebra and $(\cdot, \cdot)$ be a non-degenerate invariant symmetric bilinear form on $\mathfrak g$.
+    For $\alpha \in R$ we define
+    \[
+    h_\alpha = \frac{2H_\alpha}{(\alpha, \alpha)}.
+    \]
+    Then the definition of $h_\alpha$ is independent of the choice of the non-degenerate invariant symmetric bilinear form.
+\end{exercise}
+\begin{proof}[Solution]
+    We begin by considering the case of $\mathfrak g$ being simple.
+    Then, for any other form $(\cdot, \cdot)'$ we have $(\cdot, \cdot)' = c (\cdot, \cdot)$ for some $c \in \mathbb C^\times$.
+    Letting $H_\alpha'$ be the element in $\mathfrak h$ satisfying $(H_\alpha', \cdot )' = \alpha$, we see that $H_\alpha' = c H_\alpha$, hence $h_\alpha' = \frac{2H_\alpha'}{(\alpha, \alpha)'} = \frac{2c H_\alpha}{c (\alpha, \alpha)} = h_\alpha$.
+
+    For the case of $\mathfrak g$ being semisimple, we use \cref{thm:cartan_subalgebras_of_semisimple_algebras}, to see that there exist some $i$ such that $\alpha \in R_i \subseteq \mathfrak h_i^*$.
+    A priori, we only know that $H_\alpha \in \mathfrak h$, but in fact it lies in $\mathfrak h_i$.
+    To see this, it suffices to show that the isomorphism $\mathfrak h \to \mathfrak h^*$ sends $\mathfrak h_i$ to $\mathfrak h_i^*$.
+    Indeed, let $e \in \left(\mathfrak h_i\right)_\alpha, f \in \left( \mathfrak h_i \right)_{-\alpha}$ such that $(e,f) = 1$.
+    Then we know that $[e,f] = H_\alpha$, so for any $h_j \in \mathfrak h_j$ we have $(H_\alpha, h_j) = ([e,f], h_j) = (e, [f,h_j]) = 0$, which implies that $H_\alpha$
+    Let $x_i \in \mathfrak h_i, x_j \in \mathfrak h_j$.
+    Then 
+\end{proof}
+
+\begin{exercise}[Exercise 7.2]
+    Let $R \subseteq E$ be a root system and $\Pi = \{\alpha_1, \cdots, \alpha_r\} \subseteq R_+$ be a set of simple roots, determined by the element $t \in E$.
+    \begin{enumerate}[label = (\roman*)]
+        \item The set
+        \[
+        R^\vee = \left\{ \alpha^\vee : \alpha \in R \right\}
+        \]
+        is a root system in $E^*$.
+        \item The set 
+        \[
+        \Pi^\vee = \left\{ \alpha_1^\vee, \cdots, \alpha_r^\vee \right\}
+        \]
+        is a set of simple roots of $R^\vee$.
+    \end{enumerate}
+\end{exercise}
+\begin{proof}[Solution]
+    \begin{enumerate}[label = (\roman*)]
+        \item Noting that $E \mapsto E^*, e \mapsto (e, \cdot)$ is an isomorphism, and that $e^\vee$ is a multiple of $(e, \cdot)$, it is clear that $\Pi^\vee$ is a basis for $E^*$.
+        Using this isomorphism, we define an inner product on $E^*$ by $\left((e_1, \cdot), (e_2, \cdot)\right) = (e_1, e_2)$.
+        Then
+        \[
+        \frac{2(\alpha^\vee, \beta^\vee)}{(\beta^\vee, \beta^\vee)} = n_{\beta \alpha} \in \mathbb Z
+        \]  
+        Finally, we compute
+        \begin{align*}
+            s_{\alpha^\vee}(\beta^\vee) &= \beta^\vee - \frac{2(\alpha^\vee, \beta^\vee)}{(\beta^\vee, \beta^\vee)} \alpha^\vee =
+            \frac{2\beta^*}{|\beta|^2} - \frac{2(\alpha, \beta)}{|\alpha|^2} \frac{2\alpha^*}{|\alpha|^2}\\
+            &= \frac{2}{|\beta|^2} \left(s_\alpha(\beta)\right)^* = \left(s_\alpha(\beta)\right)^\vee \in R^\vee
+        \end{align*}
+        \item We use the element $t^*$ to see that $(R_+)^\vee = (R^\vee)_+$.
+        On the other hand, we know that $\Pi^\vee$ a basis for $E^*$.
+        In particular, every root in $\Pi^\vee$ can't be written as a sum of positive roots, so $\Pi^\vee$ consists of simple roots.
+        On the other hand, the simple roots of $R_+$ are a basis of $E^*$, so they are at most $r$, hence $\Pi^\vee$ contains all simple roots of $R^\vee$ as well.
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}[Exercise 7.3]
+    Let $v_1, \cdots, v_k$ be a collection of non-zero vectors in a Euclidean space $E$ such that for $i \neq j$, $(v_i, v_j) \leq 0$.
+    Then $\{v_1, \cdots, v_k\}$ are linearly independent.
+\end{exercise}
+\begin{proof}[Solution]
+    Let $u = \sum_{i=1}^k a_i v_i = 0$.
+    Writing $I = \left\{ i: a_i > 0 \right\}, J = \left\{ j: a_j < 0 \right\}$.
+    Then $I \cap J = \emptyset$ and
+    \[
+    v \equaldef \sum_{i \in I} c_i v_i = \sum_{j \in J} c_j v_j
+    \]
+    where $c_i = a_i, c_j = -a_j$ for $i \in I, j \in J$.
+    Then
+    \[
+    (v,v) = \sum_{i \in I, j \in J} c_i c_j (v_i, v_j) \leq 0
+    \]
+    since $c_i, c_j \geq 0, (v_i, v_j) \leq 0$, so $v = 0$ and thus $u = 0$.
+\end{proof}
+
 \section{Linear algebra exercises}
 \begin{exercise}
     Let $A$ be a diagonalizable operator with distinct eigenvalues.
@@ -2120,6 +2513,39 @@ The representations $\rho:\mathbb S^1 \to \GL(V)$ are in bijective correspondenc
 The irreducible ones of $\mathbb S^1$ are in (the same) bijective correspondence with the irreducible ones of $\mathbb R$ such that $\tilde \rho(1) = 1$, where we recall that the irreducible representations of $\mathbb R$ are exactly the one-dimensional ones and they have the form $\rho(t) = e^{t \lambda} \in \GL(V) \simeq \mathbb C^{\times}$.
 Hence the irreducible representations of $\mathbb S^1$ are exactly one-dimensional complex vector spaces $V_k$ and are given by $\mathbb S^1 = \mathbb R/ \mathbb Z \to \GL(V_k) \simeq C^{\times}, t + \mathbb Z \mapsto e^{2 \pi i k }$.
 
+\section{$\SO(p,q)$}
+Assume that $p \leq q$.
+We consider the matrices
+\[
+S_{p,q} = \begin{pmatrix} 
+    0 & 0 & J_p \\ 
+    0 & I_{q-p} & 0\\
+    J_p & 0 & 0
+\end{pmatrix},
+\]
+and $J_p$ is the $p \times p$ matrix with ones on the antidiagonal.
+Then
+\begin{align*}
+    \SO(p,q) &= \left\{ g \in \SL(d, \mathbb R) : g^t S_{p,q} g = S_{p,q} \right\}\\
+    \mathfrak{so}(p,q) &= \left\{ x \in \mathfrak{sl}(d, \mathbb R) : x^t S_{p,q} + S_{p,q}x = 0 \right\}
+\end{align*}
+The Cartan involution is given by 
+\[
+\sigma: \SO(p,q) \to \SO(p,q), \quad g \mapsto S_{p,q} g S_{p,q}.
+\]
+To see that it is indeed a Cartan involution, recall that the Killing form of subgroups of $\GL(d, \mathbb R)$ is given by $K(x,y) = \tr(xy)$, so using the relation $x^t S_{p,q} = - S_{p,q}x$ for $x \in \mathfrak{so}(p,q)$, we see that $K(x, \sigma(x)) = - \tr(x x^t)$, which is clearly negative definite.
+
+Note that $S_{p,q}$ can be seen as the reflection $S_{p,q}(v_1 + v_{-1}) = v_1 - v_{-1}$, where $v_{\pm 1} \in V_{\pm 1}$ and $V_{\pm 1}$ are the eigenspaces of $S_{p,q}$ corresponding to eigenvalues $\pm 1$.
+Then $K = \mathrm{Fix}(\sigma) = \left\{ g \in \SO(p,q) : g V_1 = V_1 \right\} = \mathrm{Stab}_{\SO(p,q)}(V_1 \oplus V_{-1}) = \mathrm{S}(\mathrm{O}(p) \times \mathrm{O}(q))$, and the Cartan decomposition of the algebra is
+\begin{align*}
+    \mathfrak{k} &= \left\{ x \in \so(p,q) : x^t = -x \right\}\\
+    \mathfrak{p} &= \left\{ x \in \so(p,q) : x^t = x \right\}\\
+\end{align*}
+The Cartan subalgebra is given by the intersection of the Cartan subalgebra of $\mathfrak{sl}(p+q)$ and $\mathfrak{so}(p,q)$:
+\[
+\mathfrak{a} = \left\{ \diag(a_1, \cdots, a_p, 0, \cdots, 0, -a_p, \cdots, -a_1) : a_1, \cdots, a_p \in \mathbb R  \right\}
+\]
+and since the Cartan decomposition is compatible with the one of $\mathfrak{sl}(d, \mathbb R)$, the Cartan projection is the same as well.
 \chapter{Fun facts}
 
 \begin{question}
