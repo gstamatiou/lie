@@ -80,6 +80,19 @@ We have the following connection between subgroups and Lie subgroups (i.e.\ subg
     To conclude, note that for $x, y \in \overline H$, $Hx \cap Hy$ is dense in $\overline H$, so it is nonempty.
     This implies that $Hx = Hy = H$ and $H$ thus $H = \overline H$.
 \end{proof}
+
+The following lemma is useful in showing connectedness of Lie groups:
+\begin{lemma}[Connectedness from a quotient to the group]
+    Let $G$ be a Lie group and $H$ a closed subgroup.
+    If $G/H$ and $H$ are connected, then so is $G$.
+\end{lemma}
+\begin{proof}
+    Assume for the shake of contradiction that $G = A \sqcup B$ with $A, B$ open and disjoint and denote with $q: G \to G/H$ the quotient map.
+    Since $H$ is connected, the same is true for is cosets.
+    Thus $A,B$ are unions of cosets of $H$, so $q(A), q(B)$ are open and disjoint in $G/H$.
+    This is a contradiction.
+\end{proof}
+For instance it can be used to show that $\SO(n), \SU(n), \mathrm{Sp}(n)$ are connected (see for instance \cite{knapp1996lie}[Proposition 1.136]).
 \section{Homogeneous spaces}
 We begin by describing coset spaces of Lie groups.
 \begin{theorem}[Theorem 2.11, \cite{kirillov2008introduction}]
@@ -223,6 +236,12 @@ The following theorem tells us that the logarithmic map behaves well when restri
     \caption{Complex classical groups.}
     \label{table:complex_classical_groups}
 \end{table}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{lie_algebras_venn.jpg}
+    \caption{Venn Diagram}
+    \label{fig:venn}
+\end{figure}
 
 \chapter{Lie groups and Lie algebras}
 \section{Exponential map}
@@ -514,7 +533,30 @@ In particular, letting $\mathcal F = \mathcal F_0$ be the standard flag in $\mat
     \]
     tells us that $E_{ij} = [E_{ii}, E_{ij}] \in D_2 \mathfrak b$, so $D_2 \mathfrak b = D_1 \mathfrak b = \mathfrak n$, so it follows by induction.
 \end{example}
-
+\begin{example}[Nonisomorphic solvable and non-nilpotent algebras]
+    There exists an infinite family of pairwise non-isomorphic Lie algebras that are all solvable but not nilpotent.
+    These are given by
+    \[
+    \mathfrak g_\alpha = \spa\left\{
+    X = \begin{pmatrix}
+        0 & 0 & 1\\
+        0 & 0 & 0\\
+        0 & 0 & 0
+    \end{pmatrix},
+    Y = \begin{pmatrix}
+        0 & 0 & 0\\
+        0 & 0 & 1\\
+        0 & 0 & 0
+    \end{pmatrix},
+    X = \begin{pmatrix}
+        \alpha & 0 & 0\\
+        0 & 1 & 0\\
+        0 & 0 & 0
+    \end{pmatrix}
+    \right\}.
+    \]
+    See \cref{ex:solvable_not_nilpotent} for a proof.
+\end{example}
 Finally, we have the following properties for solvable and nilpotent algebras.
 \begin{proposition}
     \begin{enumerate}[label = (\roman*)]
@@ -1300,6 +1342,10 @@ Note also that the following results are valid for the algebras $\mathfrak{su}(2
 
 Recall that $\mathfrak{sl}(2, \mathbb C)$ has a basis $e, f, h$ given by
 \[
+h = \begin{pmatrix}
+    1 & 0 \\
+    0 & -1
+\end{pmatrix},    
 e = \begin{pmatrix}
     0 & 1 \\
     0 & 0
@@ -1307,10 +1353,6 @@ e = \begin{pmatrix}
 f = \begin{pmatrix}
     0 & 0 \\
     1 & 0
-\end{pmatrix},
-f = \begin{pmatrix}
-    1 & 0 \\
-    0 & -1
 \end{pmatrix},
 \]
 that satisfy the commutation relations
@@ -1342,10 +1384,11 @@ V = \bigoplus_{\lambda \in \mathbb C} V[\lambda],
 called the weight decomposition of $V$.
 In fact, we will show below that the weights are integers.
 
-\begin{lemma}
-    Let $V$ be a finite-dimensional representation of $\mathfrak{sl}(2, \mathbb C)$, and $v \in V[\lambda]$ be a highest weight vector. Then
+\begin{theorem}[Representations of $\mathfrak{sl}(2, \mathbb C)$]
+    Let $V$ be a finite-dimensional representation of $\mathfrak{sl}(2, \mathbb C)$, and $v \in V[\lambda]$ be a highest weight vector. 
+    Then
     \begin{enumerate}[label = (\roman*)]
-        \item e v = 0\\
+        \item e v = 0
         \item For 
         \[
         v^k = \frac{f^k}{k!} v, k \geq 0,
@@ -1357,7 +1400,26 @@ In fact, we will show below that the weights are integers.
             e v^k &= (\lambda - k + 1) v^{k-1}, k > 0.           
         \end{align}
     \end{enumerate}
-\end{lemma}
+    If moreover $V$ is an irreducible representation, then $V = \spa\{v^0, \cdots, v^{n-1}\}$ and $\lambda = n-1$.
+    In particular, there exists a unique irreducible representation of $\mathfrak{sl}(2,\mathbb C)$ of any given dimension.
+\end{theorem}
+\begin{corollary}
+    Let $\rho: \mathfrak{sl}(2,\mathbb C) \to \gl(2,\mathbb C)$ be a finite-dimensional representation of $\mathfrak{sl}(2, \mathbb C)$.
+    Then:
+    \begin{enumerate}
+        \item $\rho(h)$ is diagonalisable and all its eigenvalues are integers, i.e.
+        V admits a weight decomposition with integer weights:
+        \[
+        V = \bigoplus_{n \in \mathbb Z} V[n].
+        \]
+        \item $\dim V[n] = \dim V[-n]$, and for $n \geq 0$, the maps
+        \begin{align*}
+            \rho(e)^n: V[n] &\rightarrow V[-n],\\
+            \rho(f)^n: V[-n] &\rightarrow V[n],
+        \end{align*}
+        are isomorphisms.
+    \end{enumerate}
+\end{corollary}
 Although only finitely many of $v^k$ are nonzero, it is convenient to consider $V$ as a quotient of an infinite-dimensional vector space with basis $v^k$:
 \begin{lemma}
     Let $\lambda \in \mathbb C$ and define $M_\lambda$ as the infinite-dimensional vector space with basis $v_0, v_1, \cdots$. Then:
@@ -1375,20 +1437,9 @@ Although only finitely many of $v^k$ are nonzero, it is convenient to consider $
         e v^k &= (n - k + 1) v^{k-1}, k > 0; ev^0 = 0.        
     \end{align*}
     Then $V_n$ is an irreducible representation of $\mathfrak{sl}(2, \mathbb C)$ of dimension $n+1$, which we call the irreducible representation with highest weight $n$.
-    \item For $n \neq m$, $V_n$ and $V_m$ are non-isomorphic.
-    \item Every finite-dimensional irreducible representation $V$ of $\mathfrak{sl}(2, \mathbb C)$ is isomorphic to $V_n$, for $n = \dim V - 1$.
-    \item Let $V$ be a finite-dimensional representation of $\mathfrak{sl}(2, \mathbb C)$. Then:
     \begin{enumerate}[label = (\roman*)]
-        \item V admits a weight decomposition with integer weights:
-        \[
-        V = \bigoplus_{n \in \mathbb Z} V[n].
-        \]
-        \item $\dim V[n] = \dim V[-n]$, and for $n \geq 0$, the maps
-        \begin{align*}
-            e^n: V[n] &\rightarrow V[-n],\\
-            f^n: V[-n] &\rightarrow V[n],
-        \end{align*}
-        are isomorphisms.
+        \item For $n \neq m$, $V_n$ and $V_m$ are non-isomorphic.
+        \item Every finite-dimensional irreducible representation $V$ of $\mathfrak{sl}(2, \mathbb C)$ is isomorphic to $V_n$, for $n = \dim V - 1$.
     \end{enumerate}
 \end{theorem}
 
@@ -1571,15 +1622,45 @@ However the following result is true for general Lie algebras:
 \section{Lie's and Engel's theorems}
 The following theorem can be thought of as the reason that solvable Lie algebras are nice enough to study.
 \begin{theorem}[Lie's theorem on solvable algebras]
-    Let $\rho: \mathfrak g \to \gl(V)$ be a complex representation if a solvable Lie algebra $\mathfrak g$.
-    Then there exists a basis in $V$ with respect to which all operators $\rho(x)$ are upper triangular.
+    Let $\mathfrak g$ be a solvable Lie algebra over $\mathbb K$. Then:
+    \begin{enumerate}
+        \item There exists a basis in $V$ with respect to which all operators $\rho(x)$ are upper triangular.
+        \item There exists a full flag of $V$ consisting of subspaces that are stable under $\rho(\mathfrak g)$.
+    \end{enumerate}
+    
 \end{theorem}
-This theorem is a generalization of the fact that every operator in a complex vector space is upper-triangular in some basis.
-The proof is based on the following result:
-\begin{proposition}
-    Let $\rho: \mathfrak g \to \gl(V)$ be a complex representation of a solvable Lie algebra $\mathfrak g$.
-    Then there exists an eigenvector in $V$, common to every operator $\rho(x)$.
-\end{proposition}
+\begin{proof}
+    The proof is inductive on $\dim \mathfrak g$ and is based on showing the following result:
+\begin{center}
+        Every representation $\rho: \mathfrak g \to \mathfrak{gl}(V)$ of a solvable algebra admits a common eigenvector in $V$, i.e.\  $\exists v \in V: \rho(x) v = \lambda(x) v, \forall x \in \mathfrak g$.
+\end{center}
+To show this, we proceed again by induction on $\dim \mathfrak g$.
+It is clear for the case $\dim \mathfrak g = 1$.
+In the general case, we proceed as follows:
+\begin{enumerate}
+    \item Let $\mathfrak h$ be a subalgebra of $\mathfrak g$ such that:
+    \[
+    \dim \mathfrak h = \dim \mathfrak g - 1, \quad [\mathfrak g, \mathfrak g] \subseteq \mathfrak h
+    \]
+    Then $\mathfrak h$ is solvable, and by the induction hypothesis, there exists some $e \in V, \lambda \in \mathfrak h^*$ such that $\rho(H)e = \lambda(H)e$ for all $H \in \mathfrak h$.
+    \item Letting $X \in \mathfrak g$ such that $\mathfrak g = \mathbb K X \oplus \mathfrak h$, we consider the subspace $E$ of $V$ spanned by the vectors $e, \rho(X)e, \rho(X)^2 e, \cdots$.
+    Then it suffices to show that every vector of $E$ is a common eigenvector of $\rho(\mathfrak h)$.
+    To do this, we proceed in two steps:
+    \begin{enumerate}
+        \item For all $H \in \mathfrak h$, we show that $\pi(H)$ is upper-triangular on $E$:
+        \[
+        \pi(H) = \begin{pmatrix}
+            \lambda(H) & * & \cdots & *\\
+            0 & \lambda(H) & \cdots & *\\
+            \vdots & \vdots & \ddots & \vdots\\
+            0 & 0 & \cdots & \lambda(H)
+        \end{pmatrix} \text{ in } E,
+        \]
+        with respect to the basis $e, \rho(X)e, \cdots$.
+        \item We show that $\pi(H)$ is actually diagonal on $E$.
+    \end{enumerate}
+\end{enumerate}
+\end{proof}
 
 We have the following corollaries of Lie's theorem:
 \begin{corollary}
@@ -2193,7 +2274,9 @@ Considering the quotient space $\tilde X / \pi_1(X, x_0)$, we have the following
 \end{theorem}
 
 \chapter{Exercises}
-In this chapter, we have solutions for certain exercises of \cite{kirillov2008introduction}.
+
+\section{Kirillov's book}
+In this section, we have solutions for certain exercises of \cite{kirillov2008introduction}.
 
 \begin{exercise}[Exercise 2.3]
     Let $f:G_1 \to G_2$ be a Lie group morphism such that $f_*: \mathfrak g_1 \to \mathfrak g_2$ is an isomorphism.
@@ -2470,6 +2553,148 @@ $\SU(2)$.
     since $c_i, c_j \geq 0, (v_i, v_j) \leq 0$, so $v = 0$ and thus $u = 0$.
 \end{proof}
 
+\section{Knapp's book}
+\begin{exercise}[Exercise I.1]
+    \begin{enumerate}[label = (\roman*)]
+        \item The Heisenberg algebra
+        \[
+        \mathfrak g = \left\{ \begin{pmatrix}
+            0 & x & z\\
+            0 & 0 & y\\
+            0 & 0 & 0
+        \end{pmatrix}: x,y,z \in \mathbb K \right\}
+        \]
+        is nilpotent.
+        \item Consider the group of translations and dialations of the plane:
+        \[
+        G = \mathbb K^2 \rtimes \mathbb K^\times \simeq \left\{ \begin{pmatrix}
+            t & 0 & x\\
+            0 & t & y\\
+            0 & 0 & 1
+        \end{pmatrix} : t, x, y, \in \mathbb K \right\}.
+        \]
+        Show that its Lie algebra
+        \[
+        \mathfrak g = \left\{ \begin{pmatrix}
+            t & 0 & x\\
+            0 & t & y\\
+            0 & 0 & 0
+        \end{pmatrix}: t,x,y \in \mathbb K \right\}
+        \]
+        is split-solvable, i.e.\ it admits a full-flag of ideals (in $\mathfrak g$).
+    \end{enumerate}
+\end{exercise}
+\begin{proof}[Solution]
+    \begin{enumerate}[label = (\roman*)]
+        \item We define as a $k$-th upper triangular matrix a matrix for which non-zero elements are on the $r$-th diagonal, i.e. $a_{ij} \neq 0$ implies $i-j \leq k$.
+        Then it is easy to see that the product of a $k$-th and an $l$-th upper triangular matrix is a $k+l$-upper triangular matrix.
+        \item The ideals are:
+        \begin{align*}
+            \mathfrak a_0 = 0 \subseteq
+            \mathfrak a_1 = \left\{
+            \begin{pmatrix}
+                0 & 0 & x\\
+                0 & 0 & 0\\
+                0 & 0 & 0
+            \end{pmatrix} : x \in \mathbb K
+            \right\} \subseteq
+            \mathfrak a_2 = \left\{
+            \begin{pmatrix}
+                0 & 0 & x\\
+                0 & 0 & y\\
+                0 & 0 & 0
+            \end{pmatrix} : x, y \in \mathbb K
+            \right\} \subseteq \mathfrak a_3 = \mathfrak g
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}[Exercise I.2]\label{ex:solvable_not_nilpotent}
+    For 
+\[
+A = \begin{pmatrix}
+\alpha & \beta \\
+\gamma & \delta
+\end{pmatrix}
+\]
+any nonsingular matrix over $k$, let $\mathfrak{g}_A$ be the 3-dimensional algebra over $k$ with basis $X, Y, Z$ satisfying
+\begin{align*}
+    [X, Y] &= 0,\\
+    [X, Z] &= \alpha X + \beta Y,\\
+    [Y, Z] &= \gamma X + \delta Y.    
+\end{align*}
+
+
+\begin{itemize}
+    \item[(a)] Show that $\mathfrak{g}_A$ is a Lie algebra by showing that
+    \[
+    X \leftrightarrow \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0 \end{pmatrix}, \quad Y \leftrightarrow \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix}, \quad Z \leftrightarrow \begin{pmatrix} \alpha & \beta & 0 \\ \gamma & \delta & 0 \\ 0 & 0 & 0 \end{pmatrix}
+    \]
+    gives an isomorphism with a Lie algebra of matrices.
+    
+    \item[(b)] Show that $\mathfrak{g}_A$ is solvable but not nilpotent.
+    
+    \item[(c)] Let $k = \mathbb{R}$. Take $\delta = 1$ and $\beta = \gamma = 0$. Show that the various Lie algebras $\mathfrak{g}_A$ for $\alpha > 0$ are mutually nonisomorphic. (Therefore for $k = \mathbb{R}$ that there are uncountably many nonisomorphic solvable real Lie algebras of dimension 3.)
+\end{itemize}
+\end{exercise}
+\begin{proof}[Solution]
+    \begin{enumerate}
+        \item[(b)] Note that $[\mathfrak g_A, \mathfrak g_A] = \spa{X,Y}$ is an abelian ideal of $\mathfrak{g}_A$.
+        Hence, the lower central series is $\mathfrak g_A \supseteq \spa{X,Y} \supseteq 0$, so $\mathfrak g_A$ is solvable.
+        On the other hand, the lower central series does not terminate: $D^i\mathfrak g_A = D^1 \mathfrak g_A = \spa\{X, Y\}$, so it is not nilpotent.
+        \item[(a)] Note that $\ad Z$ is diagonalisable with eigenvalues $-\alpha, -1, 0$, coming from $X, Y, Z$ respectively.
+        In fact, the eigenvalues remain the same for $\ad(Z + sX + tY)$, and hence the ratio of the largest eigenvalue to the second largest is $\alpha$ for any constant multiple of this transformation.
+        Consider $\alpha, \alpha' > 1$ and the corresponding algebras $g_\alpha, g_{\alpha'}$ generated by $X,Y,Z$ and $X',Y',Z'$ respectively, that satisfy the relations above.
+        If $T: \mathfrak g_\alpha \to \mathfrak g_{\alpha'}$ was a Lie algebra isomorphism, then it would satisfy $T([\mathfrak g_\alpha, \mathfrak g_\alpha]^c) = [\mathfrak g_{\alpha'}, \mathfrak g_{\alpha'}]^c$, so it would send $Z$ to some multiple of $Z' + sX' + tY'$ for some $s,t \in \mathbb K$.
+        Thus $ T(\ad Z)T^{-1} = \ad(Z + sX + tY)$, up to a constant multiple, and hence the ratio of the smallest to the second smallest eigenvalue would be $\alpha$. 
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}[Exercise I.4]
+    \begin{enumerate}
+        \item Let $\mathfrak g$ be a real Lie algebra of complex matrices with the property
+        \[
+        iX \not \in \mathfrak g \text{ for all } X \in \mathfrak g - \{0 \}
+        \]
+        Then
+        \[
+        \mathfrak g^\mathbb C \simeq \mathfrak g \oplus i\mathfrak g
+        \]
+        \item
+        \[
+        \mathfrak{sl}(2,\mathbb R)^\mathbb C \simeq \mathfrak{su}(2)^\mathbb C
+        \]
+    \end{enumerate}
+\end{exercise}
+\begin{proof}[Solution]
+    \begin{enumerate}
+        \item
+        We recall the construction of $\mathfrak g^\mathbb C$: it is the $\mathbb C$-vector space $\mathfrak g \otimes_\mathbb R \mathbb C$ that is spanned by $x \otimes 1_\mathbb C$ and scalar multiplication defined by $z \left(x \otimes 1_\mathbb C\right) = x \otimes z$.
+        We consider the map $\mathfrak g \otimes_\mathbb R \mathbb C \to \mathfrak g \oplus i\mathfrak g$ that extends $x \otimes 1_\mathbb z \mapsto (\mathrm{Re}z x, i\mathrm{Im}z x)$.
+        It is clearly surjective, and for injectivity we consider $x_1, \cdots, x_n$ be a basis for $\mathfrak g$.
+        If the image $z_1 x_1 + \cdots z_n x_n$ of $x_1 \otimes z_1 + \cdots + x_n \otimes z_n$ is zero, then $\mathrm{Re}(z_1)x_1 + \cdots + \mathrm{Re}(z_n)x_n = 0$, so $\mathrm{Re}(z_i) = 0$ for all $i$.
+        Similarly we show that $\mathrm{Im}(z_i) = 0$ for all $i$.
+        \item Both $\mathfrak{sl}(2, \mathbb R)$ and $\mathfrak{su}(2)$ satisfy the property above, so the result applies.
+        Looking at $\mathfrak{sl}(2,\mathbb C)$, every traceless complex matrix can be written as $x + iy$ for some traceless real matrices $x, y$, and every such sum is a tracless complex matrix, so 
+        \[
+        \mathfrak{sl}(2, \mathbb C) = \mathfrak{sl}(2, \mathbb R) \oplus i\mathfrak{sl}(2, \mathbb R) \simeq \mathfrak{sl}(2,\mathbb R)^\mathbb C
+        \]
+
+        On the other hand
+        \[
+        \mathfrak{su}(2,\mathbb C) = \left\{\begin{pmatrix}
+            ia & b\\
+            -\overline{b} & -ia
+        \end{pmatrix}: a \in \mathbb R, b \in \mathbb C\right\},
+        \]
+        so any traceless complex matrix uniquely decomposes into a sum $x + iy$ with $x, y \in \mathfrak{su}(2)$.
+        Thus
+        \[
+        \mathfrak{sl}(2,\mathbb C) = \mathfrak{su}(2) \oplus i \mathfrak{su}(2) \simeq \mathfrak{su}(2)^\mathbb C.
+        \]
+    \end{enumerate}
+\end{proof}
+
 \section{Linear algebra exercises}
 \begin{exercise}
     Let $A$ be a diagonalizable operator with distinct eigenvalues.
@@ -2558,7 +2783,8 @@ The representations $\rho:\mathbb S^1 \to \GL(V)$ are in bijective correspondenc
 The irreducible ones of $\mathbb S^1$ are in (the same) bijective correspondence with the irreducible ones of $\mathbb R$ such that $\tilde \rho(1) = 1$, where we recall that the irreducible representations of $\mathbb R$ are exactly the one-dimensional ones and they have the form $\rho(t) = e^{t \lambda} \in \GL(V) \simeq \mathbb C^{\times}$.
 Hence the irreducible representations of $\mathbb S^1$ are exactly one-dimensional complex vector spaces $V_k$ and are given by $\mathbb S^1 = \mathbb R/ \mathbb Z \to \GL(V_k) \simeq C^{\times}, t + \mathbb Z \mapsto e^{2 \pi i k }$.
 
-\section{$\SL(d,\mathbb R)$}
+
+\section{$\SL(d,\mathbb K)$}
 We have
 \begin{align*}
     \mathfrak{sl}(d, \mathbb K) &= \{ x \in \gl(d, \mathbb K) : \tr x = 0\}\\
@@ -2568,6 +2794,7 @@ For the particular case of $d = 2$, we fix the following basis of $\mathfrak{sl}
 \mathfrak{sl}(2, \mathbb K) = \left\{ \begin{pmatrix} a & b \\ c & -a \end{pmatrix} : a,b,c \in \mathbb K \right\} = \mathrm{span}\left\{ h = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}, e = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, f = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix} \right\}
 \]
 \subsection{Killing form}
+We consider the case $d = 2$.
 In the ordered basis $h,e,f$, the adjoint representation is given by
 \[
 \ad_h = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & -2 \end{pmatrix}, \quad
@@ -2579,6 +2806,21 @@ So the Killing form is given by
 B = \begin{pmatrix} 8 & 0 & 0 \\ 0 & 0 & 4 \\ 0 & 4 & 0 \end{pmatrix}.
 \]
 
+\section{Simplicity}
+We will show that $\SL(d, \mathbb K)$ is simple.
+First we note that if any ideal $I$ of $\mathfrak{sl}(d, \mathbb K)$ contains some $E_{ij}$ with $i \neq j$, then it $I = \mathfrak{sl}(d, \mathbb K)$, since
+\begin{align*}
+    [[E_{ij}, E_{ji}], E_{ji}] &= -2 E_{ji} \in I.
+    [E_{ji}, E_{jk}] = \begin{cases}
+        E_{ik} & \text{if } i \neq k\\
+        E_{ii} - E_{jj} & \text{if } i = k
+    \end{cases}
+\end{align*}
+Thus it suffices to show that any nonzero ideal $I$ of $\mathfrak{sl}(d, \mathbb K)$ contains some $E_{ij}$ with $i \neq j$.
+Indeed, if $X \in I - \{0 \}$, then we consider two cases.
+If there exists an off-diagonal nonzero entry $x_{ji}, j\neq i$ of $X$, then $[[X, E_{ij}], E_{ij}] = -2x_{ji}E_{ij} \in I$.
+If on the other hand all nonzero entries of $X$ are concentrated on the diagonal, we let some $i \neq j$ such that $x_{ii} \neq x_{jj}$.
+Then $[X, E_{ij}] = (x_{ii} - x_{jj})E_{ij} \in I$. 
 
 \section{$\SO(p,q)$}
 Assume that $p \leq q$.
