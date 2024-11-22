@@ -147,9 +147,9 @@ The following proposition gives us a way to check whether a Lie group morphism i
     In particular, $f$ is surjective since its image contains $U_2$ which generates $G_2$, being a neighborhood of the identity.
     Moreover, for every $g \in G_1$ and $z_1, z_2 \in \ker f$:
     \[
-        gU_1 z_1 \cap gU_2 z_2 = \{e_1\} \text{ unless } z_1 = z_2.
+        gU_1 z_1 \cap gU_1 z_2 = \{e_1\} \text{ unless } z_1 = z_2.
     \]
-    Indeed, if $g u z_1 = g v z_2$ for some $u, v \in U$, then $u = v z_2 z_1^{-1}$, so $f(u) = f(v)$.
+    Indeed, if $g u z_1 = g v z_2$ for some $u, v \in U_1$, then $u = v z_2 z_1^{-1}$, so $f(u) = f(v)$.
     But $f$ being injective on $U_1$, this implies $u = v$ and $z_1 = z_2$.
 
     Thus $f(g)U_1$ is an evenly covered neighborhood for every $f(g) \in G_2$.
@@ -1384,7 +1384,7 @@ V = \bigoplus_{\lambda \in \mathbb C} V[\lambda],
 called the weight decomposition of $V$.
 In fact, we will show below that the weights are integers.
 
-\begin{theorem}[Representations of $\mathfrak{sl}(2, \mathbb C)$]
+\begin{theorem}[Representations of $\mathfrak{sl}(2, \mathbb C)$]\label{thm:irreducible_representations_of_sl_2_C}
     Let $V$ be a finite-dimensional representation of $\mathfrak{sl}(2, \mathbb C)$, and $v \in V[\lambda]$ be a highest weight vector. 
     Then
     \begin{enumerate}[label = (\roman*)]
@@ -1447,6 +1447,18 @@ Although only finitely many of $v^k$ are nonzero, it is convenient to consider $
 \chapter{Structure theory of Lie algebras}
 In this chapter we will discuss the structure theory of Lie algebras, with the eventual goal of the full classification of semi-siple Lie algebras and their representations.
 In this chapter $\mathfrak g$ will be a finite-dimensional Lie algebra over $\mathbb K \in \{\mathbb R, \mathbb C\}$.
+\begin{definition}
+    Let $\mathfrak g$ be a complex semisimple Lie algebra and $\mathfrak h$ be a subalgebra of $\mathfrak g$.
+    Then $\mathfrak h$ is called a Cartan subalgebra of $\mathfrak g$ if one of the following equiavalent conditions holds:
+    \begin{enumerate}[label = (\roman*)]
+        \item $\mathfrak h$ is nilpotent and self-normalizing:
+        \[
+        \mathfrak h = C(\mathfrak h) = \{x \in \mathfrak g : [x, \mathfrak h] = 0\}.
+        \]
+    \item $\mathfrak h$ is toral (i.e.\ abelian and consisting of semisimple elements) and self-normalizing.
+    \item $\mathfrak h$ is maximal among abelian subalgebras $\mathfrak h'$ such that $\ad_{\mathfrak{g}}\mathfrak h'$ is simultaneously diagonalizable.
+    \end{enumerate}
+\end{definition}
 \section{Universal enveloping algebra}
 Note that while there exists no product in a Lie algebra $V$, for every representation $\rho: \mathfrak g \to \mathfrak{gl}{V}$ the product $\rho(x) \rho(y)$ is well-defined.
 While this may indeed depend on the representation $\rho$, the commutation relations of $\mathfrak g$ are preserved by the representation, and thus the product $\rho(x) \rho(y) - \rho(y) \rho(x)$ is a well-defined (in the sense of being independent to the representation $\rho$) element of $\mathfrak{gl}{V}$.
@@ -2134,6 +2146,112 @@ The following lemma is useful in showing linear dependence:
     for $\lambda \in C_+$, by recalling that $(\alpha_i, \alpha_j) \leq 0$.
 \end{example}
 
+
+\section{Theorem of highest weight}
+Let $\mathfrak g$ be a complex semisimple Lie algebra and fix a Cartan subalgebra $\mathfrak h \subseteq \mathfrak g$, and denote with $\mathfrak h_0$ the real form of $\mathfrak h$, which is given as the set of functionals in $\mathfrak h$ on which all roots are real valued.
+We denote with $\Delta$ the set of roots of $\mathfrak g$ with respect to $\mathfrak h$ and consider a nondegenerate symmetric invariant bilinear form $B$ on $\mathfrak g$.
+Using $B$ to identify $\mathfrak h$ with $\mathfrak h^*$, we consider the dual element $H_\alpha \in \mathfrak h$ of $\alpha \in \Delta$, in which case one has that $\mathfrak h_0 = \sum_{\alpha \in \Delta} \mathbb R H_\alpha$.
+We denote with $(\cdot, \cdot)$ the inner product on $\mathfrak h^*$ induced by $B$. We fix an ordering on $\mathfrak h_0^*$ and denote with $\Delta^+$ the set of positive roots and $\Pi$ the set of simple roots.
+\begin{definition}
+    Let $\phi : \mathfrak g \to \mathfrak{gl}(V)$ be a complex finite-dimensional representation of a complex semisimple algebra $\mathfrak g$.
+    \begin{enumerate}[label = (\roman*)]
+        \item For $\lambda \in \mathfrak h^*$, we define the \emph{weight space} $V_\lambda$ as
+        \[
+        V_\lambda = \left\{ v \in V : \rho(h)v = \langle h, \lambda \rangle v, \text{ for all } h \in \mathfrak h \right\}.
+        \]
+        When $V_\lambda \neq 0$, we call $\lambda$ a \emph{weight} of $V$, and the elements of $V_\lambda$ are called \emph{weight vectors}.
+        \item We say that a weight $\lambda \in \mathfrak h^*$ is a \emph{highest weight} if it is the largest with respect to the ordering on $\mathfrak h^*$.
+        \item We say that a weight $\lambda \in \mathfrak h^*$ is \emph{dominant} if $\left( \lambda, \alpha \right) \geq 0 $ for all positive roots $\alpha \in \Delta^+$.
+        \item We say that a weight $\lambda \in \mathfrak h^*$ is \emph{algebraically integral} if $\left( \lambda, \alpha \right)/|a|^2 \in \mathbb Z$ for all roots $\alpha \in \Delta$.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}[Weight decomposition of semisimple algebra representations]
+    Let $\phi : \mathfrak g \to \mathfrak{gl}(V)$ be a complex finite-dimensional representation of a complex semisimple algebra $\mathfrak g$.
+    Then:
+    \begin{enumerate}[label = (\roman*)]
+        \item The action of $\phi(\mathfrak h)$ is simultaneously diagonalisable, so $V$ admits a \emph{weight space decomposition}:
+        \[
+        V = \bigoplus_{\lambda \in \mathfrak h^*} V_\lambda.
+        \]
+        \item Every weight takes real values on $\mathfrak h_0$ and is algebraically integral.
+        \item Roots $\alpha \in \Delta$ and weights $\lambda \in \mathfrak h^*$ are related by the formula
+        \[
+        \phi(\mathfrak g_\alpha) V_\lambda \subseteq V_{\lambda + \alpha}.
+        \]
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We use the analogous facts for the representations of $\mathfrak{sl}(2, \mathbb C)$ by restricting $\phi$ to the subalgebra $\mathfrak{sl}_\alpha$ of $\mathfrak g$ generated by $H_\alpha' = 2H_\alpha/|\alpha|^2 \in \mathfrak h$ and $E_{\pm \alpha}' \in \mathfrak g_{\pm a}$.
+\end{proof}
+\begin{theorem}[Theorem of highest weight]
+    For every semisimple Lie algebra $\mathfrak g$, we have a bijective correspondance between the set of equivalency classes of finite-dimensional irreducible representations of $\mathfrak g$ and the set of dominant algebraically integral weights of $\mathfrak g$.
+    \begin{align*}
+        \left\{ 
+            \begin{array}{c}
+                \text{Finite-dimensional irreducible} \\
+                \text{representations of } \mathfrak g
+            \end{array}
+        \right\}/\tilde \leftrightarrow \left\{ 
+            \begin{array}{c}
+                \text{Dominant algebraically integral} \\
+                \text{weights of } \mathfrak g
+            \end{array}
+        \right\}
+    \end{align*}
+\end{theorem}
+\begin{example}\cite[Paragraph 5.1]{knapp1996lie}
+\begin{enumerate}[label = (\roman*)]
+    \item $G = \SU(n)$, $\mathfrak g = \mathfrak{su}(n)^\mathbb C = \mathfrak{sl}(n, \mathbb C)$:
+    \item \begin{enumerate}[label = (\alph*)]
+        \item Consider the representation $\phi$ of $\mathfrak g$ on the space $V$ of homogenous polynomials of degree $N$ in the variables $z_1, \bar z_1, \cdots, z_n, \bar z_n$.
+        It turns out that the weight decomposition of $V$ is the decomposition into sums of monomials.
+    
+        Considering $H = \diag(i t_1, \cdots, it_n )$, we have
+        \[
+        \phi(H)P(z,\bar z) = \sum_{j=1}^n i t_j \left( z_j \frac{\partial}{\partial z_j} - \bar z_j \frac{\partial}{\partial \bar z_j} \right) P(z, \bar z).
+        \]
+        Using this, we can see that the monomial $P = z_1^{k_1} \cdots z_n^{k_n} \bar{z_1}^{l_1} \cdots \bar{z_n}^{l_n} $ is a weight vector corresponding to the weight
+        \[
+        \sum_{j=1}^n (k_j - l_j) e_j,
+        \]
+        where $e_j \in \mathfrak h^*$ is the projection of the $j$-th diagonal entry: $e_j(H) = ih_j$.
+        In fact, the weights of the representation are exactly:
+        \[
+        \sum_{j=1}^n (k_j - l_j) e_j, \quad k_j, l_j \in \mathbb Z_{\geq 0}, \quad \sum_{j=1}^n (k_j + l_j) = N,
+        \]
+        since if $P = \sum_{(k,l)} a_{kl} P_{kl}$ is a decomposition of a weight vector into monomials, then
+        \[
+        \phi(H)P = \sum_{(k,l)} a_{kl} \left( \sum_{j=1}^n (k_j - l_j) e_j \right) P_{kl},
+        \]
+        which is equal to a scalar times $P$ if and only if the weights corresponding to nonzero coefficients $a_{kl}$ coincide, implying that at most one coefficient is nonzero.
+        Moreover, the same arguements imply that the weight vectors for each tuple $(k,l)$ is the span of the corresponding monomial and hence the weight decomposition of the representation is the decomposition into sums of monomials.
+    
+        Considering the usual ordering on $\mathfrak h_0^*$, we see that the highest weight is $\lambda = N e_1$.
+        The subspace of holomorphic polynomials (i.e.\ no monomials containing $\bar z_j$) has highest weight $-N e_n$.
+        \item Consider the representation $\phi: g \to \mathfrak{gl}(\bigwedge^k \mathbb C^n)$, given by
+        \[
+        \phi(X) \epsilon_{i_1} \wedge \cdots \wedge \epsilon_{i_k} = \sum_{j=1}^n e_1 \wedge \cdots \wedge X e_{i_j} \wedge \cdots \wedge \epsilon_{i_k},
+        \]
+        where $\epsilon_1, \cdots, \epsilon_n$ is the standard basis of $\mathbb C^n$.
+        Then it is easy to see that $\phi(H) \epsilon_{i_1} \wedge \cdots \wedge \epsilon_{i_k}$ is a weight vector with weight $e_{i_1} + \cdots + e_{i_k}$.
+        As above, we can see that the weights are exactly the sums
+        \[
+        \lambda_i = \sum_{j=1}^n e_{i_j}, \quad i_1 < \cdots < i_k.
+        \]
+        and the weight spaces are spanned by the corresponding basis elements:
+        \[
+        V_{\lambda_i} = \mathbb C \epsilon_{i_1} \wedge \cdots \wedge \epsilon_{i_k}.
+        \]
+        The highest weight is $\lambda = e_1 + \cdots + e_k$.
+    \end{enumerate}
+    
+\end{enumerate}
+\end{example}
+
+
+%========================
+
 \appendix
 
 \chapter{Covering theory reminder}
@@ -2184,6 +2302,8 @@ And regarding uniqueness of lifts:
 \begin{proof}
     See \cite[Proposition 1.34]{hatcher2002topology}.
 \end{proof}
+
+
 
 \section{Universal covering}
 In this section we will be concerned with proving that under mild conditions, a space has a universal covering, i.e.\ a simply connected covering space.
@@ -2273,7 +2393,110 @@ Considering the quotient space $\tilde X / \pi_1(X, x_0)$, we have the following
     \]
 \end{theorem}
 
+
+\chapter{Tensor products}
+\section{Symmetric tensors}
+The proof of the following is in \cref{thm:irreducible_representations_of_sl_2_C}.
+\begin{fact}
+    The irreducible representations of $\mathfrak{sl}(2, \mathbb C)$ are exactly the symmetric powers of the standard representation $\mathbb C^2$.
+\end{fact}
+Suppose $V$ is an $n$-dimensional vector space over a field $\mathbb{K}$.
+\begin{definition}
+    Suppose $V$ is an $n$-dimensional vector space over a field $\mathbb{K}$.
+    We have the following equivalent definitions.
+    \begin{enumerate}[label = (\roman*)]
+        \item (As a quotient of the tensor product) 
+        We define the \emph{symmetric tensor product} $\Sym^k(V)$ as the quotient
+        \[
+        \Sym^k(V) = V^{\otimes k}/I,
+        \]
+        where $I$ is the subspace spanned by all elements of the form $v_1 \otimes \cdots \otimes v_k - v_{\sigma(1)} \otimes \cdots \otimes v_{\sigma(k)}$ with $ v_1, \cdots, v_k \in V $ and $\sigma \in S_k$ being a permutation.
+        We denote with $v_1 \cdots v_k$ the image of $v_1 \otimes \cdots \otimes v_k$ in $\Sym^k(V)$ through the canonical projection $\pi: V^k \to \Sym^k(V)$.
+        \item (By universal property)
+        We define the \emph{symmetric tensor product} $\Sym^k(V)$ as the vector space along with a symmetric multilinear map $\pi: V^k \to \Sym^k(V)$ such that for any symmetric multilinear map $f: V^k \to W$ there exists a unique linear map $\tilde f: \Sym^k(V) \to W$ such that the following diagram commutes:
+        \[
+        \begin{tikzcd}
+            V^k \arrow[r, "f"] \arrow[d, "\pi"] & W \\
+            \Sym^k(V) \arrow[ur, "\tilde f"']
+        \end{tikzcd}
+        \]
+        \item (As a subspace of the tensor product)
+        We define the \emph{symmetric tensor product} $\Sym^k(V)$ as the invariant subspace of $V^{\otimes k}$ under the action of the symmetric group $S_k$.
+        \item (As a space of polynomials)
+        We define the \emph{symmetric tensor product} $\Sym^k(V)$ as the space of homogeneous polynomials of degree $k$ on $V$.
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    \begin{enumerate}[label = (\roman*)]
+        \item Looking at the first definition, we see that the symmetric tensor product has a basis given by
+        \[
+        \left\{ e_{i_1} \cdots e_{i_k} \mid 1 \leq i_1 \leq \cdots \leq i_k \leq n \right\},
+        \]
+        with $e_1, \cdots, e_n$ being a basis of $V$.
+        \item Assuming that we define $\Sym^k(V)$ as the quotient of a tensor product, the universal mapping is simply the quotient map $V \to \Sym^k(V) = V^{\otimes k}/I$.
+        \item We could have also defined the symmetric tensor product with a universal property of having a symmetric multilinear map $\pi: V^{\otimes k} \to \Sym^k(V)$ such that for any symmetric map $f: V^{\otimes k} \to W$ there exists a unique linear map $\tilde f: \Sym^k(V) \to W$ such that the following diagram commutes:
+        \[
+        \begin{tikzcd}
+            V^{\otimes k} \arrow[r, "f"] \arrow[d, "\pi"] & W \\
+            \Sym^k(V) \arrow[ur, "\tilde f"']
+        \end{tikzcd}
+        \]
+        \item The isomorphism between the quotient space and the space of polynomials is given by the map that sends $e_{i_1} \cdots e_{i_k}$ to $x_{i_1} \cdots x_{i_k}$.
+    \end{enumerate}
+    
+    Recall that a representation $\rho: \mathfrak g \to \mathfrak{gl}(V)$ gives rise to a representation $\rho^{\otimes k}: \mathfrak g \to \mathfrak{gl}(V^{\otimes k})$, defined by
+    \[
+    \rho^{\otimes k}(X)(v_1 \otimes \cdots \otimes v_k) = \rho(X)v_1 \otimes v_2 \otimes \cdots \otimes v_k + \cdots + v_1 \otimes v_2 \otimes \cdots \otimes \rho(X)v_k.
+    \]
+    The analogue is true for the symmetric tensor product, where we have a representation $\Sym^k(\rho): \mathfrak g \to \mathfrak{gl}(\Sym^k(V))$ defined by
+    \[
+    \Sym^k(\rho)(X)(v_1 \cdots v_k) = \left(\rho(X)v_1\right) v_2 \cdots v_k + \cdots + v_1 v_2 \cdots \left(\rho(X)v_k\right).
+    \]
+\end{remark}
+
+\begin{example}
+    Consider the standard representation $\rho: \mathfrak{sl}(2, \mathbb C) \to \mathfrak{gl}(\mathbb C^2)$.
+    Then $\Sym^2(C^2) \simeq \mathbb C x^2 \mathbb C xy + \mathbb C y^2 $ and if we denote with $x,y$ the standard basis of $\mathbb C^2$, we have $\Sym^2(\rho)(H)(x y) = (\rho(H)x)y + x (\rho(H)y) = 0$.
+    Proceeding similarly, we obtain that $\Sym^2(\rho)(H) = \diag(2, 0, -2)$ in the basis $x^2, xy, y^2$. 
+\end{example}
+
+\begin{lemma}
+    Suppose $V$ admits a weight decomposition $V = \oplus V_\alpha$.
+    Then tensor, symmetric and exterior powers of $V$ admit weight decompositions as well.
+    For $V^{\otimes 2}$, the weights are the sums of two weights of $V$ (counting $\alpha, \beta$ and $\beta, \alpha$ as different), for $\Sym^2(V)$ the weights are the pairwise sums of weights of $V$ (meaning that we count the weights of $\alpha, \beta$ and $\beta, \alpha$ as the same ), for $\bigwedge^2 V$ the weights are the sums of distinct weights of $V$ and the non-simple weights of $V$ multiplied by $2$.
+    The weight decompositions are given by:
+    \[
+    V^{\otimes 2} = \bigoplus_{\gamma}
+    \bigoplus_{\substack{\alpha, \beta:\\ \alpha+\beta = \gamma}} V_\alpha \otimes V_\beta, \quad 
+    \Sym^2(V) = \bigoplus_{\gamma} \bigoplus_{\substack{\{\alpha, \beta\}:\\ \alpha+\beta = \gamma}} V_\alpha \cdot V_\beta, \quad
+    \bigwedge ^2 V = \bigoplus_{\gamma} \bigoplus_{\substack{\{\alpha, \beta\}:\\ \alpha+\beta = \gamma}} V_\alpha \wedge V_\beta,
+    \]
+    with the convention that the symmetric and the wedge products on the right hand sides are interior and that certain wedge products $V_\alpha \wedge V_\alpha$ can be zero, and that the last sum is over unordered pairs (meaning that $\{\alpha, \alpha\}$ is an admissible pair).
+\end{lemma}
+\begin{proof}
+    It is clear that $V_\alpha \otimes V_\beta \subseteq V^{\otimes 2}_{\alpha + \beta}$.
+    Moreover, one can see that $V^{\otimes 2}$ and $\bigwedge^2 V$ decompose as above by explicitly constructing bases.
+    It suffices to show that 
+    \[
+        V^{\otimes 2}_\gamma =
+        \bigoplus_{\substack{\alpha, \beta:\\ \alpha+\beta = \gamma}} V_\alpha \otimes V_\beta, \quad 
+        \bigwedge ^2 V_\gamma = \bigoplus_{\substack{\{\alpha, \beta\}:\\ \alpha+\beta = \gamma}} V_\alpha \wedge V_\beta.
+    \]
+    More generally, consider a decomposition $V = \oplus_\alpha V_{\alpha'}$ such that $V_\alpha \subseteq V_\alpha$.
+    Then for $v \sum_{\gamma} \in V_\alpha$, we can find for each $\gamma_0$ some $H \in \mathfrak h$ such that $\langle H, \gamma_0 \rangle \neq \langle H, \alpha \rangle$.
+    Then $\sum_\gamma \langle H, \alpha \rangle v_\gamma = \langle H, \alpha \rangle v = H v = H \sum_\gamma v_\gamma = \sum_\gamma \langle H, \gamma \rangle v_\gamma $.
+    In particular, $v_\gamma'=0$ and thus $v_\alpha \in V_\alpha'$.
+\end{proof}
 \chapter{Exercises}
+\begin{exercise}
+    Let $G$ be a simply connected, abelian Lie group.
+    Then the exponential map is an isomorphism.
+\end{exercise}
+\begin{proof}[Solution]
+    The exponential map is a homomorphism, since $G$ is abelian.
+    Moreover, it is a local diffeomorphism, so it is a covering map by \cref{prop:covering_map_criterion}.
+    Since it is a covering map and $G$ is simply connected, it is a homeomorphism.
+\end{proof}
 
 \section{Kirillov's book}
 In this section, we have solutions for certain exercises of \cite{kirillov2008introduction}.
@@ -2695,6 +2918,175 @@ any nonsingular matrix over $k$, let $\mathfrak{g}_A$ be the 3-dimensional algeb
     \end{enumerate}
 \end{proof}
 
+\begin{exercise}[Exercise I.5]\label{ex:so_3_killing_form}
+    The Killing form of $\mathfrak{so}(3)$ is a constant multiple of the dot product in $\mathbb R^3$.    
+\end{exercise}
+\begin{proof}[Solution]
+    Let
+    \[
+    i = \begin{pmatrix}
+        0 & 0 & 0\\
+        0 & 0 & 1\\
+        0 & -1 & 0
+    \end{pmatrix}, \quad j = \begin{pmatrix}
+        0 & 0 & 1\\
+        0 & 0 & 0\\
+        -1 & 0 & 0
+    \end{pmatrix}, \quad k = \begin{pmatrix}
+        0 & 1 & 0\\
+        -1 & 0 & 0\\
+        0 & 0 & 0
+    \end{pmatrix}
+    \]
+    be the basis for $\mathfrak{so}(3)$.
+    Then the adjoint representation is given by
+    \[
+    \ad_i = \begin{pmatrix}
+        0 & 0 & 0\\
+        0 & 0 & -1\\
+        0 & 1 & 0
+    \end{pmatrix},
+    \ad_j = \begin{pmatrix}
+        0 & 0 & 1\\
+        0 & 0 & 0\\
+        -1 & 0 & 0
+    \end{pmatrix},
+    \ad_k = \begin{pmatrix}
+        0 & -1 & 0\\
+        1 & 0 & 0\\
+        0 & 0 & 0
+    \end{pmatrix}.
+    \]
+    Hence, the Killing form is given by
+    \[
+    K = -2I_3.
+    \]
+\end{proof}
+
+\begin{exercise}[Exercise I.12]
+    If a finite-dimensional Lie algebra $\mathfrak g$ is nilpotent, then the Killing form is trivial.
+\end{exercise}
+\begin{proof}[Solution]
+    Since $\mathfrak g$ is nilpotent, we know that $\ad(\mathfrak g)$ is nilpotent as well, in the sense that all operators $\ad_x$ are nilpotent, for $x \in \mathfrak g$.
+    By Engel's theorem, we know that there exists a basis of $\mathfrak g$ for which all operators $\ad_x$ are strictly upper triangular, in particular the trace of $\ad_x \ad_y$ is zero for all $x,y\in \mathfrak g$.
+\end{proof}
+\begin{exercise}[Exercise I.13]\label{ex:simple_killing_form}
+    Suppose $\mathfrak g$ is a simple complex Lie subalgebra of complex matrices.
+    Then the Killing form is a multiple of the trace form: $B(x,y) = c \tr(xy)$.
+\end{exercise}
+\begin{proof}[Solution]
+    Letting $C(x,y) = tr(xy)$, it suffices to show that for simple Lie algebras, the Killing form is the only invariant bilinear form up to scalar multiplication.
+
+    Note first that since $\mathfrak g$ is simple, the adjoint representation of $\mathfrak g$ is irreducible, because being an invariant subspace under the adjoint representation is equivalent to being an ideal.
+
+    Denote with $b,c: \mathfrak g \to \mathfrak g^*$ the maps $x \mapsto B(x, \cdot), x \mapsto C(x,y)$, where $C(x,y) = \tr(x \cdot)$.
+    Then by Cartan's criterion, we know that $b$ is an isomorphism, so we can consider $b^{-1}c: \mathfrak g \to \mathfrak g$.
+    Since the adjoint representation is irreducible, by Schur's lemma, it suffices to show that $b^{-1}c$ is an interwining operator, because then $b^{-1}c$ is a multiple of the identity.
+    Indeed, 
+    \begin{align*}
+        B\left(\ad_x b^{-1}c(y), z\right) &= B([x, b^{-1}c(y)], z)\\
+        &= -B(b^{-1}c(y), [x,z]) = -C(y, [x,z]) = C([x, y], z) = c(\ad_x y)(z),
+    \end{align*}
+    hence $b^{-1}c(\ad_x) = \ad_x b^{-1}c(y)$, i.e.\ $b^{-1}c$ is an interwining operator, so it is a multiple of the identity.
+\end{proof}
+
+\begin{exercise}[Exercise II.1]
+We know from \cref{ex:simple_killing_form} that in each of the following cases, the Killing form is a constant multiple of the trace form.
+Finding this constant, show: 
+\begin{enumerate}[label = (\roman*)]
+    \item On $\mathfrak{sl}(n, \mathbb C), n\geq 1$, we have $B = 2n \tr$.
+    \item $\mathfrak{so}(2n+1, \mathbb C), n\geq 2$
+    \item $\mathfrak{sp}(n, \mathbb C), n \geq 3$
+    \item $\mathfrak{so}(2n, \mathbb C), n \geq 4$
+\end{enumerate} 
+\end{exercise}
+\begin{proof}[Solution]
+    We use 
+    \begin{lemma}[Corollary 2.24 of \cite{knapp1996lie}]
+        Let $\mathfrak g$ be a semisimple Lie algebra with Cartan subalgebra $\mathfrak h$.
+        Then on $\mathfrak h \times \mathfrak h$, the Killing form $B$ is given by
+        \[
+        B(H,H') = \sum_{\alpha \in \Delta} \alpha(H) \alpha(H')
+        \]
+        where $H, H' \in \mathfrak h$ and $\Delta$ is the set of roots of $\mathfrak g$.
+    \end{lemma}
+    \begin{enumerate}[label = (\roman*)]
+        \item We let $x = E_{11} - E_{22}$, so for $\alpha \in \Delta_+$ being a positive root:
+        \[
+        \alpha(x) = \begin{cases}
+            2 & \alpha = \varepsilon_1 - \varepsilon_2\\
+            1 & \alpha = \varepsilon_1 - \varepsilon_j \text{ or } \varepsilon_2 - \varepsilon_j \text{ for } j \geq 3\\
+            0 & \text{otherwise}
+        \end{cases}.
+        \] 
+        Thus, we calculate
+        \[
+        B(x.x) = 2 \sum_{\alpha \in \Delta_+} \alpha(x)^2 = 2(4 + (n-2) + (n-2)) = 4n = 2\tr(x^2)
+        \]
+    \end{enumerate}
+\end{proof}
+\begin{remark}
+    Ways to show that a representation is irreducible:
+    \begin{enumerate}[label = (\roman*)]
+        \item If it is a representation of $\ssl(2, \mathbb C)$, and there is a vector with eigenvalue $\dim V - 1$, then the representation is irreducible (see \cref{ex:sl_2_C_irreducible}).
+        \item The weight diagram does not contain 
+    \end{enumerate}
+\end{remark}
+
+\begin{exercise}\label{ex:sl_2_C_irreducible}
+[Exercise 1.17 - A quick way to show that a representation of $\mathfrak{sl}(2,\mathbb C)$ is irreducible]
+Let $V_n$ be the vector space of homogenous complex polynomials of degree $n$ in two variables.
+We define the representation
+\begin{align*}
+    \Phi: \SL(2,\mathbb C) &\to \GL(V_n)\\
+    \Phi(g)p(z_1, z_2) &= p \left( g^{-1}(x,y)^t \right)
+\end{align*}    
+Denoting with $\phi = \Phi_*: \mathfrak{sl}(2,\mathbb C) \to \gl(V_n)$ the induced representation, show that $\phi$ is irreducible.
+\end{exercise}
+\begin{proof}[Solution]
+    \underline{Idea:} If the there is a vector in a representation of $\SL(2, C)$ with eigenvalue $\dim V - 1$, then the representation is irreducible.
+
+    Since $\phi$ is a representation of $\mathfrak{sl}(2,\mathbb C)$, we know from \cref{thm:irreducible_representations_of_sl_2_C} that it splits into irreducible representations, each of which is the direct sum of eigenvectors of $\phi(h)$, and whose dimension is equal to the highest weight (i.e.\ the highest eigenvalue) of $\phi(h)$.
+
+    Let $p(z_1,z_2) = z_2^n$, and note that $\phi(h)p = n p$.
+    Considering the decomposition $\phi = \phi_1 \oplus \cdots \oplus \phi_k$ into irreducible representations and the corresponding decompositions $V_n = V_n^{(1)} \oplus \cdots \oplus V_n^{(k)}$, and $p = p_1 + \cdots + p_k$, we assume without loss of generality that $p_1 \neq 0$.
+    Then $p_1$ is an eigenvector of $\phi_1$ with eigenvalue $n$, so the highest weight of $\phi_1$ is of the form $n + 2i$ for some $i \geq 0$.
+    Due to dimension restrictions, we have that $i = 0$ and $V_n^{(1)} = V_n$, i.e. $V_n$ is irreducible.
+\end{proof}
+
+\section{Fulton, Harris}
+\begin{exercise}[Exercise 11.1]
+    Find the decomposition into irreducible representations of the representation of $\mathfrak{sl}(2, \mathbb C)$ on $V = \Sym^5(\mathbb C^2)\otimes \Sym^2(\mathbb C^2)$.
+\end{exercise}
+\begin{proof}[Solution]
+    The eigenvalues with multiplicities can be seen in \cref{fig:eigenvalue_diagram}.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.6\textwidth]{eigenvalues_of_tensor_product.jpg}
+        \caption{Eigenvalue diagram}
+        \label{fig:eigenvalue_diagram}
+    \end{figure}
+    The highest weight vector $x^5 \otimes x^2$ with weight $7$ generates a subrepresentation isomorphic to $\Sym^7(\mathbb C^2)$:
+    \[
+    \bigoplus_{j = 0}^7 \rho(F)^j \mathbb C (x^5 \otimes x^2)
+    \]
+    Note that this is not literally the sum of products of weight spaces of $\Sym^5(\mathbb C^2)$ and $\Sym^2(\mathbb C^2)$, since for example
+    \[
+    \rho(F) (x^5 \otimes x^2) = 5x^4 y \otimes x^2 \oplus x^5 \otimes 2xy.
+    \]
+    This representation accounts for the eigenvalues $\pm 7, \pm 5, \pm 3, \pm 1$.
+    Considering a nonzero vector of weight $5$ in the complement of this subrepresentation, by applying $\rho(F)$ it generates a complementary subrepresentation isomorphic to $\Sym^5(\mathbb C^2)$.
+    Similarly we obtain a subrepresentation isomorphic to $\Sym^3(\mathbb C^2)$.
+\end{proof}
+\begin{exercise}[Exercise 11.3]
+    Show that $\bigwedge^2\left(\Sym^2(\mathbb C^2)\right)$ is isomorphic to $\Sym^2(\mathbb C^2)$.
+\end{exercise}
+\begin{proof}
+    The eigenvalues are $0, \pm 2$ with multiplicity $1$.
+    This follows from the fact that for $v_\alpha, v_\beta \in \Sym^2(\mathbb C^2)$ of eigenvalues $\alpha, \beta$ respectively, we have that $v_\alpha \wedge v_\beta$ has eigenvalues $\alpha + \beta$, provided that $v_\alpha \wedge v_\beta \neq 0$. 
+\end{proof}
+
+
 \section{Linear algebra exercises}
 \begin{exercise}
     Let $A$ be a diagonalizable operator with distinct eigenvalues.
@@ -2767,6 +3159,104 @@ Given this, we just need to calculate a maximal compact subgroup of $SO(d,d)$.
     Thus $e^{\mathfrak k}$ has matrices of the desired form and is a generating set for $K$.
 \end{proof}
 
+\chapter{Analyzing Lie algebras}
+This is taken from \cite[§14]{fulton2013representation}.
+
+{\bf \underline{Step 0}:} \emph{Make sure that the Lie algebra is semisimple.}
+
+{\bf \underline{Step 1}:} \emph{Find a Cartan subalgebra $\mathfrak h \subseteq \mathfrak g$:}
+This is a maximal $\mathfrak h \subseteq \mathfrak g$ among subalgebras that are abelian and act diagonally on some faithfull (and hence every) representation of $\mathfrak g$.
+Recall that a subalgebra $\mathfrak h$ acting diagonally on some faithfull representation $\rho: \mathfrak g \to \gl(V)$ (i.e.\ $\rho(H)$ is diagonalizable in $V$ for all $H \in \mathfrak h$ ) is going to act diagonally on every representation of $\mathfrak g$ (this follows from the fact that the Jordan decomposition is preserved under representations of semisimple algebras).
+
+{\bf \underline{Step 2}:} \emph{Perform the Cartan decomposition with respect to $\mathfrak h$:}
+This is merely the decomposition of $\mathfrak g$ that we obtain by letting $\mathfrak h$ act diagonally by the adjoint representation:
+\[
+\mathfrak g = \mathfrak h \oplus \bigoplus_{\alpha \in \Delta} \mathfrak g_\alpha
+\]
+where $\Delta$ is the set of roots of $\mathfrak g$.
+
+One can show that
+\begin{enumerate}[label = (\roman*)]
+    \item each root space $\mathfrak g_\alpha$ is one-dimensional.
+    \item $\Delta$ generates a lattice $\Lambda_\Delta$ in $\mathfrak h^*$ of rank $\dim \mathfrak h$.
+    \item $R$ is symmetric about the origin.
+\end{enumerate}
+Using these, it follows that any two roots are congruent modulo $\Lambda_\Delta$:
+\[
+\Delta \subseteq \alpha + \Lambda_\Delta \text{ for all } \alpha \in \Delta.
+\]
+
+{\bf \underline{Step 3}:} \emph{Find the distinguished subalgebras $\ssl_\alpha$:}
+A crucial ingredient is the restriction of the arbitrary representation into representations of subalgebras that are isomorphic to $\ssl(2, \mathbb C)$.
+Considering a root $\alpha \in \Delta$, we define the subalgebra
+\[
+\ssl_\alpha \mathfrak g_\alpha \oplus \mathfrak g_{-\alpha} \oplus [\mathfrak g_\alpha, \mathfrak g_{-\alpha}].
+\]
+One can show that $[g_\alpha, g_{-\alpha}] \neq 0$ and that $[[g_\alpha, g_{-\alpha}], g_\alpha] \neq 0$.
+Then one can pick $X_\alpha \in \mathfrak g_\alpha, X_{-\alpha} \in \mathfrak g_{-\alpha}$ such that $H_\alpha = [X_\alpha, X_{-\alpha}]$ satisfies $\langle H_\alpha, \alpha \rangle = 2$.
+Then the subalgebra $\ssl_\alpha$ is generated by $X_\alpha, X_{-\alpha}, H_\alpha$ and is isomorphic to $\ssl(2, \mathbb C)$.
+
+{\bf \underline{Step 4}:} \emph{Use the integrality of eigenvalues of the  $H_\alpha$:}
+Note that by the analysis of representations of $\ssl(2, \mathbb C)$, $H_\alpha$ will have integer eigenvalues for every $\alpha \in \Delta$.
+Denoting the \emph{weight lattice} by
+\[
+\Lambda_W = \left\{ \lambda \in \mathfrak h^*: \langle \lambda, H_\alpha \rangle \in \mathbb Z \text{ for all } \alpha \in \Delta \right\},
+\]
+we have that all weights of all representations of $\mathfrak g$ lie in $\Lambda_W$.
+In particular $\Lambda_\Delta \subseteq \Lambda_W$.
+Also letting $\alpha \in \Delta$, we can break up the weights of $V$ into congruent classes modulo $\mathbb Z \alpha$.
+For every weight $\beta \in \mathfrak h^*$,
+\[
+V_{[\beta]} = \bigoplus_{n \in \mathbb Z} V_{\beta + n\alpha}
+\]
+is a subrepresentation of $\ssl_\alpha$ in $V$.
+
+{\bf \underline{Step 5}:} \emph{Use the symmetry of the eigenvalues of $H_\alpha$:}
+Using what we know about the representations of $\ssl(2,\mathbb C)$, we can show that for $\beta$ being the first weight of $V$ appearing in its congruency class modulo $\mathbb Z \alpha$, we have 
+\[
+V_{[\beta]} = V_{\beta} \oplus V_{\beta + \alpha} \oplus \cdots \oplus V_{\beta - \langle H_\alpha, \beta \rangle \alpha}.
+\]
+Then one can show that the reflection $s_\alpha$ reflects the weight spaces:
+\[
+s_\alpha (\beta + k \alpha) = \beta + (-\langle H_\alpha, \beta \rangle - k) \alpha.
+\]
+
+{\bf \underline{Step 6}:} \emph{Draw a picture.}
+
+{\bf \underline{Step 7}:} \emph{Choose a direction in $\mathfrak h^*$:}
+By taking a linear functional $l:\Lambda_\Delta \to \mathbb C$ that is irrational with respect to $\Lambda_\Delta$, which gives us a decomposition of the set of roots, and allows us to find a highest weight vector (i.e.\ a weight vector that is anhiliated by all $\mathfrak g_\alpha$ for $\alpha \in \Delta^+$).
+
+One can show that
+\begin{proposition}
+    For any semisimple complex Lie algebra
+    \begin{enumerate}[label = (\roman*)]
+        \item Every finite-dimensional representation $V$ of $\mathfrak g$ has a highest weight vector $v$.
+        \item The subspace of $W$ generated in the following two equivalent ways is irreducible subrepresentation of $V$ with highest vector $v$:
+        \begin{enumerate}[label = (\alph*)]
+            \item By succesive applications of $\mathfrak g_\beta$ with $\beta \in \Delta^-$.
+            \item By succesive applications of $\mathfrak g_\beta$ with $\beta$ being primitive negative roots. 
+        \end{enumerate}
+        \item An irreducible representation posseses a unique highest vector up to scalars.
+        \item The set of weights of $V$ will be exactly the weights $\alpha + \Lambda_R \cap \mathrm{Conv}(W \cdot \alpha)$.
+    \end{enumerate}
+\end{proposition}
+
+
+
+
+{\bf \underline{Step 8}:} \emph{Classify irreducible rpresentations of $\mathfrak g$:}
+We define the Weyl chamber as the vectors in the real span of $\Delta$ that form an acute angle with all positive roots.
+\[
+\mathcal W = \left\{ \lambda \in \mathfrak h^*: \langle \lambda, \gamma \rangle > 0 \text{ for all } \gamma \in \Delta^+ \right\}.
+\]
+\begin{theorem}
+    There exists a bijective correspondence
+    \[
+    \left\{ \text{irreducible finite dimensional representations of } \mathfrak g \right\} \leftrightarrow \mathcal W \cap \Lambda_W
+    \]
+    Denoting the representation corresponding to $\alpha \in \mathcal W \cap \Lambda_W$ by $\Gamma_\alpha$, the weights of $\Gamma_\alpha$ will be $$(\alpha + \Lambda_\Delta) \cap \Lambda_W \cap \mathrm{Conv}(W \cdot \alpha).$$
+\end{theorem}
+
 \chapter{Case studies}
 \section{$\mathbb R$}
 The representations of $\mathfrak g = \mathbb R$ are given as $\rho_*: \mathbb R \to \mathfrak{gl}(V)$, $t \mapsto t A$, where $A = \rho_*(1)$, and the representations of $G = \mathbb R$ are given by $\rho: \mathbb R \to \GL(V)$, $t \mapsto e^{tA}$ for $A = \rho_*(1)$.
@@ -2783,16 +3273,403 @@ The representations $\rho:\mathbb S^1 \to \GL(V)$ are in bijective correspondenc
 The irreducible ones of $\mathbb S^1$ are in (the same) bijective correspondence with the irreducible ones of $\mathbb R$ such that $\tilde \rho(1) = 1$, where we recall that the irreducible representations of $\mathbb R$ are exactly the one-dimensional ones and they have the form $\rho(t) = e^{t \lambda} \in \GL(V) \simeq \mathbb C^{\times}$.
 Hence the irreducible representations of $\mathbb S^1$ are exactly one-dimensional complex vector spaces $V_k$ and are given by $\mathbb S^1 = \mathbb R/ \mathbb Z \to \GL(V_k) \simeq C^{\times}, t + \mathbb Z \mapsto e^{2 \pi i k }$.
 
+\section{$\mathfrak{sl}(2, \mathbb C)$}
+The reference for this section is \cite[Lecture 11.1]{fulton2013representation}.
+The goal is to classify the finite-dimensional irreducible representations of $\mathfrak{sl}(2, \mathbb C)$ and show
+\begin{theorem}\label{thm:irreducible_representations_of_sl_2_C}
+    The finite-dimensional irreducible representations of $\mathfrak{sl}(2, \mathbb C)$ are exactly the symmetric powers of the standard representation $\mathbb C^2$.
+\end{theorem}
+We fix the basis for $\mathfrak{sl}(2, \mathbb C)$ as
+\[
+H = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}, \quad E = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, \quad F = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}.
+\]
+satisfying the relations
+\[
+[H, E] = 2E, \quad [H, F] = -2F, \quad [E, F] = H.
+\]
 
-\section{$\SL(d,\mathbb K)$}
+We fix a finite-dimensional representation $\rho: \mathfrak{sl}(2, \mathbb C) \to \GL(V)$.
+Then using the preservation of the Jordan decomposition for semisimple algebras, we have that the action of $H$ on $V$ is diagonalizable:
+\[
+V = \oplus_{\alpha \in \mathbb C} V_\alpha
+\]
+Using the commutativity relations and the irreduciblity hypothesis, we find for any eigenvalue $\alpha_0 \in \mathbb C$ that occurs in $V$, all other eigenvalues are in $\alpha_0 \in 2\mathbb Z$:
+\[
+V = \oplus_{k \in \mathbb Z} V_{\alpha_0 + 2k}.
+\]
+Now we fix $n$ to be the largest eigenvalue of $\rho(H)$ appearing in $V$ with eigenvector $v$, and again using the commutativity relations, we can depict the action of $\mathfrak{sl}(2, \mathbb C)$ on $V$ with \cref{fig:action_of_sl_2_C_on_V}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{sl_2_C_action.png}
+    \caption{Action of $\mathfrak{sl}(2, \mathbb C)$ on $V$: $X=E, Y=F$}
+    \label{fig:action_of_sl_2_C_on_V}
+\end{figure}
+Using the relation
+\[
+E(F^m v) = m(n-m+1)F^{m-1}v,
+\]
+we show that $\{v, Fv, F^2v, \cdots \}$ is a basis of $V$.
+Counting dimensions, we obtain that
+\[
+\text{All eigenspaces } V_\alpha \text{ of } H \text{ are one-dimensional.}
+\]
+Letting $m$ be the first integer such that $F^m v = 0$, we have that $n = m + 1$, and in particular $n$ is a non-negative integer.
+Since the action of $H, E, F$ on each eigenspace is dictated by the commutativity relations, we have that every finite-dimensional representation $V$ of $\mathfrak{sl}(2, \mathbb C)$ is determined by the largest eigenvalue $n$ of $H$.
+Moreover, the eigenvalues form a string of integers differing by $2$ and symmetric about the origin in $\mathbb Z$.
+All in all, we have shown that
+\[
+\begin{array}{c}
+\text{There is a unique finite-dimensional irreducible representation } V^{(n)} \text{ of } \mathfrak{sl}(2, \mathbb C)
+\end{array}
+\]
+Moreover, $\dim V^{(n)} = n+1$ and the eigenvalues of $H$ are $n, n-2, \cdots, -n$.
+In particular, we have the following useful fact that allows us to compute the number of irreducible factors of a representation of $\mathfrak{sl}(2, \mathbb C)$:
+\begin{remark}
+    Let $V$ be a finite-dimensional representation of $\mathfrak{sl}(2, \mathbb C)$.
+    \begin{enumerate}[label = (\roman*)]
+        \item $V$ is irreducible if and only if the eigenvalues of $H$ are integers of the same parity and occur with multiplicity $1$.
+        \item The number of irreducible factors of $V$ is the sum of the multiplicities of $0$ and $1$ as eigenvalues of $H$.
+    \end{enumerate}
+    For the second point, we have in particular that the number of irreducible factors isomorphic to some $V^{(2n)}$ is the multiplicity of $0$ as an eigenvalue of $H$, while the number of irreducible factors isomorphic to some $V^{(2n+1)}$ is the multiplicity of $1$ as an eigenvalue of $H$.
+\end{remark}
+\begin{example}
+    Consider the adjoint representation $\ad: \mathfrak{sl}(2, \mathbb C) \to \mathfrak{gl}(\mathfrak{sl}(2, \mathbb C))$.
+    We have seen that in the basis $H, E, F$
+    \[
+    \ad H = \begin{pmatrix} 0 & 0 & 0 \\ 0 & -2 & 0 \\ 0 & 0 & 2 \end{pmatrix}.
+    \]
+    This means that the weight decomposition of $H$ is $V_0 = \mathbb C H, V_2 = \mathbb C F, V_{-2} = \mathbb C E$.
+    All eigenvalues are of the same parity and occur with multiplicity $1$, so the adjoint representation is irreducible, with highest weight $2$.
+    Hence the adjoint representation is isomorphic to $\Sym^2(\mathbb C^2)$, and the isomorphisms are exactly the scalar multiples of $T: \mathfrak{sl}(2, \mathbb C) \to \Sym^2(\mathbb C^2)$ given by $T(H) = xy, T(E) = y^2, T(F) = x^2$.
+\end{example}
+Existence also holds, since we can construct $V^{(n)}$ as the span of $v, Fv, \cdots, F^nv$.
+Alternatively, we can show that $V^{(n)} = \Sym^n(\mathbb C^2)$, the $n$-th symmetric power of the standard representation of $\mathfrak{sl}(2, \mathbb C)$.
+Indeed, denoting with $\rho_2: \mathfrak{sl}(2, \mathbb C) \to \mathbb C^2 $ the standard representation, one can show that
+\[
+\Sym^n(\rho_2)(x^{n-k}y^k) = (n - 2k) x^{n-k}y^k,
+\]
+so $\Sym^n(\rho_2) = \diag(n, n-2, \cdots, -n)$ in the basis $x^{n-k}y^k, k = 0, \cdots, n$.
+In particular, for the first two values of $n$ we have that
+\begin{enumerate}[label = (\roman*)]
+    \item $n = 0: V^{(0)} = \mathbb C$ is the trivial representation.
+    \item $n = 1: V^{(1)} = \mathbb C^2$ is the standard representation.
+    \item $n = 2: V^{(2)} = \Sym^2(\mathbb C^2) \simeq \ssl(2, \mathbb C)$ is the adjoint representation. 
+\end{enumerate}
+
+\section{$\mathfrak{sl}(3, \mathbb C)$}
+We proceed analogously to the case of $\mathfrak{sl}(2, \mathbb C)$.
+
+{\bf \underline{First step}:}
+The first step was to find the element $H$ that was used to decompose the representation.
+A single element does not suffice for $\mathfrak{sl}(3, \mathbb C)$, so we consider the Cartan subalgebra $\mathfrak h$ of diagonal matrices in $\mathfrak{sl}(3, \mathbb C)$.
+Since diagnoalizable commuting matrices are simultaneously diagonalizable, we obtain that
+\begin{center}
+    Any finite dimensional representation $V$ of $\mathfrak{sl}(3, \mathbb C)$ admits a decomposition $$V = \oplus_{\alpha \in \mathbb C} V_\alpha$$ where $V_\alpha$ is the eigenspace for $\mathfrak h$ with eigenvalue $\alpha \in \mathfrak h^*$.
+\end{center}
+
+{\bf \underline{Second step}:} See how $\mathfrak{sl}(3, \mathbb C)$ acts on the decomposition of $V$.
+In the case of $\mathfrak{sl}(2, \mathbb C)$, we used the vectors $E, F$, which were eigenvectors of the adjoint action of $H$ and move between eigenspaces $V_\alpha$.
+Now, we will consider the decomposition of the adjoint representation of $\mathfrak{sl}(3, \mathbb C)$:
+\[
+\mathfrak{sl}(3, \mathbb C) = \mathfrak h \bigoplus_{\alpha \in \mathfrak h^*} \mathfrak g_\alpha
+\]
+where $\mathfrak g_\alpha = \{ x \in \mathfrak{sl}(3, \mathbb C) : [H, x] = \alpha(H) x \}$.
+More concretely, we have that the eigenspaces are
+\[
+\mathfrak g_{L_i - L_j} = \mathbb C E_{ij}, \text{ where } L_i \diag(a_1, a_2, a_3) = a_i.
+\]
+Now the answer of how $\ssl(3,\mathbb C)$ acts on itself and on $V$ is given by considering the action of each root space $\mathfrak g_\alpha$ on other root spaces $\mathfrak g_\alpha'$ or on weight spaces $V_\beta$:
+\[
+    \ad(\mathfrak g_\alpha) \mathfrak g_{\alpha'} \subset \mathfrak g_{\alpha + \alpha'}, \quad
+    \ad(\mathfrak g_\alpha) V_\beta \subset V_{\alpha + \beta}.
+\]
+for roots $\alpha = L_i - L_j, \alpha' = L_{i'} - L_{j'}$ and a weight $\beta \in \mathfrak h^*$.
+In \cref{fig:root_diagram_sl_3_C} we see a pictorial representation of the roots of $\mathfrak{sl}(3, \mathbb C)$ and the adjoint action of $\mathfrak{sl}(3,\mathbb C)$.
+There we can consider each dot as a root space $\mathfrak g_\alpha$ and visualize that $\mathfrak g_\alpha$ acts on $\ssl(3, \mathbb C)$ by "translation". 
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{sl_3_C_weight_diagram.png}
+        \caption{Root diagram of $\ssl(3, \mathbb C)$}
+        \label{fig:root_diagram_sl_3_C_1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.525\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{sl_3_C_action_weight_diagram.png}
+        \caption{Adjoint action of $\mathfrak g_{L_1 - L_3}$}
+        \label{fig:root_diagram_sl_3_C_action}
+    \end{subfigure}
+    \caption{Root diagram of $\ssl(3, \mathbb C)$ and adjoint action}
+    \label{fig:root_diagram_sl_3_C}
+\end{figure}
+
+{\bf \underline{Third step}:} Decompose irreducible representations into weight spaces.
+This insight on the action of $\mathfrak{sl}(3, \mathbb C)$ on the decomposition of $V$, along with an irreducibility condition tells us that 
+\begin{center}
+    The weights $\alpha$ of an irreducible representation of $\mathfrak{sl}(3, \mathbb C)$ differ from one another by an integral linear combination of the simple roots $L_i - L_j$, i.e.\ for any weight $\alpha_0$ of $V$:
+    \[
+    V = \bigoplus_{\alpha \in \spa_{\mathbb Z} \{L_i - L_j\}} V_{\alpha_0 + \alpha}.
+    \]
+\end{center}
+Letting $\Lambda_R$ be the root lattice $\spa_{\mathbb Z} \{L_i - L_j\}$ generated by the roots of $\mathfrak{sl}(3, \mathbb C)$, we have that the weights lie on the translate $\alpha_0 + \Lambda_R$ of it.
+
+{\bf \underline{Fourth step}:} Find the highest weight of the representation.
+We now assume that $V$ is a finite dimensional irreducible representation of $\mathfrak{sl}(3, \mathbb C)$.
+Before, we found an "extremal" eigenvector $v \in V_\alpha$ of $H$ that was annihilated by $E$, and then we used it to generate $V$ through the action of $E$.
+Then, it was clear what an extremal weight was, since the roots of $\sl(2,\mathbb C)$ were scalars.
+Now, we have to introduce an ordering on the set of weights.
+To do this, we chose a hyperplane in $\mathfrak h^*$ and order the weights by how far they lie from it.
+More concretely, we introduce the functional $\lambda: \mathfrak h^* \to \mathbb \mathbb C$ by extending linearly a functional $\lambda: \Lambda_\mathbb R \to \mathbb R$, which will measure the distance to the hyperplane $\ker \lambda$.
+The extremal weight space will be the $V_\alpha$ with $\mathrm{Re}\lambda(\alpha)>0$ maximal.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{sl_3_C_roots_ordering.png}
+    \caption{Ordering on $\mathfrak h^*$ induced by $\lambda$}
+    \label{fig:roots_ordering}
+\end{figure}
+Note that to avoid ambiguity, we must choose $\ker \lambda$ to be a hyperplane that does not contain any root, i.e.\ $\ker \lambda \cap \Lambda_R = \{0\}$.
+In the case of $\mathfrak{sl}(3, \mathbb C)$, we can choose 
+$\lambda(a_1L_1 + a+2 L_2 + a_3 L_3) = a_1a + a_2b + a_3c$
+for some $a > b > c$ satisfying $a + b + c = 0$.
+Then we can find a highest weight vector $v \in V_\alpha$, i.e.\ an eigenvector of $\mathfrak h$ that is anhiliated by $E_{12}, E_{13}, E_{23}$.
+This gives us a way to generate $V$ from $v$ by the succesive applications of $E_{21}, E_{31}, E_{32}$.
+From this, we can draw the following conclusions:
+\begin{enumerate}[label = (\roman*)]
+    \item The weights are found in the $1/3$-plane of $\mathfrak h^*$ with corner $\alpha$, as in \cref{fig:weights_plane}.
+    \item The highest weight weight space $V_\alpha$ is one-dimensional.
+    \item The weight spaces $V_{\alpha + k(L_2 - L_1)}, k \in \mathbb Z_{\geq 0}$ are also one-dimensional (they lie on the wall of the $1/3$-plane).
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{plane_of_weights.png}
+    \caption{Plane in which the weights of $V$ should lie}
+    \label{fig:weights_plane}
+\end{figure}
+
+And in the case where $V$ is a a finite-dimensional representation of $\mathfrak{sl}(3, \mathbb C)$, and $v \in V$ is a highest weight vector, we have that
+\begin{enumerate}[label = (\roman*)]
+    \item The subrepresentation $W$ generated by succesive applications of $E_{21}, E_{31}, E_{32}$ on $v$ is an irreducible subrepresentation of $V$.
+    \item The set of highest-weight vectors of $V$ forms a union of subspaces $\Psi_W$ of $V$, with $\dim \Psi_W$ being equal to the times that the subrepresentation $W$ appears in $V$.
+\end{enumerate}
+\begin{center}
+    
+{\bf \underline{Fifth step}:} Construction of the weight lattice.
+In the case of $\ssl(3, \mathbb C)$ we found all possible weights by starting from a highest weight vector and applying repeatedly $F$.
+To do the same, we consider a highest weight vector $v \in V_\alpha$ and let $m > 0$ be the first positive integer for which $E_{21}^m(v) = 0$.
+This gives us a string of one-dimensional weight spaces $\mathfrak g_{\alpha + k (L_2 - L_1)}$ whose weights lie on the wall of the $1/3$-plane, as in \cref{fig:sl_3_C_string_of_weights}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{sl_3_C_string_of_weights.png}
+    \caption{String of weights $\alpha + k(L_2 - L_1)$}
+    \label{fig:sl_3_C_string_of_weights}
+\end{figure}
+The subalgebra $\ssl_{L_2 - L_1}$ of $\ssl(3, \mathbb C)$ generated by $H_{1,2}, E_{1,2}, E_{2,1}$ admits the irreducible subrepresentation of this string of weight spaces
+\[
+W = \bigoplus_{k \in \mathbb Z} V_{\alpha + k (L_2 - L_1)}.
+\]
+\end{center}
+By the analysis we did on the representations of $\ssl(3, \mathbb C)$, we deduce that the string of weights is symmetric with respect to the reflection along the hyperplane $\langle L, H_{1,2} \rangle = 0$.
+We note here without proof that this eigenline is perpendicular to the string of weights.
+Similarly, looking at the subalgebra $\ssl_{L_2 - L_3}$, its weights will be symmetric with respect to the reflection along $\langle L, H_{2,3} \rangle = 0$.
+Looking at the last eigenspace of the first string, corresponding to the weight $\beta = \alpha + (m-1)(L_2 - L_1)$, we notice that for eigenvector $v' \in V_\beta$ is anhiliated by $E_{1,2}, E_{2,3}, E_{1,3}$.
+By choosing an another functional $l':\Lambda_R \to \mathbb R$, $\beta$ would be a highest weight, and repeating the same analysis we just did, we find that all eigenvalues of $V$ occur belor or to the right of the lines through $\beta$ in the directions of $L_1 - L_2, L_3 - L_1$ and that the strings of eigenvalues occuring on these two lines are symmetric about the lines $\langle L, H_{1,2} \rangle = 0$ and $\langle L, H_{1,3} \rangle = 0$, giving us \cref{fig:sl_3_C_string_of_weights_2}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{sl_3_C_string_of_weights_2.png}
+    \caption{Second and third strings of weights of $V$}
+    \label{fig:sl_3_C_string_of_weights_2}
+\end{figure}
+Repeating the same process for the extremal weights found at each step, we see that the set of eigenvalues will be bounded by a hexagon symmetric with respect to the eigenlines $\langle L, H_{i,j} \rangle = 0$ and with one vertex in $\alpha$, giving us \cref{fig:sl_3_C_weight_hexagon}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{sl_3_C_weight_hexagon.png}
+    \caption{Weight hexagon of $V$}
+    \label{fig:sl_3_C_weight_hexagon}
+\end{figure}
+
+Letting $\Lambda_W = \spa_{\mathbb Z} \{L_i : i\}$ be the lattice of interstices and using the fact that weights of representations of $\ssl(2, \mathbb C)$ are integers, we obtain
+\begin{proposition}
+    All the eigenvalues of any irreducible finite-dimensional representation of $\ssl(3, \mathbb C)$ must lie in the lattice $\Lambda_W = \spa_{\mathbb Z} \{L_i : i\} \subseteq \mathfrak h^*$ and be congruent modulo the lattice $\Lambda_R = \spa{\mathbb Z} \{L_i - L_j : i \neq j\}$.
+\end{proposition}
+
+Having chosen an ordering functional $l: \Lambda_R \to \mathbb R, l(a_1 L_1 + a_2 L_2 + a_3 L_3) = a_1 a + a_2 b + a_3 c$ with $a > b > c$, we remark that the highest vector of any representation will lie on the $1/6$-plane of the form $ a L_1 - b L_3$ where $a, b \geq 0$.
+\begin{theorem}\label{thm:irreducible_representations_of_sl_3_C}
+    For any pair of natural numbers $a, b$, there exists a unique irreducible finite-dimensional representation $\Gamma_{a,b}$ of $\ssl(3, \mathbb C)$ with highest weight $a L_1 - b L_3$.
+    In particular
+    \[
+    \Gamma_{a,b} = \ker(\iota_{a,b}) \subseteq \Sym^a(V) \otimes \Sym^b(V^*),
+    \]
+    where $V$ is the standard representation of $\ssl(3, \mathbb C)$ and
+    \begin{align*}
+        \iota_{a,b}: \Sym^a(V) \otimes \Sym^b(V^*) &\to \mathbb C, \nonumber \\
+        (v_1 \otimes \cdots \otimes v_a) \otimes (v_1^* \otimes \cdots \otimes v_b^*) &\mapsto \sum_{i,j} \langle v_i, v_j^* \rangle (v_1 \cdots \hat{v_i} \cdots v_a) \otimes (v_1^* \cdots \hat{v_j^*} \cdots v_b^*).
+    \end{align*}
+\end{theorem}
+
+\begin{example}
+    \begin{itemize}
+        \item $\Gamma_{1,0}$ is the standard representation $V$.
+        \item $\Gamma_{0,1}$ is the dual representation $V^*$.
+        \item $\Gamma_{1,1}$ is the adjoint representation $\ad: \ssl(3, \mathbb C) \to \gl(\ssl(3, \mathbb C))$.
+    \end{itemize}
+\end{example}
+
+\begin{fact}
+    The weights of irreducible finite-dimensional representations of $\ssl(3, \mathbb C)$ are convex hulls of triangles or hexagons.
+    The triangles correspond to the symmetric powers of the standard or the dual representation ($\Gamma_{n,0}, \Gamma_{0,n}$), while the hexagons correspond to the tensor product of the standard representation with its dual.
+\end{fact}
+
+\subsection{Examples}
+In \cref{fig:sl_3_C_weights} we see the weights of different representations of $\ssl(3, \mathbb C)$.
+We have the following remarks to make:
+
+Regarding the dual of the standard representation (\cref{fig:sl_3_C_weights_dual}), we note that the weights of the dual of any representations are the negatives of the weights of the representation.
+
+Regarding the symmetric powers pictured in \cref{fig:sl_3_C_weights_symmetric}, \cref{fig:sl_3_C_weights_symmetric_dual}, we can see that they are irreducible since they can't be decomposed into collections arising from representations of $\ssl(3, \mathbb C)$.
+One way to see this is to note that they do not decompose into triangles or hexagons.
+Alternatively, looking for instance at $\Sym^2(V)$, we see that symmetry with respect to reflections tells us that the extremal weights need to be included as weights of the representation, while the fact that the borders of the hexagon need to be uninterrupted strings of weights tells us that the representation needs to include all the weights shown in the figure.
+
+Regarding the tensor product of the standard representation with its dual (\cref{fig:sl_3_C_weights_tensor}), its weights need to be the sums of the weights of the standard representation and the dual of the standard representation.
+Moreover, the representation is isomorphic to the adjoint representation $\ad: \ssl(3, \mathbb C) \to \gl(\gl(3, \mathbb C))$ on the space $\gl(3, \mathbb C)$, via the isomorphism $T: V \otimes V^* \to \hom(V, V)$ given by $T(v \otimes \varphi)(w) = \varphi(w) v$.
+By comparing with the picture of the adjoint representation (\cref{fig:sl_3_C_weights_adjoint}), we are hinted that the representation reducible, since it contains the adjoint representation in $\ssl(3, \mathbb C)$.
+To see this in another way, note that the image of $\pi \otimes \pi^*$ is $T^{-1}(\ssl(3, \mathbb C))$, which is thus a subrepresentation.
+
+Regarding $\Sym^3(V)$ and $\Sym^3(V^*)$ (\cref{fig:sl_3_C_weights_symmetric_cube}, \cref{fig:sl_3_C_weights_symmetric_cube_dual}), we see that they are irreducible.
+In general it is clear that symmetric powers correspond will be exactly the representations whose weight diagrams are triangles (and not hexagons).
+In terms of \cref{thm:irreducible_representations_of_sl_3_C}, we have
+\[
+\Gamma_{n,0} = \Sym^n(V), \quad \Gamma_{0,n} = \Sym^n(V^*).
+\]
+
+Regarding $\Sym^2(V) \otimes V^*$ (\cref{fig:sl_3_C_weights_sym_square_tensor_dual}), we see that it is reducible, since the map
+\[
+\iota: \Sym^2(V) \otimes V^* \to \mathbb C, v w \otimes u^* \mapsto \langle u^*, v \rangle w +  \langle u^*, w \rangle v
+\]
+is a morphism of representations, so its kernel will be a subrepresentationm, with weight diagram pictured in \cref{fig:sl_3_C_weights_G_2_1}.
+Now, $\ker(\iota)$ will contain an irreducible subrepresentation $\Gamma$ with highest weight $2 L_1 - L_3$.
+Looking at the diagram, we can tell that $\Gamma$ will contain all the weights of $\ker i$.
+To know if $\ker i = \Gamma$, we need to check whether the weight spaces corresponding to $L_1, L_2, L_3$ are one or two-dimensional, which we can see from the fact that $\Gamma_{L_1}$ will be the span of the image of $V_{2L_1 - L_3}$ under $E_{2,1}E_{3,2}$ and $E_{3,2}E_{2,1}$.
+
+We also observe that if $V, W$ are representations with highest weights $\alpha, \beta$, then the tensor product $V \otimes W$ will have highest weight $\alpha + \beta$ and $\Sym^n(V)$ will have highest weight $n \alpha$. 
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.23\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{sl_3_C_weights_standard.png}
+        \caption{Standard representation $V$}
+        \label{fig:sl_3_C_weights_standard}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.23\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{sl_3_C_weights_dual.png}
+        \caption{Dual representation $V^*$}
+        \label{fig:sl_3_C_weights_dual}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.23\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{sl_3_C_weights_symmetric.png}
+        \caption{Symmetric power $\Sym^2(V)$}
+        \label{fig:sl_3_C_weights_symmetric}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.23\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{sl_3_C_weights_symmetric_dual.png}
+        \caption{Symmetric power of dual $\Sym^2(V^*)$}
+        \label{fig:sl_3_C_weights_symmetric_dual}
+    \end{subfigure}
+    \vskip\baselineskip
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{sl_3_C_weights_adjoint.jpg}
+        \caption{$\Gamma_{1,1}$ or the adjoint representation $\ad : \ssl(3,\mathbb C) \to \gl(\ssl(3,\mathbb C))$}
+        \label{fig:sl_3_C_weights_adjoint}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{sl_3_C_weights_tensor.png}
+        \caption{Tensor product $V \otimes V^* \simeq \ad : \ssl(3,\mathbb C) \to \gl(\gl(3, \mathbb C))$}
+        \label{fig:sl_3_C_weights_tensor}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{sl_3_C_weights_symmetric_cube.png}
+        \caption{$\Sym^3(V)$}
+        \label{fig:sl_3_C_weights_symmetric_cube}
+    \end{subfigure}
+    \vskip\baselineskip
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{sl_3_C_weights_symmetric_cube_dual.png}
+        \caption{$\Sym^3(V^*)$}
+        \label{fig:sl_3_C_weights_symmetric_cube_dual}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{sl_3_C_weights_sym_square_tensor_dual.png}
+        \caption{$\Sym^2(V) \otimes V^*$}
+        \label{fig:sl_3_C_weights_sym_square_tensor_dual}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{sl_3_C_weights_G_2_1.png}
+        \caption{$\Gamma_{2,1}$}
+        \label{fig:sl_3_C_weights_G_2_1}
+    \end{subfigure}
+    \caption{Weights of representations of $\ssl(3, \mathbb C)$}
+    \label{fig:sl_3_C_weights}
+\end{figure}
+
+\section{$\mathrm{SL}(d, \mathbb K)$}
 We have
 \begin{align*}
     \mathfrak{sl}(d, \mathbb K) &= \{ x \in \gl(d, \mathbb K) : \tr x = 0\}\\
 \end{align*}
-For the particular case of $d = 2$, we fix the following basis of $\mathfrak{sl}(2, \mathbb K)$:
+The Cartan subalgebra is given by
 \[
-\mathfrak{sl}(2, \mathbb K) = \left\{ \begin{pmatrix} a & b \\ c & -a \end{pmatrix} : a,b,c \in \mathbb K \right\} = \mathrm{span}\left\{ h = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}, e = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, f = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix} \right\}
+\mathfrak h = \left\{ a_1 H_1 + \cdots + a_d H_d : a_1 + \cdots + a_d = 0 \right\},
 \]
+where $H_i = E_{i,i}$.
+We denote with $L_i \in \mathfrak h^*$ the dual basis of $H_i$.
+The roots are 
+\[
+    \Delta = \{ L_i - L_j : i \neq j \},
+\] 
+and the root spaces are $$\mathfrak g_{L_i - L_j} = \mathbb C E_{i,j}.$$
+
+To find the Killing form, by \cref{ex:simple_killing_form} we know that it is a constant multplle of the trace form.
+Then by a concrete calculation over $\mathfrak h$, we find that the constant is $2d$:
+\[
+K(x, y) = 2d \tr(xy).
+\]
+
+The root lattice is given by
+\[
+\Lambda_R = \left\{ \sum c_i L_i : c_i \in \mathbb Z, \sum_i c_i = 0 \right\}/\left\{ \sum_i L_i = 0 \right\}.
+\]
+
+The distinguished subalgebra is 
+$$\mathfrak s_{L_i - L_j} \simeq \mathbb C E_{i,j} \oplus \mathbb C E_{j,i} \oplus \mathbb C (H_i - H_j),$$
+and the hyperplane $\Omega_{L_i - L_j} = (L_i - L_j)^\perp$ is given by
+\[
+\Omega_{L_i - L_j} = \left\{ \sum_r c_r L_r : c_i = c_j \right\}.
+\]
+
+The weight lattice is given by 
+\[
+\Lambda_W = \spa_{\mathbb Z} \{L_1, \cdots, L_d\} / \left\{ \sum L_i = 0  \right\}
+\]
+
+The Weyl group is the symmetric group $S_d$ and each reflection $s_{L_i - L_j}$ is exchanges $L_i$ and $L_j \in \mathfrak h^*$.
 \subsection{Killing form}
 We consider the case $d = 2$.
 In the ordered basis $h,e,f$, the adjoint representation is given by
@@ -2806,7 +3683,7 @@ So the Killing form is given by
 B = \begin{pmatrix} 8 & 0 & 0 \\ 0 & 0 & 4 \\ 0 & 4 & 0 \end{pmatrix}.
 \]
 
-\section{Simplicity}
+\subsection{Simplicity}
 We will show that $\SL(d, \mathbb K)$ is simple.
 First we note that if any ideal $I$ of $\mathfrak{sl}(d, \mathbb K)$ contains some $E_{ij}$ with $i \neq j$, then it $I = \mathfrak{sl}(d, \mathbb K)$, since
 \begin{align*}
@@ -2821,6 +3698,215 @@ Indeed, if $X \in I - \{0 \}$, then we consider two cases.
 If there exists an off-diagonal nonzero entry $x_{ji}, j\neq i$ of $X$, then $[[X, E_{ij}], E_{ij}] = -2x_{ji}E_{ij} \in I$.
 If on the other hand all nonzero entries of $X$ are concentrated on the diagonal, we let some $i \neq j$ such that $x_{ii} \neq x_{jj}$.
 Then $[X, E_{ij}] = (x_{ii} - x_{jj})E_{ij} \in I$. 
+
+\section{$\mathrm{Sp}(2n, \mathbb C)$}
+We will consider the skew-symmetric bilinear form $Q$ with matrix given by
+\[
+J_{n,n} = \begin{pmatrix}
+    0 & I_n\\
+    -I_n & 0
+\end{pmatrix}.
+\]
+Using block matrices, we find the algebra to be
+\[
+\mathfrak{sp}(2n, \mathbb C) = \left\{ \begin{pmatrix}
+    A & B\\
+    C & -A^t
+\end{pmatrix}: A, B,C \in \mathfrak{gl}(n, \mathbb C), B^t = B, C^t = C
+\right\}.
+\]
+
+\subsection{Cartan subalgebra}
+We will consider the Cartan subalgebra $\mathfrak h$ of diagonal matrices in $\mathfrak{sp}(2n, \mathbb C)$ given by
+\[
+\mathfrak h = \left\{
+    \begin{pmatrix}
+        \diag(a_1,\cdots, a_n, -a_1,\cdots, -a_n)
+    \end{pmatrix} : a_i \in \mathbb{C}    
+\right\},
+\]
+
+It is a maximal abelian subalgebra of $\so(m, \mathbb C)$, because $H = \diag(1, 2, \cdots, n, -1, \cdots, -n)$ is diagonalisable with distinct eigenvalues.
+Thus any matrix that commutes with it will have the same eigenvectors, i.e.\ it will be diagonalisable.
+
+\subsection{Roots and root decomposition}
+Denote with $L_i$ the dual basis of $H_i = E_{ii} - E_{n+i,n+i}$.
+Then we have the following relations:
+\begin{align*}
+    \ad_{H}(E_{ij} - E_{n+j,n+i}) &= (L_i - L_j)(E_{ij} - E_{n+j,n+i}),\\
+    \ad_{H}(E_{i,n+j} + E_{j,n+i}) &= (L_i + L_j)(E_{i,n+j} + E_{j,n+i}),\\
+    \ad_{H}(E_{n+i,j} + E_{n+j,i}) &= (-L_i - L_j)(E_{n+i,j} + E_{n+j,i}),\\
+    \ad_{H}(E_{i,n+i}) &= 2L_i(E_{i,n+i}),\\
+    \ad_{H}(E_{n+i,i}) &= -2L_i(E_{n+i,i}).
+\end{align*}
+This diagonalizes the adjoint action of $\mathfrak h$, so the roots are
+\[
+\Delta = \{ (\pm L_i \pm L_j) : 1 \leq i \leq j \leq n \},
+\]
+and the root decomposition of $\mathfrak{sp}(2n, \mathbb C)$ is given by
+\[
+\mathfrak{sp}(2n,\mathbb C) = \mathfrak h \oplus \bigoplus_{1 \leq i \leq j \leq n} \mathfrak g_{\pm L_i \pm L_j},
+\]
+where
+\begin{align*}
+    \mathfrak g_{L_i - L_j} &= \mathbb C \left( E_{ij} - E_{n+j,n+i} \right),\\
+    \mathfrak g_{L_i + L_j} &= \mathbb C \left( E_{i,n+j} + E_{j,n+i} \right),\\
+    \mathfrak g_{2L_i} &= \mathbb C \left( E_{i,n+i} \right),\\
+    \mathfrak g_{-2L_i} &= \mathbb C \left( E_{n+i,i} \right).
+\end{align*}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{root_diagram_sp(4,C).jpg}
+    \caption{Root diagram for $\mathfrak{sp}(4, \mathbb C)$}
+    \label{fig:root_diagram_sp_4_C}
+\end{figure}
+\subsection{Killing form}
+We know the Killing form is a multiple of the trace form, so by concrete calculation on $\mathfrak{h}$ we find it to be
+\[
+B(x,y) = 4(n+1)\tr(xy).
+\]
+
+\section{$\SO(n)$}
+Here there is, as we will see very shortly, a very big difference in behavior
+between the so-called "even" orthogonal Lie algebras $\SO(2n, \mathbb C)$ and the "odd"
+orthogonal Lie algebras $\SO(2n+1, \mathbb C)$. 
+Interestingly enough, the latter seem at first glance to be more complicated, especially in terms of notation; but when we analyze their representations we see that in fact they behave more regularly than the even ones.
+
+We will consider a complex vector space $V$, endowed with a non-degenerate symmetric bilinear form $Q$, whose matrix with respect to a base $e_1, \cdots, e_m$ for $V$ will be denoted with $M$.
+In the even dimensional case $m = 2n$, we will use:
+\[
+M = \begin{pmatrix}
+    0 & I_n\\
+    I_n & 0
+\end{pmatrix}.
+\]
+Using block matrices, one can show that
+\[
+\mathfrak{so}(2n, \mathbb C) = \left\{ \begin{pmatrix}
+    A & B\\
+    C & -A^t
+\end{pmatrix}: A, B,C \in \mathfrak{gl}(n, \mathbb C), B^t = -B, C^t = -C
+\right\}.
+\]
+
+In the odd dimensional case $m = 2n+1$, we will use:
+\[
+M = \begin{pmatrix}
+    0 & I_n & 0\\
+    I_n & 0 & 0\\
+    0 & 0 & 1
+\end{pmatrix}
+\]
+and the Lie algebra is given by
+\[
+\mathfrak{so}(2n+1, \mathbb C) = \left\{
+    \begin{pmatrix}
+        A & B & -H^t\\
+        C & -A^t & -G^t\\
+        G & H & 0
+    \end{pmatrix}: A, B, C \in \mathfrak{gl}(n, \mathbb C), G,H \in C^{1 \times n}
+\right\}.
+\]
+
+\subsection{Cartan subalgebra}
+We will consider the Cartan subalgebra $\mathfrak h$ of diagonal matrices in $\so(m, \mathbb C)$.
+In the even dimensional case of $\mathfrak{so(2n, \mathbb C)}$, we have:
+\[
+\mathfrak h = \left\{
+    \begin{pmatrix}
+        \diag(a_1,\cdots, a_n, -a_1,\cdots, -a_n)
+    \end{pmatrix} : a_i \in \mathbb{C}    
+\right\},
+\]
+and in the odd dimensional case of $\mathfrak{so(2n + 1, \mathbb C)}$, we have:
+\[
+\mathfrak h = \left\{
+    \begin{pmatrix}
+        \diag(a_1,\cdots, a_n, -a_1,\cdots, -a_n, 0)
+    \end{pmatrix} : a_i \in \mathbb{C}    
+\right\}.
+\]
+
+It is a maximal abelian subalgebra of $\so(m, \mathbb C)$, because $H = \diag(1, 2, \cdots, n, -1, \cdots, -n)$ (or $ H = \diag(1, 2, \cdots, n, -1, \cdots, -n, 0)$ in the odd dimensional case) is diagonalisable with distinct eigenvalues.
+Thus any matrix that commutes with it will have the same eigenvectors, i.e.\ it will be diagonalisable.
+
+\subsection{Roots and root decomposition}
+Denote with $L_i$ the dual basis of $H_i = E_{ii} - E_{n+i,n+i}$.
+Then we have the following relations:
+\begin{align*}
+    \ad_{H}(E_{ij} - E_{ji}) &= (L_i - L_j)(E_{ij} - E_{ji}),\\
+    \ad_{H}(E_{i,n+j} - E_{j,n+i}) &= (L_i + L_j)(E_{ij} - E_{ji}),\\
+    \ad_{H}(E_{n+i,j} - E_{n+j,i}) &= (-L_i - L_j)(E_{ij} - E_{ji}),\\
+    \ad_{H}(E_{n+i,n+j} - E_{n+j,n+i}) &= (-L_i + L_j)(E_{ij} - E_{ji}).
+\end{align*}
+In the even dimensional case of $\so(2n, \mathbb C)$, this diagonalizes the adjoint action of $\mathfrak h$, so the roots are
+\[
+\Delta = \{ (\pm L_i \pm L_j) : 1 \leq i < j \leq n \},
+\]
+and the root decomposition of $\mathfrak{so}(2n, \mathbb C)$ is given by
+\[
+\mathfrak{so}(2n,\mathbb C) = \mathfrak h \oplus \bigoplus_{1 \leq i < j \leq n} \mathfrak g_{\pm L_i \pm L_j},
+\]
+where
+\begin{align*}
+    \mathfrak g_{L_i - L_j} &= \mathbb C \left( E_{ij} - E_{ji} \right),\\
+    \mathfrak g_{L_i + L_j} &= \mathbb C \left( E_{i,n+j} - E_{j,n+i} \right),\\
+    \mathfrak g_{-L_i - L_j} &= \mathbb C \left( E_{n+i,j} - E_{n+j,i} \right),\\
+    \mathfrak g_{-L_i + L_j} &= \mathbb C \left( E_{n+i,n+j} - E_{n+j,n+i} \right).
+\end{align*}
+
+For the odd-dimensional case of $\so(2n+1, \mathbb C)$, to diagonalise the adjoint action of $\mathfrak h$ we also need the relations:
+\begin{align*}
+    \ad_{H}(E_{i,2n+1} - E_{2n+1,n+i}) &= L_i(E_{i,2n+1} - E_{2n+1,i}),\\
+    \ad_{H}(E_{n+i,2n+1} - E_{2n+1,i}) &= -L_i(E_{i,2n+1} - E_{2n+1,i}),\\
+\end{align*}
+so the root space decomposition is given by
+\[
+    \mathfrak{so}(2n+1,\mathbb C) = \mathfrak h \oplus \bigoplus_{1 \leq i < j \leq n} \mathfrak g_{\pm L_i \pm L_j} \oplus \bigoplus_{1 \leq i \leq n} \mathfrak g_{\pm L_i}.
+\]
+where the last root spaces are given by
+\[
+\mathfrak g_{L_i} = \mathbb C \left( E_{i,2n+1} - E_{2n+1,n+i} \right), \quad \mathfrak g_{-L_i} = \mathbb C \left( E_{n+i,2n+1} - E_{2n+1,i} \right).
+\]
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{root_diagram_a1+a_1.jpg}
+        \caption{$A_1 \oplus A_1$: Root diagram for $\mathfrak{so}(4, \mathbb C)$}
+        \label{fig:root_diagram_so_4_C}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{root_diagram_so(5,C).jpg}
+        \caption{Root diagram for $\mathfrak{so}(5, \mathbb C)$}
+        \label{fig:root_diagram_so_5_C}
+    \end{subfigure}
+    \caption{Root diagrams for $\mathfrak{so}(4, \mathbb C)$ and $\mathfrak{so}(5, \mathbb C)$}
+\end{figure}
+\section{$\SO(3)$}
+Let
+\[
+i = \begin{pmatrix}
+    0 & 0 & 0\\
+    0 & 0 & 1\\
+    0 & -1 & 0
+\end{pmatrix}, \quad j = \begin{pmatrix}
+    0 & 0 & 1\\
+    0 & 0 & 0\\
+    -1 & 0 & 0
+\end{pmatrix}, \quad k = \begin{pmatrix}
+    0 & 1 & 0\\
+    -1 & 0 & 0\\
+    0 & 0 & 0
+\end{pmatrix}
+\]
+be the basis for $\mathfrak{so}(3)$.
+In this basis, the Killing form is given by 
+\[
+K = - 2I_3.
+\]
 
 \section{$\SO(p,q)$}
 Assume that $p \leq q$.
