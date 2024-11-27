@@ -3086,6 +3086,30 @@ Denoting with $\phi = \Phi_*: \mathfrak{sl}(2,\mathbb C) \to \gl(V_n)$ the induc
     This follows from the fact that for $v_\alpha, v_\beta \in \Sym^2(\mathbb C^2)$ of eigenvalues $\alpha, \beta$ respectively, we have that $v_\alpha \wedge v_\beta$ has eigenvalues $\alpha + \beta$, provided that $v_\alpha \wedge v_\beta \neq 0$. 
 \end{proof}
 
+\begin{exercise}[Exercise 14.14]\label{ex:irreducible_subrepresentation}
+    Let $V$ be a representation of a semisimple Lie algebra $\mathfrak g$.
+    We fix a decomposition of the roots $R = R^+ \cup R^-$ and denote with $\Pi$ the set of simple positive roots.
+    If $v$ is a highest weight vector, then the subspace $W$ generated under succesive applications of root spaces $\mathfrak g_\beta$ corresponding to primitive negative roots $\beta \in -\Pi$ is an irreducible subrepresentation with highest weight $v$.
+\end{exercise}
+\begin{proof}
+    Let
+    \[
+    W_n = \spa\{ w_n v : w_n \text{ word of length at most } n \text{ with letters in } \mathfrak g_\beta \text{ with } \beta \in -\Pi \},
+    \]
+    and denote with $\Pi = \{\alpha_1, \cdots, \alpha_r\}$ the set of simple positive roots.
+    Then $W$ is the sum of all $W_n$, so it suffices to show that $X_\beta (Y_{-\alpha_i}) \in W$ for $\beta \in R$ and $Y$ a word with letters in root spaces of primitive negative roots.
+    For the case where $\beta > 0$, we have $X_\beta (Y_{-\alpha_i}) = [X_\beta, Y_{-\alpha_i}]v + Y_{-\alpha_i} X_\beta v = 0$.
+    Indeed, we have $X v = 0$, because $v$ is a highest weight vector.
+    To show $[X,Y]v = 0$, note that  $[X, Y] \in \mathfrak g_{\beta - \alpha_i}$.
+    Letting $\beta = n_1 \alpha_1 + \cdots + n_r \alpha_r$ for nonnegative integers $n_i$, we have $\beta - \alpha_i = n_1 \alpha_1 + \cdots + (n_i - 1) \alpha_i + \cdots + n_r \alpha_r$.
+    If $n_1 > 0$, then $\beta - \alpha_i \geq 0$, so $[X,Y]v = 0$ or is a multiple of $v$.
+    If $n_1 = 0$, then $\beta - \alpha_i$ can't be a positive root (since the coefficient in $\alpha_i$ is negative), and can't be negative (since the coefficients in the other simple roots are nonnegative), so it can't be a root, and $[X,Y] = 0$.
+
+    For the case where $\beta < 0$, recalling that $[\mathfrak g_{\gamma}, \mathfrak g_{\delta} ] = \mathfrak g_{\gamma + \delta}$, we have that $X_\beta$ is a bracket (of brackets) of elements in root space $\mathfrak g_{-\alpha_j}$ corresponding to primitive negative roots, $X Y$ will be in the span of words with letters in root spaces of primitive negative roots.
+
+    For the case of $X_\beta = H \in \mathfrak h$, we proceed inductively and have that $H Y v = [H,Y]v + YHv \in W_{n-1}$ because $H v = \lambda v$ for some $\lambda$, and $[H, Y] $ is a word of length $n-1$.
+\end{proof}
+
 
 \section{Linear algebra exercises}
 \begin{exercise}
@@ -3226,7 +3250,7 @@ s_\alpha (\beta + k \alpha) = \beta + (-\langle H_\alpha, \beta \rangle - k) \al
 {\bf \underline{Step 7}:} \emph{Choose a direction in $\mathfrak h^*$:}
 By taking a linear functional $l:\Lambda_\Delta \to \mathbb C$ that is irrational with respect to $\Lambda_\Delta$, which gives us a decomposition of the set of roots, and allows us to find a highest weight vector (i.e.\ a weight vector that is anhiliated by all $\mathfrak g_\alpha$ for $\alpha \in \Delta^+$).
 
-One can show that
+One can show (cf. \cref{ex:irreducible_subrepresentation}) that
 \begin{proposition}
     For any semisimple complex Lie algebra
     \begin{enumerate}[label = (\roman*)]
@@ -3256,6 +3280,41 @@ We define the Weyl chamber as the vectors in the real span of $\Delta$ that form
     \]
     Denoting the representation corresponding to $\alpha \in \mathcal W \cap \Lambda_W$ by $\Gamma_\alpha$, the weights of $\Gamma_\alpha$ will be $$(\alpha + \Lambda_\Delta) \cap \Lambda_W \cap \mathrm{Conv}(W \cdot \alpha).$$
 \end{theorem}
+
+\section{Drawing root and weight diagrams}
+We take the example of $\mathfrak{sl}(3, \mathbb C)$, and in particular reply to the following question:
+\begin{question}
+    Why do the weights of the standard representation of $\ssl(n, \mathbb C)$ lie on the vertices of a simplex?
+\end{question}
+
+The root diagram will be a drawing of $\mathbb spa_{\mathbb R} \Delta$, with angles and lengths determined by the Killing form.
+Recall that the way we define the Killing form on $\mathfrak h^*$ is using the identification $\mathfrak h \simeq \mathfrak h^*, H \mapsto \langle H, \cdot \rangle$.
+For each root $\alpha \in \Delta$, we know that we can find elements $E_\alpha, F_\alpha, H_\alpha$ such that they are the basis for a subalgebra $\ssl_\alpha \simeq \ssl(2, \mathbb C)$.
+Note that then we have that $\langle H_\alpha, \alpha \rangle = 2$, and using the invariance of the Killing form under the adjoint representation, we have that
+\[
+T_\alpha = \frac{2}{(H_\alpha, H_\alpha)} H_\alpha.
+\]
+Hence,
+\[
+(\alpha, \beta) = \frac{2}{|H_\alpha|^2} \langle H_\alpha, \beta \rangle
+\]
+
+Going to the case of $\ssl(3, \mathbb C)$, we have that $(X, Y) = 2 \cdot 3 \tr(XY)$, so $|H_\alpha|^2 = 12$ and $|\alpha|^2 = 1/3$.
+We can also calculate the angles between the roots:
+\begin{align*}
+    (L_1 - L_2, L_2 - L_3) = \frac{2}{12} \langle H_{1,2}, L_2 - L_3 \rangle = -1/6,
+\end{align*}
+so the angle between $L_1 - L_2$ and $L_2 - L_3$ is $\pi/2 + \pi/6$.
+Similarly, we find that the angle between $L_1 - L_2$ and $L_1 - L_3$ is $\pi/2 - \pi/6$.
+This suffices to draw the root diagram and the root lattice.
+To draw the weights $L_1, L_2, L_3$ of the standard representation, we use the fact that $L_1 + L_2 + L_3 = 0$, so $(L_1 - L_2) + (L_2 - L_3) = 3 L_1$, and we proceed similarly for the other weights.
+All in all, we obtain \cref{fig:roots_and_weights_for_standard_sl_3_C}, where we can clearly see that the weights of the standard representation fall on the vertices of a 2-simplex.
+\begin{figure}[h]\label{fig:roots_and_weights_for_standard_sl_3_C}
+    \centering
+    \includegraphics[width=0.6\textwidth]{roots_and_weights_for_standard_sl_3_C.jpg}
+    \caption{Roots (in black) of $\ssl(3,\mathbb C)$ and weights (in purple) of its adjoint representation.}
+\end{figure}
+
 
 \chapter{Case studies}
 \section{$\mathbb R$}
