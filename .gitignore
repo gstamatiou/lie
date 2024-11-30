@@ -16,3 +16,14 @@ main.bcf-SAVE-ERROR
 main.blg
 LaTeXML.cache
 .DS_Store
+lie.aux
+lie.bbl
+lie.bcf
+lie.blg
+lie.fdb_latexmk
+lie.fls
+lie.log
+lie.out
+lie.run.xml
+lie.synctex.gz
+lie.toc
