@@ -1150,6 +1150,35 @@ Now we are ready to give a classification of irreducible representations of $\ma
     Similarly, the only irreducible representations of $\mathbb S^1 = \mathbb R/ \mathbb Z$ are one-dimensional complex spaces $V_k$ for $k \in \mathbb Z$, and are given by $t \mapsto e^{2\pi i k t}$.
 \end{example}
 
+\begin{proposition}
+    If $\mathfrak g$ is completely irreducible (real or complex), then the decomposition into irreducible factors is unique up to isomorphism, i.e.\ for decompositions $\oplus V_i, \oplus V'_i$, we have $V_i \simeq V'_{\sigma(i)}$ for some permutation $\sigma$.
+\end{proposition}
+\begin{proof}
+    We begin by considering the case of decompositions into two factors: $V_1 \oplus V_2 = V_1' \oplus V_2'$.
+    Note that each projection $p_{i,j}: V_i \to V'_j$ is a morphism of representations, so by Schur's lemma, it is either zero or an isomorphism.
+    
+    If $p_{1,1} = 0$, then $V_1 = V_2'$. Also $p_{2,1} \neq 0$, since otherwise $p_{0,1}: V_1 \oplus V_2 \to V_2'$ would be trivial.
+    Hence $p_{1,2}$ is an isomorphism and $V_2 \simeq V_1'$.
+    Similarly, $p_{2,2} = 0$ implies $V_2 = V_1'$ and $V_1 \simeq V_2'$.
+    Assuming that $p_{1,1}, p_{2,2} \neq 0$, we have $V_1 \simeq V_1'$ and $V_2 \simeq V_2'$ by Schur's lemma.
+
+    For the general case, we proceed by induction.
+    First, we consider an isomorphism
+    \[
+    \phi: \bigoplus V_i \to \bigoplus V'_i.
+    \]
+    and denote with $\phi_{i,j}:V_i \to V_j'$ be the composition of the inclusion of $V_i$ into the direct sum, $\phi$ and the projection to $V_j'$.
+    Then $\phi_{i,j}$ is a morphism of representations, so by Schur's lemma, it is either zero or an isomorphism.
+    Let
+    \begin{align*}
+        A &= \bigoplus_{V_i \simeq V_1} V_i,\quad B &= \bigoplus_{V_i \not \simeq V_1} V_i,\\
+        A' &= \bigoplus_{V_i \simeq V_1'} V_i,\quad B' &= \bigoplus_{V_i \not \simeq V_1'} V_i.
+    \end{align*}
+    Then the fact that $\phi_{1,j} = 0$ for all $V_j' \not \simeq V_1$ implies that $\phi(A) \subseteq A'$.
+    Similarly we obtain $\phi(B) \subseteq B'$ and surjectivity of $\phi$ implies that $\phi(A) = A'$ and $\phi(B) = B'$.
+    The result now follows from the inductive hypothesis.
+\end{proof}
+
 \section{Complete irreducibility of unitary representations, representations on finite groups}
 
 \begin{definition}
@@ -2498,6 +2527,83 @@ Suppose $V$ is an $n$-dimensional vector space over a field $\mathbb{K}$.
     Since it is a covering map and $G$ is simply connected, it is a homeomorphism.
 \end{proof}
 
+\begin{exercise}[Invariant forms for irreducible representations are non-degenerate]
+    Let $\mathfrak g$ be a real or complex Lie algebra and $\rho:\mathfrak g \to \gl(V)$ be an irreducible representation.
+    If $\omega$ is a bilinear form on $V$ preserved by $\rho$, then it is non-degenerate.
+\end{exercise}
+\begin{proof}
+    It suffices to show that isotropic vectors $v$ span subrepresentations.
+    In fact, it suffices to show that $\mathbb C v$ is invariant, since it is one-dimensional.
+    Indeed, for $u \in V$, $\omega(\rho(x)v, u) = -\omega(v, \rho(x)u) = 0$.
+\end{proof}
+
+\begin{exercise}[Geometric characterisation of $\PSO(n, \mathbb C)$]
+    Consider a non-degenerate symmetric bilinear product $(\cdot, \cdot)$ on $\mathbb C^n$.
+    Then the group of transformations $[g] \in \PSO(n, \mathbb C)$ that preserves the quadric hypersurface
+    \[
+    S = \left\{ [x] \in \mathbb P(\mathbb C^n) \mid (x,x) = 0 \right\}
+    \]
+    is $\PSO(n, \mathbb C)$.
+\end{exercise}
+\begin{proof}
+    Let $[g] \in \PSO(n, \mathbb C)$ be a transformation that preserves $S$.
+    If $[g] \neq [\id]$, then there exist $u, v \in \mathbb C^n$ such that $(u,u) = (v,v) = 1$ and $(gu, gv) = 1, (gv, gv) = \beta$ with $\beta \neq \pm 1$.
+    Then for $x \in \mathbb C^n$, we have that
+    \begin{align*}
+        (g(xu + v), g(xu + v)) &= x^2 + 2x(gu, gv) + \beta^2 \text{ and }\\
+        (xu + v, xu + v) &= x^2 + 2x(u,v) + 1.
+    \end{align*}
+    are monic polynomials with the same roots (counting multiplicities).
+    Hence they are equal, and in particular $\beta = \pm 1$.
+\end{proof}
+
+\begin{exercise}[The highest weight lies in the Weyl chamber]\label{ex:highest_weight_inside_weyl_chamber}
+    Let $\mathfrak g$ be a finite dimensional Lie algebra.
+    For any fixed ordering of the roots, the highest weight $\alpha$ of any irreducible representation lies in the intersection of the weight lattice and the interior of the Weyl chamber.
+\end{exercise}
+\begin{proof}[Solution]
+    Let $\gamma \geq 0$ be a positive root.
+    To show that $\alpha \in \mathcal W$, it suffices to show that $\langle \alpha, \gamma \rangle \in \mathbb Z_{>0}$.
+    Since $T_\alpha = 2\|H_\alpha\|^{-2} H_\alpha$, this is equivalent to $\langle H_\alpha, \gamma \rangle > 0$.
+    Recall that
+    \[
+    \bigoplus_{ k \in \mathbb Z } V_{\alpha + k \gamma} = 
+    \bigoplus_{ k \in \mathbb Z_{\geq 0} } V_{\alpha - k \gamma},
+    \]
+    is a representation for $\mathfrak{sl}_2(\gamma)$, where the eqaulity is due to the fact that $\alpha$ is the highest weight.
+    But by the theory of representations of $\ssl(2, \mathbb C)$, we know that the weights $\langle \alpha - k \gamma, H_\gamma \rangle = \langle \alpha, H_\gamma \rangle - 2k$ is a string of integers symmetric about $0$.
+    Hence $\langle \alpha, H_\gamma \rangle$ is a positive integer (and in fact $k$ runs through $0, \cdots, \langle \alpha, H_\gamma \rangle$).
+\end{proof}
+
+\begin{exercise}[Dual space as a wedge product]\label{ex:dual_space_as_wedge_product}
+    \begin{enumerate}[label = (\alph*)]
+        \item Let $V$ be a vector space of dimension $d$.
+        Then the dual space $V^*$ is isomorphic to $\bigwedge^{d-1} V$.
+        \item Let $V$ be the standard representation $\mathbb C^d$ of $\SL(d, \mathbb R)$. Then the dual representation $V^*$ is isomorphic to $\bigwedge^{d-1} V$.
+    \end{enumerate}
+    
+\end{exercise}
+\begin{proof}[Solution]
+    \begin{enumerate}[label = (\alph*)]
+        \item 
+    Consider the map 
+    \[
+    \phi: \bigwedge^{d-1} V \to V^* \text{ defined by } \phi(v_1 \wedge \cdots \wedge v_{d-1})(v) = \det(v_1, \cdots, v_{d-1}, v)
+    \] 
+    and let $e_1, \cdots, e_d$ be a base of $V$ such that $\det(e_1, \cdots, e_d) = 1$.
+    Then $e_1 \wedge \cdots \wedge \hat e_i \wedge \cdots \wedge e_d$, for $i = 1, \cdots, d$ is a basis of $\bigwedge^{d-1} V$.
+    With respect to this basis and to the dual basis of $V$, the map $\phi$ is the identity.
+        \item
+    Suffices to check that the map just defined is a morphism of representations.
+    Indeed, for $g \in \SL(d, \mathbb R)$, we have
+    \begin{align*}
+        \phi(g(v_1 \wedge \cdots \wedge v_{d-1}))(v) &= \det(gv_1, \cdots, gv_{d-1}, v)\\
+        &= \det(g) \det(v_1, \cdots, v_{d-1}, g^{-1}v)\\
+        &= \phi(v_1 \wedge \cdots \wedge v_{d-1})(g^{-1}v).
+    \end{align*}
+    \end{enumerate}
+\end{proof}
+
 \section{Kirillov's book}
 In this section, we have solutions for certain exercises of \cite{kirillov2008introduction}.
 
@@ -2651,7 +2757,7 @@ $\SU(2)$.
     where $\rho_{V_1}(x) \in \mathbb C^{k \times k}$ is the matrix of $\rho_{V_1}(x)$ in the basis $v_1, \cdots, v_k$ and $\rho_{W/V_1}(x) \in \mathbb C^{l \times l}$ is the matrix of $\rho_{W/V_1}(x)$ in the basis $\beta(w_1), \cdots, \beta(w_l)$ of $V_2$.
     Thus
     \[
-    \rho_W(x)\rho = 
+    \rho_W(x)\rho_W(y) = 
     \begin{pmatrix}
         \rho_{V_1}(x) \rho_{V_1}(y) & *\\
         0 & \rho_{W/V_1}(x)\rho_{W/V_1}(y)
@@ -3110,6 +3216,42 @@ Denoting with $\phi = \Phi_*: \mathfrak{sl}(2,\mathbb C) \to \gl(V_n)$ the induc
     For the case of $X_\beta = H \in \mathfrak h$, we proceed inductively and have that $H Y v = [H,Y]v + YHv \in W_{n-1}$ because $H v = \lambda v$ for some $\lambda$, and $[H, Y] $ is a word of length $n-1$.
 \end{proof}
 
+\begin{exercise}[Exercise 15.11]\label{ex:irreducible_symmetric_powers}
+    Let $V = \mathbb C^4$ be the standard representation of $\mathfrak{sl}(4, \mathbb C)$.
+    Then $\Sym^n V$ is irreducible for all $n$.
+\end{exercise}
+\begin{proof}
+    We first list the weights of $\Sym^n V$.
+    These are the sums of the form 
+    \[
+    L_{(n)} = n_1 L_1 + n_2 L_2 + n_3 L_3 + n_4 L_4,
+    \]
+    with $n_i \geq 0$ and $n_1 + n_2 + n_3 + n_4 = n$.
+    The multiplicity of each weight is the same as the number of admissible $(n_1, n_2, n_3, n_4)$.
+    Clearly, it is $1$ for $n \leq 4$, and this implies that the same is true in the case $n \geq 5$, after substracting $\min\{n_1, \cdots, n_4\}$ from the equation.
+    For each admissible $(n_1, n_2, n_3, n_4)$, we have that $e_1^{n_1} e_2^{n_2} e_3^{n_3} e_4^{n_4}$ is a weight vector for $L_{(n)}$.
+    In particular every weight space of $\Sym^n(V)$ is one-dimensional, so it suffices to show that the irreducible representation with highest vector $n L_1$ has all weights of $\Sym^n V$.
+    Indeed, it is easy to see that we can obtain any monomial of degree $n$ by applying unipotent elements of $\mathfrak g_{L_i - L_j}, i > j$.
+    For instance $E_{i,1}^k e_1^n = e_1^{n-k} e_i^k$ and similarly we get the rest of the monomials. 
+\end{proof}
+
+\begin{exercise}
+    Let $V = \mathbb C^4$ be the standard representation of $\mathfrak{sl}(4, \mathbb C)$.
+    Then $\Sym^n \bigwedge^2 V$ is irreducible for all $n$.
+\end{exercise}
+\begin{proof}
+    We begin by describing the weights of $\Sym^n \bigwedge^2 V$.
+    Since the weights of $\bigwedge^2 V$ are $L_i + L_j$ for $i < j$, the weights of $\Sym^n \bigwedge^2 V$ are sums of the form
+    \[
+    L_{(n)} = \sum_{i < j} n_{ij} (L_i + L_j),
+    \]
+    with $n_{ij} \geq 0$ and $\sum_{i < j} n_{ij} = n$.
+    In particular, we see that $0$ has multiplicity equal to the number of partitions of ${L_1, \cdots, L_4}$ into $2$-element sets.
+    For instance in the case $n=2$, this is equal to $\binom{4}{2} = 6$, and the basis of the $0$-weight space is given by
+    \[
+    \left(e_1 \wedge e_2\right) (e_3 \wedge e_4), \left(e_1 \wedge e_3\right) (e_2 \wedge e_4), \left(e_1 \wedge e_4\right) (e_2 \wedge e_3).
+    \]
+\end{proof}
 
 \section{Linear algebra exercises}
 \begin{exercise}
@@ -3148,7 +3290,7 @@ eigenvectors of $A$ as well, so $W$ is indeed generated by eigenvectors of $A$.
     In particular, it is simply connected.
 \end{proposition}
 
-\chapter{$SO(d,d)$}
+\chapter{$\mathrm{SO}(d,d)$}
 The goal of this chapter is to show that $SO(d,d)$ has 2 connected components.
 First we show that a Lie group $G$ has the same number of components as its maximal compact subgroup.
 \begin{proposition}
@@ -3214,7 +3356,7 @@ Using these, it follows that any two roots are congruent modulo $\Lambda_\Delta$
 A crucial ingredient is the restriction of the arbitrary representation into representations of subalgebras that are isomorphic to $\ssl(2, \mathbb C)$.
 Considering a root $\alpha \in \Delta$, we define the subalgebra
 \[
-\ssl_\alpha \mathfrak g_\alpha \oplus \mathfrak g_{-\alpha} \oplus [\mathfrak g_\alpha, \mathfrak g_{-\alpha}].
+\ssl_\alpha = \mathfrak g_\alpha \oplus \mathfrak g_{-\alpha} \oplus [\mathfrak g_\alpha, \mathfrak g_{-\alpha}].
 \]
 One can show that $[g_\alpha, g_{-\alpha}] \neq 0$ and that $[[g_\alpha, g_{-\alpha}], g_\alpha] \neq 0$.
 Then one can pick $X_\alpha \in \mathfrak g_\alpha, X_{-\alpha} \in \mathfrak g_{-\alpha}$ such that $H_\alpha = [X_\alpha, X_{-\alpha}]$ satisfies $\langle H_\alpha, \alpha \rangle = 2$.
@@ -3271,8 +3413,12 @@ One can show (cf. \cref{ex:irreducible_subrepresentation}) that
 {\bf \underline{Step 8}:} \emph{Classify irreducible rpresentations of $\mathfrak g$:}
 We define the Weyl chamber as the vectors in the real span of $\Delta$ that form an acute angle with all positive roots.
 \[
-\mathcal W = \left\{ \lambda \in \mathfrak h^*: \langle \lambda, \gamma \rangle > 0 \text{ for all } \gamma \in \Delta^+ \right\}.
+\mathcal W = \left\{ \lambda \in \mathfrak h^*: \langle \lambda, \gamma \rangle \geq 0 \text{ for all } \gamma \in \Delta^+ \right\}.
 \]
+In particular, the highest weight lies inside the intersection of the Weyl chamber and the weight lattice (see \cref{ex:highest_weight_inside_weyl_chamber}).
+This gives us the left-to-right correspondence in the following theorem.
+The fac that it is injective, follows from the fact that 
+
 \begin{theorem}
     There exists a bijective correspondence
     \[
@@ -3280,6 +3426,15 @@ We define the Weyl chamber as the vectors in the real span of $\Delta$ that form
     \]
     Denoting the representation corresponding to $\alpha \in \mathcal W \cap \Lambda_W$ by $\Gamma_\alpha$, the weights of $\Gamma_\alpha$ will be $$(\alpha + \Lambda_\Delta) \cap \Lambda_W \cap \mathrm{Conv}(W \cdot \alpha).$$
 \end{theorem}
+\begin{proof}
+    The left-to-right correspondence is given by the highest weight vector (see \cref{ex:highest_weight_inside_weyl_chamber}).
+    To see that it is injective, let $V, W$ be two irreducible representations of the same highest weight.
+    Denoting with $v, w$ two corresponding highest vectors, $v+w$ will be a highest weight vector for the representation $V \oplus W$.
+    Let $U$ be the irreducible subrepresentation of $V \oplus W$ generated by $v+w$.
+    Then the projections $\pi_V: U \to V, \pi_W: U \to W$ are non-trivial morphisms of representations, so $V \simeq U \simeq W$.
+    The surjectivity can be tested case by case, for each semisimple Lie algebra.
+    There, it suffices to find a (not necessarily irreducible) representation with highest weight $\alpha \in \mathcal W \cap \Lambda_W$.
+\end{proof}
 
 \section{Drawing root and weight diagrams}
 We take the example of $\mathfrak{sl}(3, \mathbb C)$, and in particular reply to the following question:
@@ -3688,6 +3843,54 @@ We also observe that if $V, W$ are representations with highest weights $\alpha,
     \label{fig:sl_3_C_weights}
 \end{figure}
 
+\section{$\ssl(4,\mathbb C)$}
+Our goal here will be to show the following:
+\begin{proposition}
+    There exists no irreducible finite-dimensional representation of $\ssl(4, \mathbb C)$ of dimension $7$.
+\end{proposition}
+We will proceed case by case, considering that the irreducible representation $\Gamma_{a, b, c}$ with highest weight $aL_1 + b(L_1 + L_2) + c(L_1 + L_2 + L_3)$ is contained in the product $\Sym^a(\mathbb C^4) \otimes \Sym^b(\wedge^2 \mathbb C^4) \otimes \Sym^c(\wedge^3 \mathbb C^4)$.
+We note that $\wedge^2 \mathbb C^4$ is self-dual because its highest weight is the negative of its lowest weight.
+\begin{itemize}
+    \item {\bf \underline{$\Gamma_{(1,0,0)}$}}: This is the standard representation $\mathbb C^4$, because all its weights ($L_1, \cdots, L_4$) are simple and are obtained by applying the simple negative roots to the highest weight.
+    In particular, we have $\dim \Gamma_{(1,0,0)} = 4$.
+    \item {\bf \underline{$\Gamma_{(0,1,0)}$}}: This is $\wedge^2 \mathbb C^4$, because all its weights ($L_i + L_j, i \neq j$) are simple and are obtained by applying the simple negative roots to the highest weight.
+    In particular, we have $\dim \Gamma_{(0,1,0)} = 6$.
+    \item {\bf \underline{$\Gamma_{(0,0,1)}$}}: This is isomorphic to the dual representation $(\mathbb C^4)^*$, by \cref{ex:dual_space_as_wedge_product}. The same reasoning as in the case of $\Gamma_{(1,0,0)}$, shows that it is irreducible and that $\dim \Gamma_{(0,0,1)} = 4$.
+    \item {\bf \underline{$\Gamma_{(2,0,0)}$}}: This is $\Sym^2(\mathbb C^4)$, because all its weights ($2L_i, L_i + L_j, i \neq j$) are simple and are obtained by applying the simple negative roots to the highest weight (see \cref{ex:dual_space_as_wedge_product}).
+    In particular, we have $\dim \Gamma_{(2,0,0)} = 10$.
+    \item {\bf \underline{$\Gamma_{(0,2,0)}$}}: This is $\wedge^2 \mathbb C^4 \otimes \wedge^2 \mathbb C^4$, because all its weights ($2(L_i + L_j), L_i + L_j + L_k, i \neq j \neq k, 0$) arae simple and are obtained by applying the simple negative roots to the highest weight.
+    In particular, we have $\dim \Gamma_{(0,2,0)} = 11$.
+    \item {\bf \underline{$\Gamma_{(0,0,2)}$}}: This is $\Sym^2(\mathbb C^4)^*$, since $\left( \Sym^2(\mathbb C^4)^* \right) \simeq \Sym^2((\mathbb C^4)^*)$, which can be shown to be irreducible just as in the case of $\Gamma_{(2,0,0)}$.
+    In particular, we have that $\dim \Gamma_{(0,0,2)} = 10$.
+    \item {\bf \underline{$\Gamma_{(1,1,0)}$}}: This is contained in $\mathbb C^4 \otimes \wedge^2 \mathbb C^4$, whose weights are $2L_i + L_j$ (with multiplicity $1$) and $L_i + L_j + L_k$ (with multiplicity $3$).
+    It is reducible, but the map
+    \begin{align*}
+        \phi: \mathbb C^4 \otimes \wedge^2 \mathbb C^4 &\to \wedge^3 \mathbb C^4\\
+        v \otimes (w \wedge u) &\mapsto v \wedge w \wedge u
+    \end{align*}
+    is a morphism of representations, so its kernel will be a subrepresentation. Since $\ker \phi$ contains the highest weight $2L_1 + L_2$, we know it will contain $\Gamma_{(1,1,0)}$.
+    In fact, $\ker \phi = \Gamma_{(1,1,0)}$, which will follow as soon as we show that the multiplcity of $\ker \phi$ at $L_i + L_j + L_k$ is the same as for $\Gamma_{(1,1,0)}$.
+    One can calculate that
+    \begin{align*}
+        (\ker \phi)_{L_1 + L_2 + L_3} &= \ker \phi \cap (V \otimes \wedge^2 V)_{L_1 + L_2 + L_3}\\
+        &= \spa \{e_1 \otimes (e_2 \wedge e_3) + e_2 \otimes (e_1 \wedge e_3), e_2 \otimes (e_1 \wedge e_3) + e_3 \otimes (e_1 \wedge e_3)\},
+    \end{align*}
+    so it suffices to show that $\Gamma_{(1,1,0)}$ has multiplicity $2$ at $L_1 + L_2 + L_3$.
+    Indeed, one sees that there exist two ways to go from $2L_1 + L_2$ to $L_1+L_2+L_3$ by applying negative simple vectors, that lead to independent vectors, so $\dim (\Gamma_{(1,1,0)})_{L_1 + L_2 + L_3} = 2$.
+    In particular, we have $\dim \Gamma_{(1,1,0)} = 14$.
+    \item {\bf \underline{$\Gamma_{(1,0,1)}$}}: This is contained in $\mathbb C^4 \otimes \wedge^3 \mathbb C^4 \simeq \mathbb C^4 \otimes (\mathbb C^4)^*$, whose weights are $L_i - L_j, i \neq j$ (with multiplicity $1$) and $0$ (with multiplicity $4$).
+    It is reducible, but the map
+    \begin{align*}
+        \tr: \mathbb C^4 \otimes (\mathbb C^4)^* \simeq \hom(\mathbb C^4, \mathbb C^4) &\to \wedge^2 \mathbb C^4\\
+        a \otimes \lambda &\mapsto \langle a, \lambda \rangle
+    \end{align*}
+    is a morphism of representations and clearly $\ker \tr \supseteq \Gamma_{(1,0,1)}$.
+    To show equality, it suffices to see that $\ker \tr$ has multiplicity $3$ at $0$, and the same is true for $\Gamma_{(1,0,1)}$.
+    In particular we have $\dim \Gamma_{(1,0,1)} = 9$.
+    \item {\bf \underline{$\Gamma_{(0,1,1)}$}}: This is contained in $\wedge^2 \mathbb C^4 \otimes (\mathbb C^4)^*$, but we have that $\left(\wedge^2 \mathbb C^4 \otimes (\mathbb C^4)^*\right)^* \simeq (\mathbb C^4)^* \otimes \wedge^2 \mathbb C^4$, so we have that $\dim \Gamma_{(0,1,1)} = \dim \Gamma_{(1,1,0)} = 14$.
+    
+\end{itemize}
+
 \section{$\mathrm{SL}(d, \mathbb K)$}
 We have
 \begin{align*}
@@ -3774,6 +3977,8 @@ Using block matrices, we find the algebra to be
 \end{pmatrix}: A, B,C \in \mathfrak{gl}(n, \mathbb C), B^t = B, C^t = C
 \right\}.
 \]
+Note that for $n = 1$, we have $\mathfrak{sp}(2, \mathbb C) = \mathfrak{sl}(2, \mathbb C)$ and $\Sp(2, \mathbb C) = \SL(2, \mathbb C)$.
+
 
 \subsection{Cartan subalgebra}
 We will consider the Cartan subalgebra $\mathfrak h$ of diagonal matrices in $\mathfrak{sp}(2n, \mathbb C)$ given by
@@ -3785,7 +3990,7 @@ We will consider the Cartan subalgebra $\mathfrak h$ of diagonal matrices in $\m
 \right\},
 \]
 
-It is a maximal abelian subalgebra of $\so(m, \mathbb C)$, because $H = \diag(1, 2, \cdots, n, -1, \cdots, -n)$ is diagonalisable with distinct eigenvalues.
+It is a maximal abelian subalgebra of $\ssp(m, \mathbb C)$, because $H = \diag(1, 2, \cdots, n, -1, \cdots, -n)$ is diagonalisable with distinct eigenvalues.
 Thus any matrix that commutes with it will have the same eigenvectors, i.e.\ it will be diagonalisable.
 
 \subsection{Roots and root decomposition}
@@ -3810,21 +4015,170 @@ where
 \begin{align*}
     \mathfrak g_{L_i - L_j} &= \mathbb C \left( E_{ij} - E_{n+j,n+i} \right),\\
     \mathfrak g_{L_i + L_j} &= \mathbb C \left( E_{i,n+j} + E_{j,n+i} \right),\\
+    \mathfrak g_{-L_i - L_j} &= \mathbb C \left( E_{n+i,j} + E_{n+j,i} \right),\\
     \mathfrak g_{2L_i} &= \mathbb C \left( E_{i,n+i} \right),\\
     \mathfrak g_{-2L_i} &= \mathbb C \left( E_{n+i,i} \right).
 \end{align*}
+For $n = 1$, $\ssp(2, \mathbb C) = \mathfrak{sl}(2, \mathbb C)$, and for $n = 2$ the root diagram for $\mathfrak{sp}(4, \mathbb C)$ is given in \cref{fig:root_diagram_sp_4_C}.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.4\textwidth]{root_diagram_sp(4,C).jpg}
-    \caption{Root diagram for $\mathfrak{sp}(4, \mathbb C)$}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{root_diagram_sp(4,C).jpg}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{root_diagram_sp_4_no labels.png}
+    \end{subfigure}
     \label{fig:root_diagram_sp_4_C}
+    \caption{Root diagram for $\mathfrak{sp}(4, \mathbb C)$}
 \end{figure}
+
 \subsection{Killing form}
 We know the Killing form is a multiple of the trace form, so by concrete calculation on $\mathfrak{h}$ we find it to be
 \[
 B(x,y) = 4(n+1)\tr(xy).
 \]
+This shows for instance that $L_1, L_2$ are orthogonal with respect to the Killing form, as shown in \cref{fig:root_diagram_sp_4_C}.
+Indeed, denoting with $T_\alpha \in \mathfrak h$ the element corresponding to $\alpha \in \Delta \subseteq h^*$ with respect to the Killing form, we know that $T_\alpha = 2H_\alpha/B(H_\alpha, H_\alpha)$, where $H_\alpha$ is the element $[X_\alpha, X_{-\alpha}]$ in the copy $\ssl_\alpha$ of $\ssl(2, \mathbb C)$ in $\mathfrak{sp}(2n, \mathbb C)$.
+In our case, $H_{2L_i} = H_i$, so $B(2L_1, 2L_2) = 2L_1(T_{2L_2}) = 2L_1(2H_1/B(H_1, H_1)) = 0$.
 
+\subsection{Distinguished subalgebras}
+We see that
+\[
+\begin{array}{lll}
+    X_{L_i - L_j} = E_{ij} - E_{n+j,n+i}, & X_{-(L_i - L_j)} = E_{ji} - E_{n+i,n+j}, & H_{L_i - L_j} = H_i - H_j,\\
+    X_{L_i + L_j} = E_{i,n+j} + E_{j,n+i}, & X_{-(L_i + L_j)} = E_{n+i,j} + E_{n+j,i}, & H_{L_i + L_j} = H_i + H_j,\\
+    X_{2L_i} = E_{i,n+i}, & X_{-2L_i} = E_{n+i,i}, & H_{2L_i} = H_i.
+\end{array}
+\]
+\subsection{Weight lattice}
+The weight lattice is given by integral combinations of $L_i$:
+\[
+\Lambda_W = \spa_{\mathbb Z} \{L_1, \cdots, L_n\}.
+\]
+In particular, $[\Lambda_W : \Lambda_R] = 2$.
+
+\subsection{Weyl group}
+Let for each $\alpha \in \Delta$, $\Omega_\alpha = \{ \beta \in \mathfrak h^* : \langle \beta, H_\alpha \rangle = 0 \}$ be the hyperplane along which the reflection $s_\alpha$ acts.
+In the case $n = 2$, we have 
+\begin{align*}
+    \Omega_{L_1 - L_2} &= \mathbb C (L_1 + L_2),\\
+    \Omega_{L_1 + L_2} &= \mathbb C (L_1 - L_2),\\
+    \Omega_{2L_1} &= \mathbb C (L_2),\\
+    \Omega{2L_2} &= \mathbb C (L_1),
+\end{align*}
+which is shown in \cref{fig:root_hyperplanes_sp_4_C}. In particular, the weight diagram of an irreducible representation of $\ssp(4, \mathbb C)$ will look either like a square (when the highest weight lies on one of the $\Omega_\alpha$) or like an octagon.
+Note also that $\Omega_\alpha \perp \mathbb C_\alpha$.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{root_hyperplanes_sp_4_C.png}
+    \caption{Hyperplanes $\Omega_\alpha$ for $\mathfrak{sp}(4, \mathbb C)$}
+    \label{fig:root_hyperplanes_sp_4_C}
+\end{figure}
+\subsection{Weyl chamber}
+We consider $l(\sum a_i L_i) = \sum a_i c_i$, with $c_1 > c_2 > \cdots > c_n>0$.
+Then the positive and the positive simple roots are given by
+\begin{align*}
+    R^+ &= \{ L_i + L_j : 1 \leq i < j \leq n \} \cup \{ L_i - L_j : 1 \leq i < j \leq n \} \cup \{ 2L_i : 1 \leq i \leq n \},\\
+    \Pi &= \{ L_i - L_{i+1} : 1 \leq i < n \} \cup \{ 2L_n \}.
+\end{align*}
+and the Weyl-chamber given by
+\begin{align*}
+    \mathcal W &= \{ \sum a_i L_i : a_1 \geq a_2 \geq \cdots \geq a_n \geq 0 \}\\
+    &= \spa_{\mathbb R_{\geq 0}} \{ L_1, L_1 + L_2, \cdots, L_1 + \cdots + L_n \},
+\end{align*}
+so the fundamental weights are
+\[
+\omega_i = L_1 + \cdots + L_i, \quad i = 1, \cdots, n.
+\]
+The latter can be seen from the fact that $a_1 L_1 + \cdots + a_n L_n = (a_1 - a_2)\omega_1 + (a_2 - a_3) \omega_2 + \cdots + (a_{n-1} - a_n) \omega_{n-1} + a_n \omega_n$.
+In particular, the walls of the Weyl chamber are given by
+\[
+\bigoplus_{j \neq k} \mathbb R_{\geq 0} \omega_j = \left\{ \sum_{i} a_i L_i : a_1 \geq \cdots \geq a_{i} = a_{i+1} \geq \cdots \geq  a_n \geq 0 \right\}.
+\]
+
+
+\subsection{Cartan matrix and Dynkin diagram}
+Denoting with $\alpha_i = L_i - L_{i+1}$ for $i<n$ and $\alpha_n = 2L_n$, we have $T_{\alpha_i} = 2H_{\alpha_i}/(H_{\alpha_i}, H_{\alpha_i})$ is the element of $\mathfrak h $ corresponding to $H_{\alpha_i}$ via the Killing form and for $i < n-1$:
+\begin{align*}
+    (\alpha_i, \alpha_i) &= \frac{2}{(H_{\alpha_i}, H_{\alpha_i})} \langle H_{\alpha_i}, \alpha_i \rangle = \frac{4}{(H_{\alpha_i}, H_{\alpha_i})},\\
+    (\alpha_i, \alpha_{i+1}) &= \frac{2}{(H_{\alpha_i}, H_{\alpha_i})} \langle H_{\alpha_i}, \alpha_{i+1} \rangle = -\frac{2}{(H_{\alpha_i}, H_{\alpha_i})},\\
+    (\alpha_i, \alpha_j) &= 0 \text{ for } |i-j| > 1\\
+    (\alpha_{n-1}, \alpha_n) &= \frac{2}{(H_{\alpha_{n-1}}, H_{\alpha_{n-1}})} \langle H_{\alpha_{n-1}}, \alpha_n \rangle = -2 \frac{2}{(H_{\alpha_{n-1}}, H_{\alpha_{n-1}})}.
+\end{align*}
+Hence,
+\begin{align*}
+    \frac{2(\alpha_i, \alpha_j)}{(\alpha_i, \alpha_i)} &= 0 \text{ for } |i-j| > 1,\\
+    \frac{2(\alpha_{i}, \alpha_{i+1})}{(\alpha_i, \alpha_i)} &= -1 \text{ for } i < n-1,\\
+    \frac{2(\alpha_{n-1}, \alpha_n)}{(\alpha_{n-1}, \alpha_{n-1})} &= -2,\quad \frac{2(\alpha_n, \alpha_{n-1})}{(\alpha_n, \alpha_n)} = -1.
+\end{align*}
+and the Cartan matrix is
+\[
+A = \begin{pmatrix}
+    2 & -1 & 0 & \cdots & 0 & 0\\
+    -1 & 2 & -1 & \cdots & 0 & 0\\
+    0 & -1 & 2 & \cdots & 0 & 0\\
+    \vdots & \vdots & \vdots & \ddots & \vdots &\vdots\\
+    0 & 0 & 0 & \cdots & 2 & -2\\
+    0 & 0 & 0 & \cdots & -1 & 2
+\end{pmatrix}.
+\]
+\subsection{Examples of representations of $\ssp(4, \mathbb C)$}
+We have the following examples of representations of $\ssp(4, \mathbb C)$:
+\begin{enumerate}
+    \item Standard representation $\mathbb C^4$: the weights are $\pm L_1, \pm L_2$ and are all simple, It is $4$-dimensional, irreducible.
+    \item Dual representation $(\mathbb C^4)^*$: it is isomorphic to the standard representation.
+    \item Wedge square $\wedge^2(\mathbb C^4)$: the simple weights are $\pm L_1 \pm L_2$ and $0$ is a weight of multiplicity $2$.
+    It is not irreducible.
+    \item $\Gamma_{0,1}$: the simple weights are $\pm L_1 \pm L_2$ and $0$. They are simple and it is $5$-dimensional.
+    \item $\Gamma_{2,0}$: this is the same as the adjoint representation $\ad: \ssp(4, \mathbb C) \to \gl(\ssp(4,\mathbb C))$, or the symmetric square $\Sym^2(\mathbb C^4)$.
+\end{enumerate}
+
+\begin{remark}
+    To see why the adjoint representation is the same as the symmetric square $\Sym^2(\mathbb C^n)$, recall first that the symplectic form $Q$ induces an isomorphism $V \to V^*$, $v \mapsto Q(v, \cdot)$.
+    For general $\mathbb C^n$, denoting with $e_i$ the basis with respect to which
+    \[
+    Q = \begin{pmatrix}
+        0 & I_n\\
+        -I_n & 0
+    \end{pmatrix},
+    \]
+    this isomorphism maps $e^j, e^{n+j}$ to $-e_{n+j}, e_j$ respectively.
+    Composing with the isomorphism $V \otimes V \to \hom(V, V)$ we obtain:
+    \[
+    \begin{array}{rcccl}
+        \hom(V,V)   &\to &V \otimes V^* &\to &V \otimes V\\
+        X &\mapsto &\sum_{i,j} X_{i,j}e_i \otimes e^j &\mapsto &\sum_{i,j} X'_{i,j}e_i \otimes e_j
+    \end{array}
+    \]
+    where
+    \[
+    X'= \begin{pmatrix}
+        B & -A\\
+        D & -C
+    \end{pmatrix}, \text{ when } X = \begin{pmatrix}
+        A & B\\
+        C & D
+    \end{pmatrix}.
+    \]
+    Hence the defining relation $X^t Q + Q X = 0$ of $\ssp(4, \mathbb C)$ is equivalent to $\sum X'_{i,j}e_i \otimes e_j \in \Sym^2(\mathbb C^n)$.
+    This also shows that $\Sym^n(\mathbb C^n)$ is irreducible, since the adjoint representation of a simple Lie algebra is irreducible.
+\end{remark}
+
+\begin{center}
+    Irreducible representations of $\ssp(4, \mathbb C)$ with highest weight $aL_1 + b(L_1 + L_2)$\\
+    \begin{tabular}{c|c|c|c}
+        $\Gamma_{a,b}$ & $0$ & $1$ & $2$\\
+        \hline
+        $0$ & & \includegraphics[width=3cm]{sp_4_C_weights_standard.png} & \includegraphics[width=3cm]{sp_4_C_weights_adjoint.png} \\
+        \hline
+        $1$ & \includegraphics[width=3cm]{sp_4_C_weights_Gamma_0_1.png} & \includegraphics[width=3cm]{sp_4_C_weights_Gamma_1_1.jpg} &  \\
+        \hline
+        $2$ & \includegraphics[width=3cm]{sp_4_C_weights_Gamma_2_0.jpg} &  & \\
+    \end{tabular}
+\end{center}
 \section{$\SO(n)$}
 Here there is, as we will see very shortly, a very big difference in behavior
 between the so-called "even" orthogonal Lie algebras $\SO(2n, \mathbb C)$ and the "odd"
@@ -3866,6 +4220,10 @@ and the Lie algebra is given by
     \end{pmatrix}: A, B, C \in \mathfrak{gl}(n, \mathbb C), G,H \in C^{1 \times n}
 \right\}.
 \]
+In particular,
+\[
+\dim \SO(m, \mathbb C) = \frac{m(m-1)}{2}.
+\]
 
 \subsection{Cartan subalgebra}
 We will consider the Cartan subalgebra $\mathfrak h$ of diagonal matrices in $\so(m, \mathbb C)$.
@@ -3898,7 +4256,7 @@ Then we have the following relations:
     \ad_{H}(E_{n+i,j} - E_{n+j,i}) &= (-L_i - L_j)(E_{ij} - E_{ji}),\\
     \ad_{H}(E_{n+i,n+j} - E_{n+j,n+i}) &= (-L_i + L_j)(E_{ij} - E_{ji}).
 \end{align*}
-In the even dimensional case of $\so(2n, \mathbb C)$, this diagonalizes the adjoint action of $\mathfrak h$, so the roots are
+In the even dimensional case of $\sso(2n, \mathbb C)$, this diagonalizes the adjoint action of $\mathfrak h$, so the roots are
 \[
 \Delta = \{ (\pm L_i \pm L_j) : 1 \leq i < j \leq n \},
 \]
@@ -3927,6 +4285,57 @@ where the last root spaces are given by
 \[
 \mathfrak g_{L_i} = \mathbb C \left( E_{i,2n+1} - E_{2n+1,n+i} \right), \quad \mathfrak g_{-L_i} = \mathbb C \left( E_{n+i,2n+1} - E_{2n+1,i} \right).
 \]
+
+\subsection{Distinguished subalgebras}
+We have
+\begin{align*}
+    H_{L_i - L_j} &= H_i - H_j, i > j\\
+    H_{L_i + L_j} &= H_i + H_j, i \neq j\\
+    H_{L_i} &= 2H_i, \text{ for } \sso(2n+1, \mathbb C)
+\end{align*}
+and
+\[
+\begin{array}{lll}
+    X_{L_i - L_j} = E_{i,j} - E_{n+j, n+i}, & X_{-(L_i - L_j)} = E_{j,i} - E_{n+i, n+j}, & i > j\\
+    X_{L_i + L_j} = E_{i, n+j} - E_{j, n+i}, & X_{-(L_i + L_j)} = - (E_{n+i, j} - E_{n+j, i}), & i \neq j\\
+    X_{L_i} = E_{i, 2n+1} - E_{2n+1, n+i}, & X_{-L_i} = -(E_{n + i, 2n+1} - E_{2n+1, i}), & \text{for } \sso(2n+1, \mathbb C)
+\end{array}
+\]
+
+\subsection{Weyl chamber}
+Using the ordering $l(\sum c_j L_j) = b_1 c_1 + \cdots$, with $b_1\geq \cdots \geq 0$, we have that the positive roots are
+\begin{align*}
+    R^+ &= \{ L_i - L_j : 1 \leq i < j \leq n \} \cup \{ L_i + L_j : i \neq j \}, \text{ for } \sso(2n, \mathbb C),\\
+    R^+ &= \{ L_i - L_j : 1 \leq i < j \leq n \} \cup \{ L_i + L_j : i \neq j \} \cup \{ L_i : 1 \leq i \leq n \}, \text{ for } \sso(2n+1, \mathbb C),
+\end{align*}
+while the positive simple roots are
+\begin{align*}
+    \Pi &= \{ L_i - L_{i+1} : 1 \leq i < n \} \cup \{L_{n-1} + L_n\}, \text{ for } \sso(2n, \mathbb C),\\
+    \Pi &= \{ L_i - L_{i+1} : 1 \leq i < n \} \cup \{L_n \}, \text{ for } \sso(2n+1, \mathbb C).
+\end{align*}
+Then the Weyl chamber is given by
+\begin{align*}
+    \mathcal W &= \{ \sum c_i L_i : c_1 \geq \cdots \geq c_n \geq 0 \}, \text{ for } \sso(2n+1, \mathbb C),\\
+    \mathcal W &= \{ \sum c_i L_i : c_1 \geq \cdots \geq c_{n-1} \geq |c_n| \}, \text{ for } \sso(2n, \mathbb C).
+\end{align*}
+\subsection{Killing form}
+We have that 
+\[
+B(x,y) = \begin{cases}
+    (4n-2)\tr(xy) & \text{for } \sso(2n+1, \mathbb C)\\
+    (4n-4)\tr(xy) & \text{for } \sso(2n, \mathbb C)
+\end{cases}
+\]
+\subsection{Weight lattice}
+\[
+\Lambda_W = \left\{ \sum_i c_i L_i : c_i \in \frac{1}{2}\mathbb Z \right\}
+\]
+\subsection{Representations of $\sso(m, \mathbb C)$}
+\begin{itemize}
+    \item (rank $1$, $m$ odd) $\sso(3, \mathbb C) \simeq \ssl(2, \mathbb C)$.
+    \item (rank $1$, $m$ even) $\sso(4, \mathbb C) \simeq \ssl(2, \mathbb C) \oplus \ssl(2,\mathbb C)$. In particular, the adjoint representation is not irreducible.
+\end{itemize}
+
 \begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.4\textwidth}
